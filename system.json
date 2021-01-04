@@ -1,0 +1,29 @@
+{
+  "name": "twilight2000v4",
+  "title": "Twilight 2000 v4",
+  "description": "The Twilight 2000 v4 system for FoundryVTT!",
+  "version": "1.0.0",
+  "minimumCoreVersion": "0.7.5",
+  "compatibleCoreVersion": "0.7.9",
+  "templateVersion": 2,
+  "author": "John Doe",
+  "esmodules": ["module/twilight2000v4.js"],
+  "styles": ["css/twilight2000v4.css"],
+  "scripts": [],
+  "packs": [],
+  "languages": [
+    {
+      "lang": "en",
+      "name": "English",
+      "path": "lang/en.json"
+    }
+  ],
+  "gridDistance": 5,
+  "gridUnits": "ft",
+  "primaryTokenAttribute": "health",
+  "secondaryTokenAttribute": "power",
+  "url": "",
+  "manifest": "",
+  "download": "",
+  "license": "LICENSE.txt"
+}
