@@ -24,14 +24,14 @@ export class twilightActor extends Actor {
    */
   _prepareCharacterData(actorData) {
     const data = actorData.data;
-
-    // Make modifications to data here. For example:
-
-    // Loop through ability scores, and add their modifiers to our sheet output.
-    for (let [key, ability] of Object.entries(data.abilities)) {
-      // Calculate the modifier using d20 rules.
-      ability.mod = Math.floor((ability.value - 10) / 2);
+    const dietypes={"A":12,"B":10,"C":8,"D":6,"F":0};
+    for (let [akey, attribute] of Object.entries(data.attributes)){
+      attribute.die=dietypes[attribute.rating];
+      for (let [skey, skill] of Object.entries(attribute.skills)){
+        skill.die=dietypes[skill.rating];
+      }
     }
+
   }
 
 }

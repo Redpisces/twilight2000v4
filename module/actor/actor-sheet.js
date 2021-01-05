@@ -8,22 +8,24 @@ export class twilightActorSheet extends ActorSheet {
   static get defaultOptions() {
     return mergeObject(super.defaultOptions, {
       classes: ["twilight2000v4", "sheet", "actor"],
-      template: "systems/twilight2000v4/templates/actor/actor-sheet.html",
-      width: 600,
+      width: 800,
       height: 600,
       tabs: [{ navSelector: ".sheet-tabs", contentSelector: ".sheet-body", initial: "description" }]
     });
   }
 
   /* -------------------------------------------- */
-
+  /** @override */
+  get template() {
+    //return unique actor sheet by type, like `weapon-sheet.html`.
+    const path = "systems/twilight2000v4/templates/actor";
+    return `${path}/${this.actor.data.type}-sheet.html`;
+  }
   /** @override */
   getData() {
     const data = super.getData();
     data.dtypes = ["String", "Number", "Boolean"];
-    for (let attr of Object.values(data.data.attributes)) {
-      attr.isCheckbox = attr.dtype === "Boolean";
-    }
+
     return data;
   }
 
