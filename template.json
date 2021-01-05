@@ -98,7 +98,53 @@
         }
         
       }
-    }
+    },
+    "specialties":{},
+    "damage":{
+      "min":0,
+      "max":10,
+      "value":0
+    },
+    "stress":{
+      "min":0,
+      "max":10,
+      "value":0
+    },
+    "hit_capacity":0,
+    "stress_capacity":0,
+    "cuf":"F",
+    "morale":"F",
+    "injuries":{},
+    "diseases":{},
+    "armor":{
+      "head":0,
+      "arms":0,
+      "torso":0,
+      "legs":0
+    },
+    "conditions":{
+      "starving":false,
+      "dehydrated":false,
+      "sleep_dep":false,
+      "hypothermic":false
+    },
+    "radiation":{
+      "temporary":{
+        "min":0,
+        "max":10,
+        "value":0
+      },
+      "permanent":{
+        "min":0,
+        "max":10,
+        "value":0
+      }
+    },
+    "combat_gear":{},
+    "backpack_gear":{},
+    "tiny_items":{},
+    "weapons":{}
+    
   },
   "Item": {
     "types": ["item"],

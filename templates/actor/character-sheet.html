@@ -24,18 +24,19 @@
         grid-row:4/6;
       }
       .bio-grid .meet{grid-column:1/4;}
-    
+      .skill-group{
+        border: 3px solid rgba(0,0,0,0.50);
+        margin-bottom:10px;
+        background: rgba(0,0,0,0.10); 
+      }
       .skill-grid{
         display:grid;
         grid-template-columns: 2.5fr 0.75fr 0.75fr 2.5fr 0.75fr 0.75fr 2.5fr 0.75fr 0.75fr 2.5fr 0.75fr 0.75fr;
         grid-auto-rows: minmax(32px, auto);
-        border: 3px solid rgba(0,0,0,0.50);
-        margin-bottom:10px;
       }
       .skill-grid .item{
         width=100%;
         height=100%;
-        background-color: rgba(0,0,0,0.10);
         border: 1px solid rgba(0,0,0,0.25);
         display: flex;
         align-items: center;
@@ -43,6 +44,26 @@
       .center-h{
         text-align: center;
         justify-content: center;
+      }
+      
+      .combat-grid{
+        display:grid;
+        width:100%;
+        grid-template-columns: 4fr 1fr 5fr 4fr 1fr 4fr 1fr;
+        gap: 3px;
+        background-color: rgba(0,0,0,0.10);
+        margin-bottom:10px;
+        border: 3px solid rgba(0,0,0,0.50);
+        grid-auto-rows: minmax(32px, 32px);
+      }
+      .combat-grid .item{
+        background-color: darkred;
+        padding:3px;
+      }
+      .combat-grid .item input{
+        box-sizing: border-box;
+        min-width:10%;
+        max-width: 50%;
       }
     </style>
   </head>
@@ -92,48 +113,61 @@
       </table>
       
     </div>
-    
-    <div class="grid-container skill-grid">
-      <label class="item" style="grid-row:1;grid-column:1/span 13;">Attributes &amp; Skills</label>
-    
-      {{#each data.attributes as |attribute akey|}}
-      <div class="item" style="grid-row:2;grid-column:{{math (math @index '*' 3) '+' 1}};" > </div>
-      <div class="item center-h" style="grid-row:2;grid-column:{{math (math @index '*' 3) '+' 2}};" >Rating</div>
-      <div class="item center-h" style="grid-row:2;grid-column:{{math (math @index '*' 3) '+' 3}};" >Base Die</div>
+    <div class="skill-group">
+      <div class="grid-container skill-grid">
+        <label class="item" style="grid-row:1;grid-column:1/span 13;">Attributes &amp; Skills</label>
       
+        {{#each data.attributes as |attribute akey|}}
+        <div class="item" style="grid-row:2;grid-column:{{math (math @index '*' 3) '+' 1}};" > </div>
+        <div class="item center-h" style="grid-row:2;grid-column:{{math (math @index '*' 3) '+' 2}};" >Rating</div>
+        <div class="item center-h" style="grid-row:2;grid-column:{{math (math @index '*' 3) '+' 3}};" >Base Die</div>
+        
+        
+        <button class="item rollable" data-attribute="{{akey}}" style="grid-row:3;grid-column:{{math (math @index '*' 3) '+' 1}};">{{attribute.name}}</button>
+        <div class="item center-h" style="grid-row:3;grid-column:{{math (math @index '*' 3) '+' 2}};">
+          <select class="die-select" name="data.attributes.{{akey}}.rating">
+            {{#select attribute.rating}}
+              <option value="A">A</option>
+              <option value="B">B</option>
+              <option value="C">C</option>
+              <option value="D">D</option>
+              <option value="F">F</option>
+            {{/select}}
+          </select>
+        </div>
+        <label class="item center-h" style="grid-row:3;grid-column:{{math (math @index '*' 3) '+' 3}};">{{attribute.die}}</label>
+        
+        {{#each attribute.skills as |skill skey|}}
+        <button class="item rollable" data-skill="{{skey}}" data-attribute="{{akey}}" style="grid-row:{{math @index '+' 4}};grid-column:{{math (math @../index '*' 3) '+' 1}};" >{{skill.name}}</button>
+        <div class="item center-h" style="grid-row:{{math @index '+' 4}};grid-column:{{math (math @../index '*' 3) '+' 2}};" >
+          <select class="die-select" name="data.attributes.{{akey}}.skills.{{skey}}.rating">
+            {{#select skill.rating}}
+              <option value="A">A</option>
+              <option value="B">B</option>
+              <option value="C">C</option>
+              <option value="D">D</option>
+              <option value="F">F</option>
+            {{/select}}
+          </select>
+        </div>
+        <label class="item center-h" style="grid-row:{{math @index '+' 4}};grid-column:{{math (math @../index '*' 3) '+' 3}};">{{skill.die}}</label>
+        {{/each}}
+        
+        {{/each}}
       
-      <button class="item rollable" data-rolltype="attribute" data-attribute="akey" style="grid-row:3;grid-column:{{math (math @index '*' 3) '+' 1}};">{{attribute.name}}</button>
-      <div class="item center-h" style="grid-row:3;grid-column:{{math (math @index '*' 3) '+' 2}};">
-        <select class="die-select" name="data.attributes.{{akey}}.rating">
-          {{#select attribute.rating}}
-            <option value="A">A</option>
-            <option value="B">B</option>
-            <option value="C">C</option>
-            <option value="D">D</option>
-            <option value="F">F</option>
-          {{/select}}
-        </select>
       </div>
-      <label class="item center-h" style="grid-row:3;grid-column:{{math (math @index '*' 3) '+' 3}};">{{attribute.die}}</label>
+      <div style="min-height:32px;padding:3px;">Specialties:</div>
+    </div>
+    <div class="grid-container combat-grid">
+      <div class="item" style="grid-column:1/4;">Combat</div>
+      <div class="item" style="grid-column:4;">Armor</div>
+      <div class="item" style="grid-column:5;">Rating</div>
+      <div class="item" style="grid-column:6/8;">Conditions</div>
       
-      {{#each attribute.skills as |skill skey|}}
-      <button class="item rollable" data-rolltype="skill" data-skill="skey" data-attribute="akey" style="grid-row:{{math @index '+' 4}};grid-column:{{math (math @../index '*' 3) '+' 1}};" >{{skill.name}}</button>
-      <div class="item center-h" style="grid-row:{{math @index '+' 4}};grid-column:{{math (math @../index '*' 3) '+' 2}};" >
-        <select class="die-select" name="data.attributes.{{akey}}.skills.{{skey}}.rating">
-          {{#select skill.rating}}
-            <option value="A">A</option>
-            <option value="B">B</option>
-            <option value="C">C</option>
-            <option value="D">D</option>
-            <option value="F">F</option>
-          {{/select}}
-        </select>
-      </div>
-      <label class="item center-h" style="grid-row:{{math @index '+' 4}};grid-column:{{math (math @../index '*' 3) '+' 3}};">{{skill.die}}</label>
-      {{/each}}
+      <div class="item" style="grid-column:1/3;grid-row:2/4;"><label>Damage:</label><span class="flexrow"><input/><input/></span></div>
       
-      {{/each}}
-    
+      <div class="item" style="grid-column:3;grid-row:2/4;"><label>Stress:</label><span class="flexrow"><input/><input/></span></div>
+      
     </div>
   </section>
 </form>
