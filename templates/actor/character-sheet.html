@@ -8,7 +8,7 @@
         gap: 5px;
         background-color: rgba(0,0,0,0.10);
         margin-bottom:10px;
-        border: 3px solid rgba(0,0,0,0.50);
+        border: 3px solid rgba(0,0,0,0.70);
       }
       .bio-grid .system{grid-column:1;}
       .bio-grid .name{grid-column:2;}
@@ -25,7 +25,7 @@
       }
       .bio-grid .meet{grid-column:1/4;}
       .skill-group{
-        border: 3px solid rgba(0,0,0,0.50);
+        border: 3px solid rgba(0,0,0,0.70);
         margin-bottom:10px;
         background: rgba(0,0,0,0.10); 
       }
@@ -35,10 +35,9 @@
         grid-auto-rows: minmax(32px, auto);
       }
       .skill-grid .item{
-        width=100%;
-        height=100%;
-        border: 1px solid rgba(0,0,0,0.25);
-        display: flex;
+        width:100%;
+        height:100%;
+        border: 1px solid rgba(0,0,0,0.20);
         align-items: center;
       }
       .center-h{
@@ -49,21 +48,57 @@
       .combat-grid{
         display:grid;
         width:100%;
-        grid-template-columns: 4fr 1fr 5fr 4fr 1fr 4fr 1fr;
-        gap: 3px;
+        grid-template-columns: 4fr 1fr 5fr 3fr 1fr 3fr 1fr;
         background-color: rgba(0,0,0,0.10);
         margin-bottom:10px;
-        border: 3px solid rgba(0,0,0,0.50);
+        border: 3px solid rgba(0,0,0,0.70);
         grid-auto-rows: minmax(32px, 32px);
       }
       .combat-grid .item{
-        background-color: darkred;
-        padding:3px;
+        width:100%;
+        height:100%;
+        border: 1px solid rgba(0,0,0,0.20);
+        align-items: center;
+        overflow:hidden;
       }
-      .combat-grid .item input{
-        box-sizing: border-box;
-        min-width:10%;
-        max-width: 50%;
+      
+      .damage-subgrid{
+        display:grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+        grid-auto-rows: minmax(auto, auto);
+        width:100%;
+        height:100%;
+        padding:3px;    
+      }
+      .damage-subgrid .item{
+        width:100%;
+        height:100%;
+        
+        display: grid;
+        align-items: baseline;
+        border: none;
+      }
+      .grid-container .heading{
+        background-color: rgba(0,0,0,0.50);
+        background: rgba(0,0,0,0.50);
+        color:#DDD;
+      }
+      
+      .gear-grid{
+        display:grid;
+        width:100%;
+        grid-template-columns: 1fr 1fr;
+        background-color: rgba(0,0,0,0.10);
+        margin-bottom:10px;
+        border: 3px solid rgba(0,0,0,0.70);
+        grid-auto-rows: minmax(32px, 32px);
+      }
+      .gear-grid .item{
+        width:100%;
+        height:100%;
+        border: 1px solid rgba(0,0,0,0.20);
+        align-items: center;
+        overflow:hidden;
       }
     </style>
   </head>
@@ -71,7 +106,7 @@
   {{!-- Sheet Body --}}
   <section class="sheet-body">
     <div class="grid-container bio-grid">
-      <div class="item system" style="display: flex;align-items: center;justify-content: center;">Twilight:2000</div>
+      <div class="item heading system" style="display: flex;align-items: center;justify-content: center;">Twilight:2000</div>
       
       <div class="item name">Name:<input name="data.bio.name" type="text" value="{{data.bio.name}}" placeholder="Name" /></div>
       
@@ -115,15 +150,15 @@
     </div>
     <div class="skill-group">
       <div class="grid-container skill-grid">
-        <label class="item" style="grid-row:1;grid-column:1/span 13;">Attributes &amp; Skills</label>
+        <label class="item heading" style="grid-row:1;grid-column:1/span 13;border-bottom:none;">Attributes &amp; Skills</label>
       
         {{#each data.attributes as |attribute akey|}}
-        <div class="item" style="grid-row:2;grid-column:{{math (math @index '*' 3) '+' 1}};" > </div>
-        <div class="item center-h" style="grid-row:2;grid-column:{{math (math @index '*' 3) '+' 2}};" >Rating</div>
-        <div class="item center-h" style="grid-row:2;grid-column:{{math (math @index '*' 3) '+' 3}};" >Base Die</div>
+        <div class="item heading" style="grid-row:2;grid-column:{{math (math @index '*' 3) '+' 1}};border-top:none;" > </div>
+        <div class="item center-h heading" style="grid-row:2;grid-column:{{math (math @index '*' 3) '+' 2}};border-top:none;" >Rating</div>
+        <div class="item center-h heading" style="grid-row:2;grid-column:{{math (math @index '*' 3) '+' 3}};border-top:none;" >Base Die</div>
         
         
-        <button class="item rollable" data-attribute="{{akey}}" style="grid-row:3;grid-column:{{math (math @index '*' 3) '+' 1}};">{{attribute.name}}</button>
+        <label class="item" data-attribute="{{akey}}" style="grid-row:3;grid-column:{{math (math @index '*' 3) '+' 1}};">{{attribute.name}}</label>
         <div class="item center-h" style="grid-row:3;grid-column:{{math (math @index '*' 3) '+' 2}};">
           <select class="die-select" name="data.attributes.{{akey}}.rating">
             {{#select attribute.rating}}
@@ -131,14 +166,13 @@
               <option value="B">B</option>
               <option value="C">C</option>
               <option value="D">D</option>
-              <option value="F">F</option>
             {{/select}}
           </select>
         </div>
         <label class="item center-h" style="grid-row:3;grid-column:{{math (math @index '*' 3) '+' 3}};">{{attribute.die}}</label>
         
         {{#each attribute.skills as |skill skey|}}
-        <button class="item rollable" data-skill="{{skey}}" data-attribute="{{akey}}" style="grid-row:{{math @index '+' 4}};grid-column:{{math (math @../index '*' 3) '+' 1}};" >{{skill.name}}</button>
+        <label class="item" data-skill="{{skey}}" data-attribute="{{akey}}" style="grid-row:{{math @index '+' 4}};grid-column:{{math (math @../index '*' 3) '+' 1}};" >{{skill.name}}</label>
         <div class="item center-h" style="grid-row:{{math @index '+' 4}};grid-column:{{math (math @../index '*' 3) '+' 2}};" >
           <select class="die-select" name="data.attributes.{{akey}}.skills.{{skey}}.rating">
             {{#select skill.rating}}
@@ -159,14 +193,91 @@
       <div style="min-height:32px;padding:3px;">Specialties:</div>
     </div>
     <div class="grid-container combat-grid">
-      <div class="item" style="grid-column:1/4;">Combat</div>
-      <div class="item" style="grid-column:4;">Armor</div>
-      <div class="item" style="grid-column:5;">Rating</div>
-      <div class="item" style="grid-column:6/8;">Conditions</div>
+      <div class="item heading" style="grid-column:1/4;">Combat</div>
+      <div class="item heading" style="grid-column:4;">Armor</div>
+      <div class="item heading" style="grid-column:5;">Rtg</div>
+      <div class="item heading" style="grid-column:6/8;">Conditions</div>
       
-      <div class="item" style="grid-column:1/3;grid-row:2/4;"><label>Damage:</label><span class="flexrow"><input/><input/></span></div>
+      <div class="item grid-container damage-subgrid" style="grid-column:1/3;grid-row:2/4;">
+        <label class="item" style="grid-row:1; grid-column:1/5;">Damage:</label>
+        <label class="item" style="grid-row:2; grid-column:1;">Hits:</label>
+        <input class="item" style="grid-row:2; grid-column:2;" type="number" data-dtype="Number" name="data.damage.value" value="{{data.damage.value}}"/>
+        <label class="item" style="grid-row:2; grid-column:3;">Max:</label>
+        <input class="item" style="grid-row:2; grid-column:4;" type="number" data-dtype="Number" name="data.damage.max" value="{{data.damage.max}}"/>
+      </div>
       
-      <div class="item" style="grid-column:3;grid-row:2/4;"><label>Stress:</label><span class="flexrow"><input/><input/></span></div>
+      <div class="item grid-container damage-subgrid" style="grid-column:3;grid-row:2/4;">
+        <label class="item" style="grid-row:1; grid-column:1/5;">Stress:</label>
+        <label class="item" style="grid-row:2; grid-column:1;">Stress:</label>
+        <input class="item" style="grid-row:2; grid-column:2;" type="number" data-dtype="Number" name="data.stress.value" value="{{data.stress.value}}"/>
+        <label class="item" style="grid-row:2; grid-column:3;">Max:</label>
+        <input class="item" style="grid-row:2; grid-column:4;" type="number" data-dtype="Number" name="data.stress.max" value="{{data.stress.max}}"/>
+      </div>
+      
+      <div class="item" style="grid-row:2; grid-column:4;">Head</div>
+      <div class="item" style="grid-row:3; grid-column:4;">Arms</div>
+      <div class="item" style="grid-row:4; grid-column:4;">Torso</div>
+      <div class="item" style="grid-row:5; grid-column:4;">Legs</div>
+      
+      <input class="item" style="grid-row:2; grid-column:5;" type="number" data-dtype="Number" name="data.armor.head" value="{{data.armor.head}}"/>
+      <input class="item" style="grid-row:3; grid-column:5;" type="number" data-dtype="Number" name="data.armor.arms" value="{{data.armor.arms}}"/>
+      <input class="item" style="grid-row:4; grid-column:5;" type="number" data-dtype="Number" name="data.armor.torso" value="{{data.armor.torso}}"/>
+      <input class="item" style="grid-row:5; grid-column:5;" type="number" data-dtype="Number" name="data.armor.legs" value="{{data.armor.legs}}"/>
+      
+      <label class="item" style="grid-row:4; grid-column:1;">Hit Capacity:</label>
+      <label class="item" style="grid-row:5; grid-column:1;">Stress Capacity:</label>
+      <label class="item" style="grid-row:6; grid-column:1;">Coolness under fire:</label>
+      <label class="item" style="grid-row:7; grid-column:1;">Unit Morale:</label>
+      
+      <input class="item" style="grid-row:4; grid-column:2;" type="number" data-dtype="Number" name="data.hit_capacity" value="{{data.hit_capacity}}"/>
+      <input class="item" style="grid-row:5; grid-column:2;" type="number" data-dtype="Number" name="data.stress_capacity" value="{{data.stress_capacity}}"/>
+      
+      <select class="item die-select" style="grid-row:6; grid-column:2;" name="data.cuf">
+        {{#select data.cuf}}
+        <option value="A">A</option>
+        <option value="B">B</option>
+        <option value="C">C</option>
+        <option value="D">D</option>
+        {{/select}}
+      </select>
+      <select class="item" style="grid-row:7; grid-column:2;" name="data.morale">
+        {{#select data.morale}}
+        <option value="A">A</option>
+        <option value="B">B</option>
+        <option value="C">C</option>
+        <option value="D">D</option>
+        {{/select}}
+      </select>
+      
+      <div class="item" style="grid-row:4/6; grid-column:3;">Critical Injuries</div>
+      <div class="item" style="grid-row:6/8; grid-column:3;">Diseases</div>
+      
+      <label class="item" style="grid-row:2; grid-column:6;">Starving:</label>
+      <label class="item" style="grid-row:3; grid-column:6;">Dehydrated:</label>
+      <label class="item" style="grid-row:4; grid-column:6;">Sleep Dep:</label>
+      <label class="item" style="grid-row:5; grid-column:6;">Hypothermic:</label>
+      
+      <div class="item" style="grid-row:2; grid-column:7;"><input class="checkbox" type="checkbox" name="data.conditions.starving" {{checked data.conditions.starving}}/></div>
+      <div class="item" style="grid-row:3; grid-column:7;"><input class="checkbox" type="checkbox" name="data.conditions.dehydrated" {{checked data.conditions.dehydrated}}/></div>
+      <div class="item" style="grid-row:4; grid-column:7;"><input class="checkbox" type="checkbox" name="data.conditions.sleep_dep" {{checked data.conditions.sleep_dep}}/></div>
+      <div class="item" style="grid-row:5; grid-column:7;"><input class="checkbox" type="checkbox" name="data.conditions.hypothermic" {{checked data.conditions.hypothermic}}/></div>
+      
+      <label class="item heading" style="grid-row:6; grid-column:4/8;">Radiation:</label>
+      <label class="item" style="grid-row:7; grid-column:4;">Current:</label>
+      <input class="item" style="grid-row:7; grid-column:5;" type="number" data-dtype="Number" name="data.radiation.temporary.value" value="{{data.radiation.temporary.value}}"/>
+      <label class="item" style="grid-row:7; grid-column:6;">Permanent:</label>
+      <input class="item" style="grid-row:7; grid-column:7;" type="number" data-dtype="Number" name="data.radiation.permanent.value" value="{{data.radiation.permanent.value}}"/>
+    </div>
+    
+    <div class="grid-container gear-grid">
+      <label class="item heading" style="grid-row:1; grid-column:1/3;">Gear:</label>
+      <div class="item" style="grid-row:2/span 6; grid-column:1;">Combat Items:</div>
+      <div class="item" style="grid-row:2/span 6; grid-column:2;">Backpack:</div>
+      <div class="item" style="grid-row:8; grid-column:1/3;">Tiny Items:</div>
+      
+      <div class="item weapon-subgrid" style="grid-row:9/span 6; grid-column:1/3;">
+      
+      </div>
       
     </div>
   </section>
