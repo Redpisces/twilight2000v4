@@ -2,6 +2,16 @@
   {{!-- Sheet Head --}}
   <head>
     <style>
+      .item{
+        display: flex;
+        align-items: center;
+      }
+      input[type=number]{
+        text-align:center;
+      }
+      select{
+        text-align:center;
+      }
       .bio-grid{
         display:grid;
         grid-template-columns: repeat(4, 1fr);
@@ -102,9 +112,20 @@
       }
     </style>
   </head>
-
+  <header style="height:auto;flex:0">
+    <h1 class="charname"><input name="name" type="text" value="{{actor.name}}" placeholder="Name"/></h1>
+  </header>
+  {{!-- Sheet Tab Navigation --}}
+    <nav class="sheet-tabs tabs" data-group="primary">
+        <a class="item" data-tab="description">Description</a>
+        <a class="item" data-tab="skills">Stats</a>
+        <a class="item" data-tab="gear">Gear</a>
+    </nav>
   {{!-- Sheet Body --}}
   <section class="sheet-body">
+  
+  {{!-- Biography Tab --}}
+  <div class="tab biography" data-group="primary" data-tab="description">
     <div class="grid-container bio-grid">
       <div class="item heading system" style="display: flex;align-items: center;justify-content: center;">Twilight:2000</div>
       
@@ -146,8 +167,10 @@
           </td>
         </tr>
       </table>
-      
     </div>
+  </div>
+  {{!-- Skill Tab --}}
+  <div class="tab skills" data-group="primary" data-tab="skills">
     <div class="skill-group">
       <div class="grid-container skill-grid">
         <label class="item heading" style="grid-row:1;grid-column:1/span 13;border-bottom:none;">Attributes &amp; Skills</label>
@@ -192,6 +215,7 @@
       </div>
       <div style="min-height:32px;padding:3px;">Specialties:</div>
     </div>
+
     <div class="grid-container combat-grid">
       <div class="item heading" style="grid-column:1/4;">Combat</div>
       <div class="item heading" style="grid-column:4;">Armor</div>
@@ -232,16 +256,16 @@
       <input class="item" style="grid-row:4; grid-column:2;" type="number" data-dtype="Number" name="data.hit_capacity" value="{{data.hit_capacity}}"/>
       <input class="item" style="grid-row:5; grid-column:2;" type="number" data-dtype="Number" name="data.stress_capacity" value="{{data.stress_capacity}}"/>
       
-      <select class="item die-select" style="grid-row:6; grid-column:2;" name="data.cuf">
-        {{#select data.cuf}}
+      <select class="item die-select" style="grid-row:6; grid-column:2;" name="data.cuf.rating">
+        {{#select data.cuf.rating}}
         <option value="A">A</option>
         <option value="B">B</option>
         <option value="C">C</option>
         <option value="D">D</option>
         {{/select}}
       </select>
-      <select class="item" style="grid-row:7; grid-column:2;" name="data.morale">
-        {{#select data.morale}}
+      <select class="item" style="grid-row:7; grid-column:2;" name="data.morale.rating">
+        {{#select data.morale.rating}}
         <option value="A">A</option>
         <option value="B">B</option>
         <option value="C">C</option>
@@ -268,7 +292,9 @@
       <label class="item" style="grid-row:7; grid-column:6;">Permanent:</label>
       <input class="item" style="grid-row:7; grid-column:7;" type="number" data-dtype="Number" name="data.radiation.permanent.value" value="{{data.radiation.permanent.value}}"/>
     </div>
-    
+  </div>
+  {{!-- Gear Tab --}}
+  <div class="tab gear" data-group="primary" data-tab="gear">
     <div class="grid-container gear-grid">
       <label class="item heading" style="grid-row:1; grid-column:1/3;">Gear:</label>
       <div class="item" style="grid-row:2/span 6; grid-column:1;">Combat Items:</div>
@@ -280,6 +306,7 @@
       </div>
       
     </div>
+  </div>
   </section>
 </form>
 

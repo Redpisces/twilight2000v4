@@ -6,7 +6,7 @@ let confirmed = false;
 const singleSuccess = 6;
 // What number is starting number needed for a double success, set to 0 to disable
 const doubleSuccess = 10;
-let roll_it = `<form autocomplete="off"><p>Enter Ranks [A,B,C,D,F] and number of ammo dice</p><div class="form-group"><label for="num">Ranks:</label><input id="num" type="num"/><img style="border:none;height:24px;" src="systems/twilight2000v4/icons/rank-3.svg"/></div><div class="form-group"><label for="ammo">Ammo:</label><input id="ammo" type="num"/><img style="border:none;height:24px;" src="systems/twilight2000v4/icons/bullets.svg"/></div></form>`;
+let roll_it = `<form autocomplete="off"><p>Enter Ranks [A,B,C,D,F]+-(mod) and number of ammo dice</p><div class="form-group"><label for="num">Ranks:</label><input id="num" type="num"/><img style="border:none;height:24px;" src="systems/twilight2000v4/icons/rank-3.svg"/></div><div class="form-group"><label for="ammo">Ammo:</label><input id="ammo" type="num"/><img style="border:none;height:24px;" src="systems/twilight2000v4/icons/bullets.svg"/></div></form>`;
  new Dialog({
     title: `Die  Roller`,
     content: roll_it,
@@ -22,16 +22,89 @@ let roll_it = `<form autocomplete="off"><p>Enter Ranks [A,B,C,D,F] and number of
         //BEGIN RANKS
           {
             let ranks = html.find('#num').val().toUpperCase();
-            let dice ="";
-            for (let letter of ranks){
-              dice += (letter in dieTypes) ? `1d${dieTypes[letter]},` : "" ;
+            let dice =[];
+            let symbols="";
+            
+            for (let symbol of ranks){
+              if (['+','-','0','1','2','3','4','5','6','7','8','9'].includes(symbol)){
+                 symbols+=symbol;
+              }
             }
-            dice = dice.slice(0,-1);
-            let roll = new Roll(`{${dice}}cs>=${singleSuccess}`).roll();
+            let mod=eval(symbols);
+            
+            
+            for (let letter of ranks){
+              if (letter in dieTypes){
+                 dice.push(letter);
+              }
+            }
+            dice.sort(function(a,b){
+              return a.localeCompare(b);
+            });
+            console.log(mod);
+            for (let i=0;i<dice.length;i++){
+              loop1:
+              while(mod>0){
+                switch (dice[i]){
+                  case "D":
+                    dice[i]="C";
+                    mod--;
+                    break;
+                  case "C":
+                    dice[i]="B";
+                    mod--;
+                    break;
+                  case "B":
+                    dice[i]="A";
+                    mod--;
+                    break;
+                  default:
+                    break loop1;
+                }
+              }
+            }
+            for (let i=dice.length-1;i>=0;i--){
+              loop1:
+              while(mod<0){
+                switch (dice[i]){
+                  case "D":
+                    dice[i]="F";
+                    mod++;
+                    break;
+                  case "C":
+                    dice[i]="D";
+                    mod++;
+                    break;
+                  case "B":
+                    dice[i]="C";
+                    mod++;
+                    break;
+                  case "A":
+                    dice[i]="B";
+                    mod++;
+                    break;
+                  default:
+                    break loop1;
+                }
+              }
+            }
+            
+            
+            
+            
+            let formula="{";
+            
+            while (dice.length > 1){
+              formula+=`1d${dieTypes[dice.pop()]},`;
+            }
+            if (dice.length == 1){
+              formula+=`1d${dieTypes[dice.pop()]}}`;
+            }
+            
+            let roll = new Roll(`${formula}cs>=${singleSuccess}`).roll();
             let bonus = "";
             let get_dice = "";
             for (let groups of roll.dice){
-              console.log(groups);
               let dice_roll = groups.results;
               let dieNum = groups.faces;
               for (let dice of dice_roll){
@@ -58,7 +131,6 @@ let roll_it = `<form autocomplete="off"><p>Enter Ranks [A,B,C,D,F] and number of
               let bonus = "";
               let get_dice = "";
               for (let groups of roll.dice){
-                console.log(groups);
                 let dice_roll = groups.results;
                 let dieNum = groups.faces;
                 for (let dice of dice_roll){
