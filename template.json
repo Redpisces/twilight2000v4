@@ -181,18 +181,6 @@
           "max":10,
           "value":0
         }
-      },
-      "combat_gear":{
-        
-      },
-      "backpack_gear":{
-        
-      },
-      "tiny_items":{
-        
-      },
-      "weapons":{
-        
       }
     }
   },
@@ -228,13 +216,11 @@
       ],
       "type":"",
       "ammo":"",
-      "rel":{"rating":"F"},
+      "rel":{"rating":"F","max":"A"},
       "rof":0,
-      "damage":0,
-      "crit":0,
-      "blast":"-",
+      "blast":{"rating":"-"},
       "range":0,
-      "mag":0
+      "mag":{"min":0,"max":0,"value":0}
     }
   }
 }

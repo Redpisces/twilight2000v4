@@ -96,6 +96,19 @@
               </select>
             </div>
             
+            <div class="item skill-subgrid" style="grid-row:span 2;" > 
+              <div style="grid-row:1;grid-column:1;width:100%;height:36px;display: flex;justify-content: center;align-items: center;"><label>Max Rel</label></div>
+              <select style="grid-row:2;grid-column:1;height:100%;width:100%" class="die-select" name="data.rel.max">
+              {{#select data.rel.max}}
+                <option value="A">A</option>
+                <option value="B">B</option>
+                <option value="C">C</option>
+                <option value="D">D</option>
+                <option value="F">F</option>
+              {{/select}}
+              </select>
+            </div>
+            
             <div class="item skill-subgrid" style="grid-row:span 2;" >
               <div style="grid-row:1;grid-column:1;width:100%;height:36px;display: flex;justify-content: center;align-items: center;"><label>ROF</label></div>
               <input style="grid-row:2;grid-column:1;height:100%;width:100%" name="data.rof" value="{{data.rof}}" placeholder="rof" type="number" data-dtype="number"/>
@@ -113,14 +126,13 @@
             
             <div class="item skill-subgrid" style="grid-row:span 2;" > 
               <div style="grid-row:1;grid-column:1;width:100%;height:36px;display: flex;justify-content: center;align-items: center;"><label>Blast</label></div>
-              <select style="grid-row:2;grid-column:1;height:100%;width:100%" class="die-select" name="data.blast">
-              {{#select data.blast}}
+              <select style="grid-row:2;grid-column:1;height:100%;width:100%" class="die-select" name="data.blast.rating">
+              {{#select data.blast.rating}}
                 <option value="A">A</option>
                 <option value="B">B</option>
                 <option value="C">C</option>
                 <option value="D">D</option>
-                <option value="F">F</option>
-                <option value="F">-</option>
+                <option value="-">-</option>
               {{/select}}
               </select>
             </div>
@@ -132,7 +144,11 @@
             
             <div class="item skill-subgrid" style="grid-row:span 2;" >
               <div style="grid-row:1;grid-column:1;width:100%;height:36px;display: flex;justify-content: center;align-items: center;"><label>Mag</label></div>
-              <input style="grid-row:2;grid-column:1;height:100%;width:100%" name="data.mag" value="{{data.mag}}" placeholder="mag" type="number" data-dtype="number"/>
+              <input style="grid-row:2;grid-column:1;height:100%;width:100%" name="data.mag.value" value="{{data.mag.value}}" placeholder="mag" type="number" data-dtype="number"/>
+            </div>
+            <div class="item skill-subgrid" style="grid-row:span 2;" >
+              <div style="grid-row:1;grid-column:1;width:100%;height:36px;display: flex;justify-content: center;align-items: center;"><label>Max</label></div>
+              <input style="grid-row:2;grid-column:1;height:100%;width:100%" name="data.mag.max" value="{{data.mag.max}}" placeholder="mag" type="number" data-dtype="number"/>
             </div>  
             
             <div class="item skill-subgrid" style="grid-row:span 2;" >

@@ -110,6 +110,19 @@
         align-items: center;
         overflow:hidden;
       }
+      .weapons td{
+        text-align: center;
+        vertical-align: middle;
+      }
+      .weapons h3{
+        margin:0px;
+      }
+      .weapons .item-image{
+        margin:0px;
+        width:24px;
+        height:24px;
+      }
+      
     </style>
   </head>
   <header style="height:auto;flex:0">
@@ -238,7 +251,7 @@
         <input class="item" style="grid-row:2; grid-column:4;" type="number" data-dtype="Number" name="data.stress.max" value="{{data.stress.max}}"/>
       </div>
       
-      <div class="item" style="grid-row:2; grid-column:4;">Head</div>
+      <div class="item" style="grid-row:2; grid-column:4;">Head</div>li
       <div class="item" style="grid-row:3; grid-column:4;">Arms</div>
       <div class="item" style="grid-row:4; grid-column:4;">Torso</div>
       <div class="item" style="grid-row:5; grid-column:4;">Legs</div>
@@ -297,11 +310,86 @@
   <div class="tab gear" data-group="primary" data-tab="gear">
     <div class="grid-container gear-grid">
       <label class="item heading" style="grid-row:1; grid-column:1/3;">Gear:</label>
-      <div class="item" style="grid-row:2/span 6; grid-column:1;">Combat Items:</div>
+      <div class="item" style="grid-row:2/span 6; grid-column:1;">
+        <div style="width:100%;height:100%;align-content:top;overflow-y:scroll;">
+            <ol class="items-list">
+                <li class="item flexrow item-header">
+                  <div class="item-image"></div>
+                  <div class="item-name">Name</div>
+                  <div class="item-controls">
+                    <a class="item-control item-create" title="Create item" data-type="item"><i class="fas fa-plus"></i> Add item</a>
+                  </div>
+                </li>
+            {{#each actor.gear as |item id|}}
+                <li class="item flexrow" data-item-id="{{item._id}}">
+                    <div class="item-image"><img src="{{item.img}}" title="{{item.name}}" width="24" height="24"/></div>
+                    <h4 class="item-name">{{item.name}}</h4>
+                    <div class="item-controls">
+                        <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
+                        <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
+                    </div>
+                </li>
+            {{/each}}
+            </ol>
+        </div>
+      </div>
       <div class="item" style="grid-row:2/span 6; grid-column:2;">Backpack:</div>
       <div class="item" style="grid-row:8; grid-column:1/3;">Tiny Items:</div>
       
       <div class="item weapon-subgrid" style="grid-row:9/span 6; grid-column:1/3;">
+        <div style="width:100%;height:100%;align-content:top;overflow-y:scroll;overflow-x:none">
+          <table class="items-list weapons">
+                <tr class="">
+                  <th style="width:24px;"><div class="item-image"></div></th>
+                  <th><div class="item-name">Name</div></th>
+                  <th><div>Rof</div></th>
+                  <th><div>Damage</div></th>
+                  <th><div>Crit</div></th>
+                  <th><div>Armor</div></th>
+                  <th><div>Range</div></th>
+                  <th><div>Mag</div></th>
+                  <th><div>Cap</div></th>
+                  <th><div>Reliability</div></th>
+                  <th><div>Blast</div></th>
+                  <th><div class="item-controls">
+                    <a class="item-control item-create" title="Create item" data-type="gun"><i class="fas fa-plus"></i> Add Gun</a>
+                  </div></th>
+                </tr>
+            {{#each actor.weapons as |item id|}}
+                <tr class="item" data-item-id="{{item._id}}" style="
+                height: 100%;
+                width: 100%;
+                padding: 0px;
+                border: none;
+                display: revert;
+                ">
+                    <td><div class="item-image"><img src="{{item.img}}" title="{{item.name}}" width="24" height="24"/></div></td>
+                    <td><h4 class="item-name">{{item.name}}</h4></td>
+                    <td><h3>{{item.data.rof}}</h3></td>
+                    <td><h3>{{item.data.damage}}</h3></td>
+                    <td><h3>{{item.data.crit}}</h3></td>
+                    <td><h3>{{item.data.armor}}</h3></td>
+                    <td><h3>{{item.data.range}}</h3></td>
+                    <td><input class="embeded" style="width:32px" name="in.data.data.mag.value" value="{{item.data.mag.value}}" placeholder="mag" type="number" data-dtype="number"/></td>
+                    <td><h3>{{item.data.mag.max}}</h3></td>
+                    <td><select class="die-select embeded" name="in.data.data.rel.rating">
+                    {{#select item.data.rel.rating}}
+                      <option value="A">A</option>
+                      <option value="B">B</option>
+                      <option value="C">C</option>
+                      <option value="D">D</option>
+                      <option value="F">F</option>
+                    {{/select}}
+                    </select></td>
+                    <td><h3>{{item.data.blast.rating}}</h3></td>
+                    <td class="item-controls">
+                        <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
+                        <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
+                    </td>
+                </tr>
+            {{/each}}
+            </table>
+        </div>
       
       </div>
       

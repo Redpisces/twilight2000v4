@@ -26,6 +26,10 @@ export class twilightActorSheet extends ActorSheet {
     const data = super.getData();
     data.dtypes = ["String", "Number", "Boolean"];
 
+    if (this.actor.data.type == 'character'){
+      this._prepareCharacterItems(data);
+    }
+    
     return data;
   }
 
@@ -55,6 +59,9 @@ export class twilightActorSheet extends ActorSheet {
 
     // Rollable abilities.
     html.find('.rollable').click(this._onRoll.bind(this));
+    
+    //embeded select
+    html.find('.embeded').change(this._onEmbedSelect.bind(this));
   }
 
   /* -------------------------------------------- */
@@ -97,64 +104,94 @@ export class twilightActorSheet extends ActorSheet {
     const dataset = element.dataset;
     let terms={};
         
-    if (dataset.attribute){
-      terms[this.actor.data.data.attributes[dataset.attribute].name]=this.actor.data.data.attributes[dataset.attribute].die;
-    }
-    if (dataset.skill){
-      //search for skills because im a dummy
-      for (let attribute of Object.values(this.actor.data.data.attributes)){
-        if (attribute.skills[dataset.skill]){
-          terms[attribute.skills[dataset.skill].name]=attribute.skills[dataset.skill].die;
-        }
+   
+  }
+  _prepareCharacterItems(sheetData){
+    const actorData = sheetData.actor;
+    
+    const gear=[];
+    const weapons=[];
+    
+    for (let i of sheetData.items){
+      let item =i.data;
+      
+      i.img=i.img||DEFAULT_TOKEN;
+      
+      switch (i.type){
+        case 'item':
+          gear.push(i);
+          break;
+        case 'gun':
+          gear.push(i);
+          weapons.push(i);
+          break;
+        default:
+          gear.push(i);
+          break;
       }
+      actorData.gear=gear;
+      actorData.weapons=weapons;
       
     }
-    let rollproto="{"
-    for (let value of Object.values(terms)){
-      rollproto+=`1d${value},`
-    }
-    rollproto=rollproto.slice(0,-1)+"}";
-    var roll=new Roll(rollproto);
-    roll.evaluate()
-    var results=[0,0];
-    var content=`<div>Rolls `;
-    for (let value of Object.keys(terms)){
-      content+=`${value}+`
-    }
-    content=content.slice(0,-1)+`</div><div>`
-    content+=formatTwilightRoll(roll,results);
-    content+=`</div><div>Success:${results[0]}. Glitches:${results[1]}</div>`;
-    let data={
-      speaker: ChatMessage.getSpeaker({ actor: this.actor }),
-      content: content
-    };
-    ChatMessage.create(data);
-
+    
   }
-
+  async _onEmbedSelect(event){
+    event.preventDefault();
+    const element = event.currentTarget;
+    const value=element.value;
+    var path=element.name.split(".").reverse();
+    const actor = this.actor;
+    const li = $(element).parents(".item");
+    const item = this.actor.getOwnedItem(li.data("itemId"));
+    
+    
+    
+    if (path.pop()!="in"){
+      console.error("Unexpected data");
+      return;
+    }
+    if (path.pop()!="data"){
+      console.error("Unexpected data");
+      return;
+    }
+    if (path.pop()!="data"){
+      console.error("Unexpected data");
+      return;
+    }
+    path.reverse();
+    
+    let data=_deepUpdate(item['data']['data'],path,value);
+    const update = {_id: item._id, data: data};
+    console.log(data);
+    const updated = await actor.updateEmbeddedEntity("OwnedItem", update);
+    console.log(updated);
+    console.log(actor);
+  }
 }
-function formatTwilightRoll(roll,results){
-  const colors=["#A00","#0A0","#0AA","#111"];
-  let content="";
-  for (let dice of roll.terms[0].rolls){
-          for (let die of dice.terms){
-            let color = ""
-            if (die.results[0].result>=10){
-              color=colors[2];
-              results[0]+=2;
-            }
-            else if (die.results[0].result>=6){
-              color=colors[1];
-              results[0]++;
-            }
-            else if (die.results[0].result==1){
-              color=colors[0];
-              results[1]++
-            }
-            else {color=colors[3];}
-            
-            content+=`<div style="background-image: url('icons/svg/d${die.faces}-grey.svg');position: relative;width: 24px;line-height: 24px;float: left;margin-right: 1px;background-repeat: no-repeat;background-size: 24px 24px;font-size: 16px;color: ${color};font-weight: bold;text-align: center;">${die.results[0].result}</div>`;
+function _deepUpdate(original,keys,value){
+  if (keys.length === 0) {
+    return value;
+  }
+  const currentKey = keys[0];
+  if (Array.isArray(original)) {
+    return original.map(
+      (v, index) => index === currentKey
+        ? _deepUpdate(v, keys.slice(1), value) // (A)
+        : v); // (B)
+  } else if (typeof original === 'object' && original !== null) {
+    return Object.fromEntries(
+      Object.entries(original).map(
+        (keyValuePair) => {
+          const [k,v] = keyValuePair;
+          if (k === currentKey) {
+            return [k, _deepUpdate(v, keys.slice(1), value)]; // (C)
+          } else {
+            return keyValuePair; // (D)
           }
+        }));
+  } else {
+    // Primitive value
+    return original;
   }
-  return content;
 }
+
