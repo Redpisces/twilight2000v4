@@ -14,20 +14,26 @@ export class twilightActorSheet extends ActorSheet {
     });
   }
 
-  /* -------------------------------------------- */
-  /** @override */
   get template() {
-    //return unique actor sheet by type, like `weapon-sheet.html`.
     const path = "systems/twilight2000v4/templates/actor";
-    return `${path}/${this.actor.data.type}-sheet.html`;
+    
+     return `${path}/${this.actor.data.type}-sheet.html`;
   }
+  
+  /* -------------------------------------------- */
+
   /** @override */
   getData() {
     const data = super.getData();
     data.dtypes = ["String", "Number", "Boolean"];
-
-    if (this.actor.data.type == 'character'){
-      this._prepareCharacterItems(data);
+    
+    for (let [akey,avalue] of Object.entries(data.data.attributes)) {
+      avalue.skills={}
+      for (let [skey,svalue] of Object.entries(data.data.skills)) {
+        if (svalue.linked_atr == akey){
+          avalue.skills[skey]=svalue;
+        }
+      }
     }
     
     return data;
@@ -59,9 +65,6 @@ export class twilightActorSheet extends ActorSheet {
 
     // Rollable abilities.
     html.find('.rollable').click(this._onRoll.bind(this));
-    
-    //embeded select
-    html.find('.embeded').change(this._onEmbedSelect.bind(this));
   }
 
   /* -------------------------------------------- */
@@ -102,96 +105,15 @@ export class twilightActorSheet extends ActorSheet {
     event.preventDefault();
     const element = event.currentTarget;
     const dataset = element.dataset;
-    let terms={};
-        
-   
-  }
-  _prepareCharacterItems(sheetData){
-    const actorData = sheetData.actor;
-    
-    const gear=[];
-    const weapons=[];
-    
-    for (let i of sheetData.items){
-      let item =i.data;
-      
-      i.img=i.img||DEFAULT_TOKEN;
-      
-      switch (i.type){
-        case 'item':
-          gear.push(i);
-          break;
-        case 'gun':
-          gear.push(i);
-          weapons.push(i);
-          break;
-        default:
-          gear.push(i);
-          break;
-      }
-      actorData.gear=gear;
-      actorData.weapons=weapons;
-      
-    }
-    
-  }
-  async _onEmbedSelect(event){
-    event.preventDefault();
-    const element = event.currentTarget;
-    const value=element.value;
-    var path=element.name.split(".").reverse();
-    const actor = this.actor;
-    const li = $(element).parents(".item");
-    const item = this.actor.getOwnedItem(li.data("itemId"));
-    
-    
-    
-    if (path.pop()!="in"){
-      console.error("Unexpected data");
-      return;
-    }
-    if (path.pop()!="data"){
-      console.error("Unexpected data");
-      return;
-    }
-    if (path.pop()!="data"){
-      console.error("Unexpected data");
-      return;
-    }
-    path.reverse();
-    
-    let data=_deepUpdate(item['data']['data'],path,value);
-    const update = {_id: item._id, data: data};
-    console.log(data);
-    const updated = await actor.updateEmbeddedEntity("OwnedItem", update);
-    console.log(updated);
-    console.log(actor);
-  }
-}
-function _deepUpdate(original,keys,value){
-  if (keys.length === 0) {
-    return value;
-  }
-  const currentKey = keys[0];
-  if (Array.isArray(original)) {
-    return original.map(
-      (v, index) => index === currentKey
-        ? _deepUpdate(v, keys.slice(1), value) // (A)
-        : v); // (B)
-  } else if (typeof original === 'object' && original !== null) {
-    return Object.fromEntries(
-      Object.entries(original).map(
-        (keyValuePair) => {
-          const [k,v] = keyValuePair;
-          if (k === currentKey) {
-            return [k, _deepUpdate(v, keys.slice(1), value)]; // (C)
-          } else {
-            return keyValuePair; // (D)
-          }
-        }));
-  } else {
-    // Primitive value
-    return original;
-  }
-}
 
+    if (dataset.roll) {
+      let roll = new Roll(dataset.roll, this.actor.data.data);
+      let label = dataset.label ? `Rolling ${dataset.label}` : '';
+      roll.roll().toMessage({
+        speaker: ChatMessage.getSpeaker({ actor: this.actor }),
+        flavor: label
+      });
+    }
+  }
+
+}

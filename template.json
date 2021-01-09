@@ -1,226 +1,78 @@
 {
-  "Actor":{
-    "types":[
-      "character",
-      "npc"
-    ],
-    "templates":{
-      "base":{
-        
+  "Actor": {
+    "types": ["character"],
+    "templates": {
+      "base": {
+       
       }
     },
-    "npc":{
-      "templates":[
-        "base"
-      ],
-      "attributes":{
-        "str":{
-          "name":"Strength",
-          "rating":"C"
-        },
-        "agi":{
-          "name":"Agility",
-          "rating":"C"
-        },
-        "int":{
-          "name":"Intelligence",
-          "rating":"C"
-        },
-        "emp":{
-          "name":"Empathy",
-          "rating":"C"
-        }
-      },
-      "skills":{"skill_1":{"name":"","rating":"F"},"skill_2":{"name":"","rating":"F"},"skill_3":{"name":"","rating":"F"},"skill_4":{"name":"","rating":"F"},"skill_5":{"name":"","rating":"F"},"skill_6":{"name":"","rating":"F"}},
-      "hit_capacity":{
-        "value":0,
-        "max":0
-      },
-      "cuf":{"rating":"D"},
-      "morale":{"rating":"D"},
-      "equipment":{},
-      "weapons":{}
-    },
-    
-    "character":{
-      "templates":[
-        "base"
-      ],
+    "character": {
+      "templates": ["base"],
       "bio":{
-        "name":"",
-        "nation":"",
-        "branch":"",
-        "apperance":"",
-        "rank":"",
-        "code":"",
-        "buddy":"",
-        "dream":"",
-        "meet":""
+        "full_name": {"value":"","size":1},
+        "nationality": {"value":"","size":1},
+        "branch":{"value":"","size":1},
+        "apperance":{"name":"","value":"","size":2},
+        "rank":{"value":"","size":1},
+        "code":{"value":"","size":2},
+        "buddy":{"value":"","size":1},
+        "dream":{"value":"","size":2},
+        "history":{"value":"","size":2}
       },
-      "exp":{
+      "experience":{
         "current":0,
         "total":0
       },
-      "attributes":{
-        "str":{
-          "name":"Strength",
-          "rating":"C",
-          "skills":{
-            "heavy_weapons":{
-              "name":"Heavy Weapons",
-              "rating":"F"
-            },
-            "melee":{
-              "name":"Melee",
-              "rating":"F"
-            },
-            "stamina":{
-              "name":"Stamina",
-              "rating":"F"
-            }
-          }
-        },
-        "agi":{
-          "name":"Agility",
-          "rating":"C",
-          "skills":{
-            "driving":{
-              "name":"Driving",
-              "rating":"F"
-            },
-            "mobility":{
-              "name":"Mobility",
-              "rating":"F"
-            },
-            "ranged_combat":{
-              "name":"Ranged Combat",
-              "rating":"F"
-            }
-          }
-        },
-        "int":{
-          "name":"Intelligence",
-          "rating":"C",
-          "skills":{
-            "recon":{
-              "name":"Recon",
-              "rating":"F"
-            },
-            "survival":{
-              "name":"Survival",
-              "rating":"F"
-            },
-            "tech":{
-              "name":"Tech",
-              "rating":"F"
-            }
-          }
-        },
-        "emp":{
-          "name":"Empathy",
-          "rating":"C",
-          "skills":{
-            "command":{
-              "name":"Command",
-              "rating":"F"
-            },
-            "manipulation":{
-              "name":"Manipulation",
-              "rating":"F"
-            },
-            "medical_aid":{
-              "name":"Medical Aid",
-              "rating":"F"
-            }
-          }
-        }
+      "attributes": {
+        "str":{"rating":"C"},"agi":{"rating":"C"},"int":{"rating":"C"},"emp":{"rating":"C"}
       },
-      "specialties":{
+      "skills":{
+        "heavy_weapons":{"rating":"F","linked_atr":"str"},
+        "melee":{"rating":"F","linked_atr":"str"},
+        "stamina":{"rating":"F","linked_atr":"str"},
+        
+        "driving":{"rating":"F","linked_atr":"agi"},
+        "mobility":{"rating":"F","linked_atr":"agi"},
+        "ranged_combat":{"rating":"F","linked_atr":"agi"},
+        
+        "recon":{"rating":"F","linked_atr":"int"},
+        "survival":{"rating":"F","linked_atr":"int"},
+        "tech":{"rating":"F","linked_atr":"int"},
+        
+        "command":{"rating":"F","linked_atr":"emp"},
+        "manipulation":{"rating":"F","linked_atr":"emp"},
+        "mecical_aid":{"rating":"F","linked_atr":"emp"}
         
       },
-      "damage":{
-        "min":0,
-        "max":10,
-        "value":0
-      },
-      "stress":{
-        "min":0,
-        "max":10,
-        "value":0
-      },
-      "hit_capacity":0,
-      "stress_capacity":0,
+      "hits":{"max":10,"value":0},
+      "stress":{"max":10,"value":0},
       "cuf":{"rating":"D"},
       "morale":{"rating":"D"},
-      "injuries":{
-        
-      },
-      "diseases":{
-        
-      },
-      "armor":{
-        "head":0,
-        "arms":0,
-        "torso":0,
-        "legs":0
-      },
-      "conditions":{
-        "starving":false,
-        "dehydrated":false,
-        "sleep_dep":false,
-        "hypothermic":false
-      },
-      "radiation":{
-        "temporary":{
-          "min":0,
-          "max":10,
-          "value":0
-        },
-        "permanent":{
-          "min":0,
-          "max":10,
-          "value":0
-        }
-      }
+      "armor":{"head":0,"arms":0,"torso":0,"legs":0},
+      "conditions":{"starving":false,"dehydrated":false,"sleep_dep":false,"hypothermic":false},
+      "rads":{"temp":0,"permanent":0}
     }
   },
-  "Item":{
-    "types":[
-      "item",
-      "gun"
-    ],
-    "templates":{
-      "base":{
-        "description":"",
-        "quantity":1,
-        "weight":0
-      },
-      "weapon":{
-        "damage":0,
-        "crit":0,
-        "armor":"0",
-        "weight":0.0,
-        "price":0
+  "Item": {
+    "types": ["gear","specialty","injury","disease"],
+    "templates": {
+      "base": {
+        "description": ""
       }
     },
-    "item":{
-      "templates":[
-        "base"
-      ]
-      
+    "gear": {
+      "templates": ["base"],
+      "quantity": 1,
+      "weight": 0
     },
-    "gun":{
-      "templates":[
-        "base",
-        "weapon"
-      ],
-      "type":"",
-      "ammo":"",
-      "rel":{"rating":"F","max":"A"},
-      "rof":0,
-      "blast":{"rating":"-"},
-      "range":0,
-      "mag":{"min":0,"max":0,"value":0}
+    "specialty": {
+      "templates": ["base"]
+    },
+    "injury": {
+      "templates": ["base"]
+    },
+    "disease": {
+      "templates": ["base"]
     }
   }
 }
