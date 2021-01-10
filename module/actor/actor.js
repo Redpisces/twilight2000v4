@@ -40,6 +40,7 @@ export class twilightActor extends Actor {
     const specialties = [];
     const injuries=[];
     const diseases=[];
+    const weapons=[];
     
     for (let i of actorData.items){
       let item = i.data;
@@ -58,6 +59,10 @@ export class twilightActor extends Actor {
         case 'disease':
           diseases.push(i);
           break;
+        case 'weapon':
+          gear.push(i);
+          weapons.push(i);
+          break;
         default:
           break;
       }
@@ -66,7 +71,7 @@ export class twilightActor extends Actor {
       actorData.specialties=specialties;
       actorData.injuries=injuries;
       actorData.diseases=diseases;
-      
+      actorData.weapons=weapons;
     }
     
   }

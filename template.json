@@ -54,7 +54,7 @@
     }
   },
   "Item": {
-    "types": ["gear","specialty","injury","disease"],
+    "types": ["gear","specialty","injury","disease","weapon"],
     "templates": {
       "base": {
         "description": ""
@@ -73,6 +73,23 @@
     },
     "disease": {
       "templates": ["base"]
+    },
+    "weapon":{
+      "templates": ["base"],
+      "attributes":{
+        "type":"",
+        "ammo":"",
+        "rel":"",
+        "rof":"",
+        "damage":"",
+        "crit":"",
+        "blast":"",
+        "range":"",
+        "mag":"",
+        "armor":"",
+        "weight":"",
+        "price":""
+      }
     }
   }
 }
