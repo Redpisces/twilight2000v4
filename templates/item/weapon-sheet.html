@@ -51,7 +51,7 @@
               {{#each data.attributes as |item id|}}
               <div class="grid-item sub-subgrid" >
                 <label class="grid-item" for="data.attributes.{{id}}">{{id}}</label>
-                <input class="grid-item" style="grid-column-end:span 1;" name="data.attributes.{{id}}" type="number" value="{{item}}"/>
+                <input class="grid-item" style="grid-column-end:span 1;" name="data.attributes.{{id}}" type="text" value="{{item}}"/>
               </div>
               {{/each}}
             </div>
