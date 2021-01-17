@@ -150,7 +150,7 @@
             <option value="D">D</option>
             {{/select}}
           </select>
-          <div class="grid-item die">d{{item.base_die}}</div>
+          <div class="grid-item die">{{item.base_die}}</div>
         </div>
         {{#each item.skills as |skill sid|}}
         <div class="grid-item sub-subgrid" style="grid-column:{{math @../index '+' 1}};grid-row:{{math @index '+' 3}};">
@@ -164,7 +164,7 @@
             <option value="F">F</option>
             {{/select}}
           </select>
-          <div class="grid-item die">d{{skill.base_die}}</div>
+          <div class="grid-item die">{{skill.base_die}}</div>
         </div>
         {{/each}}
         {{/each}}
