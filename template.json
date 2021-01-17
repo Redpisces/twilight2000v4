@@ -40,7 +40,7 @@
         "tech":{"rating":"F","linked_atr":"int"},
         
         "command":{"rating":"F","linked_atr":"emp"},
-        "manipulation":{"rating":"F","linked_atr":"emp"},
+        "persuasion":{"rating":"F","linked_atr":"emp"},
         "mecical_aid":{"rating":"F","linked_atr":"emp"}
         
       },

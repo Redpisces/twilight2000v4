@@ -32,33 +32,27 @@
       .stat-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      gap: 3px;
+      gap: 1px;
       grid-auto-rows: minmax(25px, auto);
+      border: 1px solid black;
+      background-color: black;
       }
       .stat-grid .sub-subgrid{
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1px;
-      grid-auto-rows: minmax(25px, auto);
-      grid-auto-flow: dense;
-      }
-      .stat-grid .sub-subgrid{
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1px;
+      grid-template-columns: 4fr 2fr 1fr;
+      gap: 0px;
       grid-auto-rows: minmax(25px, auto);
       grid-auto-flow: dense;
       }
       .stat-grid .grid-item{
-      border: 1px solid black;
+        background: url(../ui/parchment.jpg) repeat;
       }
       .stat-grid .sub-subgrid .grid-item{
-      border: 1px none grey;
+        overflow:hidden;
       }
       .combat-grid {
-      border: 1px solid black;
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
+      grid-template-columns: repeat(3, 1fr);
       gap: 3px;
       grid-auto-rows: minmax(25px, auto);
       }
@@ -73,11 +67,15 @@
       }
       .combat-grid .stats-subgrid{
       display: grid;
-      grid-template-columns: 2fr 1fr 2fr 1fr;
+      grid-template-columns: 2fr 1fr;
       grid-auto-rows: minmax(25px, auto);
       }
       .combat-grid .stats-subgrid .grid-item{
       border: 0px none black;
+      }
+      
+      .combat-grid.stats-subgrid.grid-item input[type="text"], input[type="number"], input[type="password"], input[type="date"], input[type="time"]{
+      border: 1px solid #7a7971;
       }
       .health-grid {
       display: grid;
@@ -87,6 +85,19 @@
       }
       .health-grid ol {
       border: 1px solid black;
+      }
+      
+      .weapon-grid {
+        display: grid;
+        grid-template-columns: 4fr repeat(12, 1fr);
+        gap: 1px;
+        grid-auto-rows: minmax(25px, auto);
+        border: 1px solid black;
+        background-color: black;
+        overflow-x:scroll;
+      }
+      .weapon-grid .grid-item{
+        background: url(../ui/parchment.jpg) repeat;
       }
     </style>
   </head>
@@ -130,7 +141,7 @@
         <div class="grid-item sub-subgrid" style="grid-column:span 4;grid-row:1;"> Attributes &#38; Skills </div>
         {{#each data.attributes as |item id|}}
         <div class="grid-item sub-subgrid" style="grid-column:{{math @index '+' 1}};grid-row:2;">
-          <label class="grid-item" style="grid-column-end:span 2;" for="data.attributes.{{id}}.rating">{{id}}</label>
+          <label class="grid-item" style="grid-column-end:span 1;" for="data.attributes.{{id}}.rating">{{id}}</label>
           <select class="grid-item" style="grid-column-end:span 1;" name="data.attributes.{{id}}.rating">
             {{#select item.rating}}
             <option value="A">A</option>
@@ -139,11 +150,11 @@
             <option value="D">D</option>
             {{/select}}
           </select>
-          <div class="grid-item" >{{item.base_die}}</div>
+          <div class="grid-item die">d{{item.base_die}}</div>
         </div>
         {{#each item.skills as |skill sid|}}
         <div class="grid-item sub-subgrid" style="grid-column:{{math @../index '+' 1}};grid-row:{{math @index '+' 3}};">
-          <label class="grid-item" style="grid-column-end:span 2;" for="data.skills.{{sid}}.rating">{{@key}}</label>
+          <label class="grid-item" style="grid-column-end:span 1;" for="data.skills.{{sid}}.rating">{{@key}}</label>
           <select class="grid-item" style="grid-column-end:span 1;" name="data.skills.{{sid}}.rating">
             {{#select skill.rating}}
             <option value="A">A</option>
@@ -153,7 +164,7 @@
             <option value="F">F</option>
             {{/select}}
           </select>
-          <div class="grid-item" >{{skill.base_die}}</div>
+          <div class="grid-item die">d{{skill.base_die}}</div>
         </div>
         {{/each}}
         {{/each}}
@@ -178,30 +189,34 @@
         {{/each}}
       </ol>
       <div class="grid-container combat-grid">
-        <div class="grid-item sub-subgrid" style="grid-column:span 2;grid-row:1;"> Combat</div>
-        <div class="grid-item sub-subgrid" style="grid-column:span 1;grid-row:1;"> Armor</div>
-        <div class="grid-item sub-subgrid" style="grid-column:span 1;grid-row:1;"> Conditions</div>
-        <div class="grid-item" style="grid-column-end:span 1;grid-row-end:span 2;">
-          <label for="data.hits.value">Damage</label><input name="data.hits.value" type="number" value="{{data.hits.value}}"/>
-        </div>
-        <div class="grid-item" style="grid-column-end:span 1;grid-row-end:span 2;">
-          <label for="data.stress.value">Stress</label><input name="data.stress.value" type="number" value="{{data.stress.value}}"/>
-        </div>
-        <div class="grid-item armor-subgrid" style="grid-column-end:span 1;grid-row-end:span 4;">
-          {{#each data.armor as |value id|}}
-          <label for="data.armor.{{id}}">{{id}}</label><input name="data.armor.{{id}}" type="number" value="{{value}}"/>
-          {{/each}}
-        </div>
-        <div class="grid-item armor-subgrid" style="grid-column-end:span 1;grid-row-end:span 4;">
-          {{#each data.conditions as |value id|}}
-          <label for="data.conditions.{{id}}">{{id}}</label>
-          <input name="data.conditions.{{id}}" type="checkbox" {{checked value}}/>
-          {{/each}}
-        </div>
-        <div class="grid-item stats-subgrid" style="grid-column-end:span 2;grid-row-end:span 2;">
+        
+        <div class="grid-item stats-subgrid" style="grid-column-end:span 1;grid-row-end:span 3;">
+          <div style="grid-column-end:span 2;border-bottom: 1px solid black;"> Damage</div>
+          <label class="grid-item" for="data.hits.value">Hits</label>
+          <input class="grid-item" name="data.hits.value" type="number" value="{{data.hits.value}}"/>
           <label class="grid-item" for="data.hits.max">Hit Cap</label>
           <input class="grid-item" name="data.hits.max" type="number" value="{{data.hits.max}}"/>
-          <label class="grid-item" for="data.cuf.rating">Hit CUF</label>
+        </div>
+        
+        <div class="grid-item stats-subgrid" style="grid-column-end:span 1;grid-row-end:span 3;">
+          <div style="grid-column-end:span 2;border-bottom: 1px solid black;"> Stress</div>
+          <label class="grid-item" for="data.stress.value">Stress</label>
+          <input class="grid-item" name="data.stress.value" type="number" value="{{data.stress.value}}"/>
+          <label class="grid-item" for="data.stress.max">Stress Cap</label>
+          <input class="grid-item" name="data.stress.max" type="number" value="{{data.stress.max}}"/>
+        </div>
+        
+        <div class="grid-item stats-subgrid" style="grid-column-end:span 1;grid-row-end:span 3;">
+          <div style="grid-column-end:span 2;border-bottom: 1px solid black;"> Rads</div>
+          <label class="grid-item" for="data.rads.temp">Temporary</label>
+          <input class="grid-item" name="data.rads.temp" type="number" value="{{data.rads.temp}}"/>
+          <label class="grid-item" for="data.rads.permanent">Permanant</label>
+          <input class="grid-item" name="data.rads.permanent" type="number" value="{{data.rads.permanent}}"/>
+        </div>
+        
+        <div class="grid-item stats-subgrid" style="grid-column-end:span 1;grid-row-end:span 3;">
+          <div style="grid-column-end:span 2;border-bottom: 1px solid black;"> Morale</div>
+          <label class="grid-item" for="data.cuf.rating">CUF</label>
           <select class="grid-item" name="data.cuf.rating">
             {{#select data.cuf.rating}}
             <option value="A">A</option>
@@ -211,8 +226,6 @@
             <option value="F">F</option>
             {{/select}}
           </select>
-          <label class="grid-item" for="data.stress.max">Stress Cap</label>
-          <input class="grid-item" name="data.stress.max" type="number" value="{{data.stress.max}}"/>
           <label class="grid-item" for="data.morale.rating">Morale</label>
           <select class="grid-item" name="data.morale.rating">
             {{#select data.morale.rating}}
@@ -224,6 +237,21 @@
             {{/select}}
           </select>
         </div>
+        
+        <div class="grid-item armor-subgrid" style="grid-column-end:span 1;grid-row-end:span 5;">
+          <div style="grid-column-end:span 2;border-bottom: 1px solid black;"> Armor</div>
+          {{#each data.armor as |value id|}}
+          <label for="data.armor.{{id}}">{{id}}</label><input name="data.armor.{{id}}" type="number" value="{{value}}"/>
+          {{/each}}
+        </div>
+        <div class="grid-item armor-subgrid" style="grid-column-end:span 1;grid-row-end:span 5;">
+          <div style="grid-column-end:span 2;border-bottom: 1px solid black;"> Conditions</div>
+          {{#each data.conditions as |value id|}}
+          <label for="data.conditions.{{id}}">{{id}}</label>
+          <input name="data.conditions.{{id}}" type="checkbox" {{checked value}}/>
+          {{/each}}
+        </div>
+        
       </div>
       <div class="grid-container health-grid">
         <div>
@@ -293,25 +321,31 @@
         {{/each}}
       </ol>
       
-      <ol class="items-list" style="border: 1px solid black;">
-        <li class="item flexrow item-header">
-          <div class="item-image"></div>
-          <div class="item-name">Weapon</div>
-          <div class="item-controls" style="min-width: 100px;">
-            <a class="item-control item-create" title="Create item" data-type="weapon"><i class="fas fa-plus"></i> Add Weapon</a>
-          </div>
-        </li>
+      <div class="grid-container weapon-grid">
         {{#each actor.weapons as |item id|}}
-        <li class="item flexrow" data-item-id="{{item._id}}">
-          <div class="item-image"><img src="{{item.img}}" title="{{item.name}}" width="24" height="24"/></div>
-          <h4 class="item-name">{{item.name}}</h4>
-          <div class="item-controls">
+          {{#if @first}}
+              <div class="grid-item">Weapon</div>
+            {{#each item.data.attributes as |stat key|}}
+              {{#unless @last}}
+              <div class="grid-item">{{key}}</div>
+              {{/unless}}
+            {{/each}}
+            <div class="grid-item"></div>
+          {{/if}}
+        
+            <div class="grid-item">{{item.name}}</div>
+          {{#each item.data.attributes as |stat key|}}
+            {{#unless @last}}
+            <div class="grid-item">{{stat}}</div>
+            {{/unless}}
+          {{/each}}
+          <div class="item-controls grid-item item" data-item-id="{{item._id}}">
             <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
             <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
           </div>
-        </li>
         {{/each}}
-      </ol>
+        <div class="grid-item" style="grid-column-end:span 13;"><a class="item-control item-create" title="Create item" data-type="weapon"><i class="fas fa-plus"></i> Add Weapon</a></div>
+      </div>
       
     </div>
   </section>

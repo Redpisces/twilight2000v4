@@ -35,6 +35,8 @@ export class twilightActor extends Actor {
       // Calculate the modifier using d20 rules.
       skill.base_die = rankValues[skill.rating];
     }
+    data.cuf.base_die=rankValues[data.cuf.rating];
+    data.morale.base_die=rankValues[data.morale.rating];
     
     const gear=[];
     const specialties = [];

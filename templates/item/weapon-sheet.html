@@ -4,9 +4,11 @@
         .stat-grid{
           display: grid;
           grid-template-columns: repeat( auto-fit, minmax(100px, 1fr) );
-          gap: 5px;
+          gap: 1px;
           grid-auto-rows: minmax(50px, auto);
           grid-auto-flow: dense;
+          border: 1px solid black;
+          background-color: black;
         }
         .stat-grid .sub-subgrid{
         display: grid;
@@ -16,10 +18,14 @@
         grid-auto-flow: dense;
         }
         .stat-grid .grid-item{
-        border: 1px solid black;
+        background: url(../ui/parchment.jpg) repeat;
         }
         .stat-grid .sub-subgrid .grid-item{
         border: 1px none grey;
+        }
+        .stat-grid .sub-subgrid input[type="text"], input[type="number"], input[type="password"], input[type="date"], input[type="time"]{
+        background: rgba(0,0,0,0.05);
+        border: 1px solid #7a7971;
         }
       </style>
     </head>
