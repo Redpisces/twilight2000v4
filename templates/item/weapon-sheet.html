@@ -53,7 +53,6 @@
 
         {{!-- Attributes Tab --}}
         <div class="tab attributes" data-group="primary" data-tab="attributes">
-			{{log data.version}}
 			{{#if (comp data.version "=" "1")}}
             <div class="grid-container stat-grid">
               {{#each data.attributes as |item id|}}
@@ -63,6 +62,13 @@
               </div>
               {{/each}}
             </div>
+			{{/if}}
+			
+			{{#if (comp data.version ">=" "2")}}
+			  <div class="grid-item sub-subgrid" >
+                <label class="grid-item" for="data.attributes.type">Type</label>
+                <input class="grid-item" style="grid-column-end:span 1;" name="data.attributes.type" type="text" value="data.attributes.type"/>
+              </div>
 			{{/if}}
         </div>
     </section>
