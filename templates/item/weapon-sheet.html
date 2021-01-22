@@ -53,6 +53,7 @@
 
         {{!-- Attributes Tab --}}
         <div class="tab attributes" data-group="primary" data-tab="attributes">
+			{{log data.version}}
 			{{#unless data.version}}
             <div class="grid-container stat-grid">
               {{#each data.attributes as |item id|}}
