@@ -53,7 +53,7 @@
       "conditions":{"starving":false,"dehydrated":false,"sleep_dep":false,"hypothermic":false},
       "rads":{"temp":0,"permanent":0}
     },
-    "vehicle"{
+    "vehicle":{
       "version":1,
       "full_name":"",
       "type":"",
@@ -73,7 +73,7 @@
     "templates": {
       "base": {
         "description": "",
-		"version":2
+		    "version":2
       }
     },
     "gear": {
