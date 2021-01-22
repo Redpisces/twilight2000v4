@@ -58,7 +58,7 @@
     "templates": {
       "base": {
         "description": "",
-		"version":1
+		"version":2
       }
     },
     "gear": {
