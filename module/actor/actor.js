@@ -62,7 +62,6 @@ export class twilightActor extends Actor {
           diseases.push(i);
           break;
         case 'weapon':
-          gear.push(i);
           weapons.push(i);
           break;
         default:
