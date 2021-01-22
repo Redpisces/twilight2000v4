@@ -80,7 +80,7 @@
       "attributes":{
         "type":"",
         "ammo":"",
-        "rel":"A",
+        "rel":{"value":"A","max":"A"},
         "rof":0,
         "damage":0,
         "crit":0,
@@ -89,7 +89,10 @@
         "mag":{"value":0,"max":0},
         "armor":0,
         "weight":0,
-        "price":0
+        "price":0,
+		"skill":"none",
+		"attribute":"none",
+		"features":{"two-handed":false,"belted":false,"mounted":false,"disposable":false}
       }
     }
   }
