@@ -17,7 +17,7 @@ export class twilightActorSheet extends ActorSheet {
   get template() {
     const path = "systems/twilight2000v4/templates/actor";
     
-     return `${path}/${this.actor.data.type}-sheet.hdb`;
+     return `${path}/${this.actor.data.type}-sheet.hbs`;
   }
   
   /* -------------------------------------------- */
