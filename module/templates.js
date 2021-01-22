@@ -10,7 +10,7 @@ export const preloadHandlebarsTemplates = async function() {
 		// 'templates/dice/roll.html',
 
 		// Actor Sheet Partials
-		'systems/twilight2000v4/templates/actor/part/attribute-slot.hbs'
+		'systems/twilight2000v4/templates/actor/part/attribute-slot.hbs',
 		'systems/twilight2000v4/templates/actor/part/skill-slot.hbs'
 	]);
 }
