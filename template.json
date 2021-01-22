@@ -73,26 +73,40 @@
     "types": ["gear","specialty","injury","disease","weapon"],
     "templates": {
       "base": {
-        "description": "",
-		    "version":2
+        "description": ""  
+      },
+      "gear":{
+        "quantity": 1,
+        "weight": 0
       }
     },
     "gear": {
-      "templates": ["base"],
-      "quantity": 1,
-      "weight": 0
+      "version":1,
+      "templates": ["base","gear"]
     },
     "specialty": {
+      "version":1,
       "templates": ["base"]
     },
     "injury": {
+      "version":1,
       "templates": ["base"]
     },
     "disease": {
+      "version":1,
       "templates": ["base"]
     },
+    "armor": {
+      "version":1,
+      "templates": ["base","gear"],
+      "value":0,
+      "max":0,
+      "location":"torso",
+      "weight":0,
+    },
     "weapon":{
-      "templates": ["base"],
+      "version":2,
+      "templates": ["base","gear"],
       "attributes":{
         "type":"",
         "ammo":"",
@@ -104,11 +118,9 @@
         "range":0,
         "mag":{"value":0,"max":0},
         "armor":0,
-        "weight":0,
-        "price":0,
-		"skill":"none",
-		"attribute":"none",
-		"features":{"two-handed":false,"belted":false,"mounted":false,"disposable":false}
+        "skill":"none",
+        "attribute":"none",
+        "features":{"two-handed":false,"belted":false,"mounted":false,"disposable":false}
       }
     }
   }
