@@ -43,7 +43,8 @@ export class twilightActor extends Actor {
     const injuries=[];
     const diseases=[];
     const weapons=[];
-    
+    const armor=[];
+	  
     for (let i of actorData.items){
       let item = i.data;
       i.img = i.img || DEFAULT_TOKEN;
@@ -64,6 +65,9 @@ export class twilightActor extends Actor {
         case 'weapon':
           weapons.push(i);
           break;
+		case 'armor':
+          weapons.push(i);
+          break;
         default:
           break;
       }
@@ -73,6 +77,7 @@ export class twilightActor extends Actor {
       actorData.injuries=injuries;
       actorData.diseases=diseases;
       actorData.weapons=weapons;
+	  actorData.armor=armor;
     }
     
   }
