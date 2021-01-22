@@ -29,6 +29,9 @@ Hooks.once('init', async function() {
   Actors.registerSheet("twilight2000v4", twilightActorSheet, { makeDefault: true });
   Items.unregisterSheet("core", ItemSheet);
   Items.registerSheet("twilight2000v4", twilightItemSheet, { makeDefault: true });
+	
+  registerHandlebars();
+  preloadHandlebarsTemplates();
 
   
 });
