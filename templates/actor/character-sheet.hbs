@@ -141,16 +141,7 @@
         <div class="grid-item sub-subgrid" style="grid-column:span 4;grid-row:1;"> Attributes &#38; Skills </div>
         {{#each data.attributes as |item id|}}
         <div class="grid-item sub-subgrid" style="grid-column:{{math @index '+' 1}};grid-row:2;">
-          <label class="grid-item" style="grid-column-end:span 1;" for="data.attributes.{{id}}.rating">{{id}}</label>
-          <select class="grid-item" style="grid-column-end:span 1;" name="data.attributes.{{id}}.rating">
-            {{#select item.rating}}
-            <option value="A">A</option>
-            <option value="B">B</option>
-            <option value="C">C</option>
-            <option value="D">D</option>
-            {{/select}}
-          </select>
-          <div class="grid-item die">{{item.base_die}}</div>
+          {{> "systems/t2k4e/templates/actors/parts/slots/attribute-slot.hbs" this}}
         </div>
         {{#each item.skills as |skill sid|}}
         <div class="grid-item sub-subgrid" style="grid-column:{{math @../index '+' 1}};grid-row:{{math @index '+' 3}};">
