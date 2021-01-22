@@ -1,0 +1,95 @@
+<form class="{{cssClass}}" autocomplete="off">
+    <head>
+      <style>
+        .stat-grid{
+          display: grid;
+          grid-template-columns: repeat( auto-fit, minmax(100px, 1fr) );
+          gap: 1px;
+          grid-auto-rows: minmax(50px, auto);
+          grid-auto-flow: dense;
+          border: 1px solid black;
+          background-color: black;
+        }
+        .stat-grid .sub-subgrid{
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 1px;
+        grid-auto-rows: minmax(25px, auto);
+        grid-auto-flow: dense;
+        }
+        .stat-grid .grid-item{
+        background: url(../ui/parchment.jpg) repeat;
+        }
+        .stat-grid .sub-subgrid .grid-item{
+        border: 1px none grey;
+        }
+        .stat-grid .sub-subgrid input[type="text"], input[type="number"], input[type="password"], input[type="date"], input[type="time"]{
+        background: rgba(0,0,0,0.05);
+        border: 1px solid #7a7971;
+        }
+      </style>
+    </head>
+    
+    <header class="sheet-header">
+        <img class="profile-img" src="{{item.img}}" data-edit="img" title="{{item.name}}"/>
+        <div class="header-fields">
+            <h1 class="charname"><input name="name" type="text" value="{{item.name}}" placeholder="Name"/></h1>
+        </div>
+    </header>
+
+    {{!-- Sheet Tab Navigation --}}
+    <nav class="sheet-tabs tabs" data-group="primary">
+        <a class="item" data-tab="description">Description</a>
+        <a class="item" data-tab="attributes">Attributes</a>
+    </nav>
+
+    {{!-- Sheet Body --}}
+    <section class="sheet-body">
+
+        {{!-- Description Tab --}}
+        <div class="tab" data-group="primary" data-tab="description">
+            {{editor content=data.description target="data.description" button=true owner=owner editable=editable}}
+        </div>
+
+        {{!-- Attributes Tab --}}
+        <div class="tab attributes" data-group="primary" data-tab="attributes">
+        
+          <div class="grid-container stat-grid">
+                        
+            <div class="grid-item sub-subgrid" >
+              <label class="grid-item" for="data.value">Value</label>
+              <input class="grid-item" style="grid-column-end:span 1;" name="data.value" type="number" value="{{data.value}}"/>
+            </div>
+            
+            <div class="grid-item sub-subgrid" >
+              <label class="grid-item" for="data.max">Max</label>
+              <input class="grid-item" style="grid-column-end:span 1;" name="data.max" type="number" value="{{data.max}}"/>
+            </div>
+            
+            <div class="grid-item sub-subgrid" >
+              <label class="grid-item" for="data.location">Blast</label>
+              <select name="data.location">
+                  {{#select data.location}}
+                    <option value="head">Head</option>
+                    <option value="torso">Torso</option>
+                    <option value="arms">Arms</option>
+                    <option value="legs">Legs</option>
+                    {{/select}}
+                </select>
+            </div>
+            
+            <div class="grid-item sub-subgrid" >
+              <label class="grid-item" for="data.weight">Weight</label>
+              <input class="grid-item" style="grid-column-end:span 1;" name="data.weight" type="number" value="{{data.weight}}"/>
+            </div>
+            
+            <div class="grid-item sub-subgrid" >
+              <label class="grid-item" for="data.price">Price</label>
+              <input class="grid-item" style="grid-column-end:span 1;" name="data.price" type="number" value="{{data.price}}"/>
+            </div>
+            
+          </div>
+        
+        </div>
+    </section>
+</form>
