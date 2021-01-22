@@ -85,30 +85,40 @@
           <input name="data.type" type="text" value="{{data.type}}"/>
         </div>
         
-       <div class="grid-item flexcol" >
-              <label class="grid-item" >Reliability</label>
-              <div class="flexrow flex-center">
-                <select name="data.attributes.rel.value">
-                  {{#select data.attributes.rel.value}}
-                    <option value="A">A</option>
-                    <option value="B">B</option>
-                    <option value="C">C</option>
-                    <option value="D">D</option>
-                    <option value="F">F</option>
-                    {{/select}}
-                </select>
-                <span class="sep"> / </span> 
-                <select name="data.attributes.rel.max">
-                  {{#select data.attributes.rel.max}}
-                    <option value="A">A</option>
-                    <option value="B">B</option>
-                    <option value="C">C</option>
-                    <option value="D">D</option>
-                    <option value="F">F</option>
-                    {{/select}}
-                </select>
-              </div>
-            </div>
+        <div class="grid-item flexcol" >
+          <label class="grid-item" >Reliability</label>
+          <div class="flexrow flex-center">
+            <select name="data.attributes.rel.value">
+              {{#select data.attributes.rel.value}}
+                <option value="A">A</option>
+                <option value="B">B</option>
+                <option value="C">C</option>
+                <option value="D">D</option>
+                <option value="F">F</option>
+                {{/select}}
+            </select>
+            <span class="sep"> / </span> 
+            <select name="data.attributes.rel.max">
+              {{#select data.attributes.rel.max}}
+                <option value="A">A</option>
+                <option value="B">B</option>
+                <option value="C">C</option>
+                <option value="D">D</option>
+                <option value="F">F</option>
+                {{/select}}
+            </select>
+          </div>
+        </div>
+        
+        <div class="grid-item flexcol" >
+          <label class="grid-item" >Combat Speed</label>
+          <div   class="flexrow flex-center">
+            <input name="data.attributes.rof" type="number" value="{{data.combat_speed.road}}"/>
+            <span class="sep"> / </span> 
+            <input name="data.attributes.rof" type="number" value="{{data.combat_speed.offroad}}"/>
+            <input name="data.attributes.rof" type="text" value="{{data.combat_speed.type}}"/>    
+          </div>        
+        </div>
         
       </div>
       
