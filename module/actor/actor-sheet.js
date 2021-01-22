@@ -27,14 +27,16 @@ export class twilightActorSheet extends ActorSheet {
     const data = super.getData();
     data.dtypes = ["String", "Number", "Boolean"];
     
-    for (let [akey,avalue] of Object.entries(data.data.attributes)) {
-      avalue.skills={}
-      for (let [skey,svalue] of Object.entries(data.data.skills)) {
-        if (svalue.linked_atr == akey){
-          avalue.skills[skey]=svalue;
-        }
-      }
-    }
+	if (data.data.attributes){
+		for (let [akey,avalue] of Object.entries(data.data.attributes)) {
+		  avalue.skills={}
+		  for (let [skey,svalue] of Object.entries(data.data.skills)) {
+			if (svalue.linked_atr == akey){
+			  avalue.skills[skey]=svalue;
+			}
+		  }
+		}
+	}
     
     return data;
   }
