@@ -53,6 +53,7 @@
 
         {{!-- Attributes Tab --}}
         <div class="tab attributes" data-group="primary" data-tab="attributes">
+			{{#unless data.version}}
             <div class="grid-container stat-grid">
               {{#each data.attributes as |item id|}}
               <div class="grid-item sub-subgrid" >
@@ -61,6 +62,7 @@
               </div>
               {{/each}}
             </div>
+			{{/unless}
         </div>
     </section>
 </form>
