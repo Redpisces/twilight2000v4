@@ -101,8 +101,7 @@
       "templates": ["base","gear"],
       "value":0,
       "max":0,
-      "location":"torso",
-      "weight":0,
+      "location":"torso"
     },
     "weapon":{
       "version":2,
