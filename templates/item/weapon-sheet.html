@@ -54,7 +54,7 @@
         {{!-- Attributes Tab --}}
         <div class="tab attributes" data-group="primary" data-tab="attributes">
 			{{log data.version}}
-			{{#unless data.version}}
+			{{#if (comp data.version "=" "1")}}
             <div class="grid-container stat-grid">
               {{#each data.attributes as |item id|}}
               <div class="grid-item sub-subgrid" >
@@ -63,7 +63,7 @@
               </div>
               {{/each}}
             </div>
-			{{/unless}}
+			{{/if}}
         </div>
     </section>
 </form>

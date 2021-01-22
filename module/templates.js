@@ -42,6 +42,20 @@ export function registerHandlebars(){
         "/": lvalue / rvalue,
         "%": lvalue % rvalue
     }[operator];
-  });	
+  });
+	
+  Handlebars.registerHelper("comp", function(lvalue,operator,rvalue,options){
+	lvalue = parseFloat (lvalue);  
+	rvalue = parseFloat (rvalue);
+	
+	return {
+		">": lvalue > rvalue,
+		"<": lvalue < rvalue,
+		"=": lvalue == rvalue,
+		"!=": lvalue != rvalue,
+		">=": lvalue >= rvalue,
+		"<=": lvalue <= rvalue
+	}[operator];
+  });
 }
 		
