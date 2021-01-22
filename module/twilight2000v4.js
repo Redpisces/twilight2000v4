@@ -3,7 +3,7 @@ import { twilightActor } from "./actor/actor.js";
 import { twilightActorSheet } from "./actor/actor-sheet.js";
 import { twilightItem } from "./item/item.js";
 import { twilightItemSheet } from "./item/item-sheet.js";
-import { preloadHandlebarsTemplates, registerHandlebars } from './module/templates.js';
+import { preloadHandlebarsTemplates, registerHandlebars } from './templates.js';
 Hooks.once('init', async function() {
 
   game.twilight2000v4 = {
