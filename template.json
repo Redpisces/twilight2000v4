@@ -62,7 +62,7 @@
       "combat_speed":{"road":0,"offroad":0,"type":""},
       "travel_speed":{"road":0,"offroad":0,"type":""},
       "armor":{"front":0,"side":0,"rear":0},
-      "fuel":{"type":"","cap":0,"cons":0},
+      "fuel":{"type":"","value":0,"cap":0,"cons":0},
       "crew":"",
       "cargo_cap":0,
       "weapon_mounts":"",
