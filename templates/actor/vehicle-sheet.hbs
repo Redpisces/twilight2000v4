@@ -9,83 +9,34 @@
       .grid-item{
       padding:3px;
       }
-      .bio-grid{
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 10px;
-      grid-auto-rows: minmax(50px, auto);
-      grid-auto-flow: dense;
-      }
-      .bio-grid .subgrid{
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 0px;
-      grid-auto-rows: minmax(25px, auto);
-      grid-auto-flow: dense;
-      }
-      .bio-grid .grid-item{
-      border: 1px solid black;
-      }
-      .bio-grid .subgrid .grid-item{
-      border: 1px solid grey;
-      }
-      .stat-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 1px;
-      grid-auto-rows: minmax(25px, auto);
-      border: 1px solid black;
-      background-color: black;
-      }
-      .stat-grid .sub-subgrid{
-      display: grid;
-      grid-template-columns: 4fr 2fr 1fr;
-      gap: 0px;
-      grid-auto-rows: minmax(25px, auto);
-      grid-auto-flow: dense;
-      }
-      .stat-grid .grid-item{
-        background: url(../ui/parchment.jpg) repeat;
-      }
-      .stat-grid .sub-subgrid .grid-item{
-        overflow:hidden;
-      }
-      .combat-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 3px;
-      grid-auto-rows: minmax(25px, auto);
-      }
-      .combat-grid .grid-item{
-      border: 1px solid black;
-      }
-      .combat-grid .armor-subgrid{
-      display: grid;
-      grid-template-columns: 2fr 1fr;
-      gap: 3px;
-      grid-auto-rows: minmax(25px, auto);
-      }
-      .combat-grid .stats-subgrid{
-      display: grid;
-      grid-template-columns: 2fr 1fr;
-      grid-auto-rows: minmax(25px, auto);
-      }
-      .combat-grid .stats-subgrid .grid-item{
-      border: 0px none black;
-      }
       
-      .combat-grid.stats-subgrid.grid-item input[type="text"], input[type="number"], input[type="password"], input[type="date"], input[type="time"]{
-      border: 1px solid #7a7971;
-      }
-      .health-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 3px;
-      grid-auto-rows: minmax(25px, auto);
-      }
-      .health-grid ol {
-      border: 1px solid black;
-      }
+      .stat-grid{
+          display: grid;
+          grid-template-columns: repeat( auto-fit, minmax(100px, 1fr) );
+          gap: 1px;
+          grid-auto-rows: minmax(50px, auto);
+          grid-auto-flow: dense;
+          border: 1px solid black;
+          background-color: black;
+        }
+        .stat-grid .sub-subgrid{
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 1px;
+        grid-auto-rows: minmax(25px, auto);
+        grid-auto-flow: dense;
+        }
+        .stat-grid .grid-item{
+        background: url(../ui/parchment.jpg) repeat;
+        }
+        .stat-grid .sub-subgrid .grid-item{
+        border: 1px none grey;
+        }
+        .stat-grid .sub-subgrid input[type="text"], input[type="number"], input[type="password"], input[type="date"], input[type="time"]{
+        background: rgba(0,0,0,0.05);
+        border: 1px solid #7a7971;
+        }
+      
       
       .weapon-grid {
         display: grid;
