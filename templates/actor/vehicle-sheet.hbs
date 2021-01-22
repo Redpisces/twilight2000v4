@@ -122,19 +122,19 @@
     </div>
     <div class="tab stats" data-group="primary" data-tab="stats">
     
-      <ol>
+      <div class="grid-container stat-grid">
         
-        <li class="item flexrow">
+        <div class="grid-item sub-subgrid" >
           <h4 class="item-name">Full Name</h4>
           <input name="data.full_name" type="text" value="{{data.full_name}}"/>
-        </li>
+        </div>
         
-        <li class="item flexrow">
+        <div class="grid-item sub-subgrid" >
           <h4 class="item-name">Type</h4>
           <input name="data.type" type="text" value="{{data.type}}"/>
-        </li>
+        </div>
         
-        <li class="grid-item flexcol" >
+       <div class="grid-item sub-subgrid" >
               <label class="grid-item" >Reliability</label>
               <div class="flexrow flex-center">
                 <select name="data.attributes.rel.value">
@@ -157,9 +157,9 @@
                     {{/select}}
                 </select>
               </div>
-            </li>
+            </div>
         
-      </ol>
+      </div>
       
 	  </div>
     {{!-- Owned Items Tab --}}
