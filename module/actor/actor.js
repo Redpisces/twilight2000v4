@@ -66,7 +66,7 @@ export class twilightActor extends Actor {
           weapons.push(i);
           break;
 		case 'armor':
-          weapons.push(i);
+          armor.push(i);
           break;
         default:
           break;
