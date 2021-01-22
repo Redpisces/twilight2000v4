@@ -66,31 +66,98 @@
 			
         {{#if (comp data.version ">=" "2")}}
           <div class="grid-container stat-grid">
-                <div class="grid-item sub-subgrid" >
-                  <label class="grid-item" for="data.attributes.type">Type</label>
-                  <input class="grid-item" style="grid-column-end:span 1;" name="data.attributes.type" type="text" value="{{data.attributes.type}}"/>
-                </div>
-                <div class="grid-item sub-subgrid" >
-                  <label class="grid-item" for="data.attributes.ammo">Ammo</label>
-                  <input class="grid-item" style="grid-column-end:span 1;" name="data.attributes.ammo" type="text" value="{{data.attributes.ammo}}"/>
-                </div>
-                <div class="grid-item flexcol" >
-                  <label class="grid-item" for="data.attributes.ammo">Reliability</label>
-                  <div class="flexrow flex-center">
-                    <select name="data.attributes.rel.value">
-                      {{#select data.attributes.rel.value}}
-                        <option value="A">A</option>
-                        <option value="B">B</option>
-                        <option value="C">C</option>
-                        <option value="D">D</option>
-                        <option value="F">F</option>
-                        {{/select}}
-                    </select>
-                     
-                    <span class="sep"> / </span> 
-                    <span> zxcv </span>
-                  </div>
-                </div>
+            <div class="grid-item sub-subgrid" >
+              <label class="grid-item" for="data.attributes.type">Type</label>
+              <input class="grid-item" style="grid-column-end:span 1;" name="data.attributes.type" type="text" value="{{data.attributes.type}}"/>
+            </div>
+
+            <div class="grid-item sub-subgrid" >
+              <label class="grid-item" for="data.attributes.ammo">Ammo</label>
+              <input class="grid-item" style="grid-column-end:span 1;" name="data.attributes.ammo" type="text" value="{{data.attributes.ammo}}"/>
+            </div>
+
+            <div class="grid-item flexcol" >
+              <label class="grid-item" >Reliability</label>
+              <div class="flexrow flex-center">
+                <select name="data.attributes.rel.value">
+                  {{#select data.attributes.rel.value}}
+                    <option value="A">A</option>
+                    <option value="B">B</option>
+                    <option value="C">C</option>
+                    <option value="D">D</option>
+                    <option value="F">F</option>
+                    {{/select}}
+                </select>
+                <span class="sep"> / </span> 
+                <select name="data.attributes.rel.max">
+                  {{#select data.attributes.rel.max}}
+                    <option value="A">A</option>
+                    <option value="B">B</option>
+                    <option value="C">C</option>
+                    <option value="D">D</option>
+                    <option value="F">F</option>
+                    {{/select}}
+                </select>
+              </div>
+            </div>
+            
+            <div class="grid-item sub-subgrid" >
+              <label class="grid-item" for="data.attributes.rof">ROF</label>
+              <input class="grid-item" style="grid-column-end:span 1;" name="data.attributes.rof" type="number" value="{{data.attributes.rof}}"/>
+            </div>
+            
+            <div class="grid-item sub-subgrid" >
+              <label class="grid-item" for="data.attributes.damage">Damage</label>
+              <input class="grid-item" style="grid-column-end:span 1;" name="data.attributes.damage" type="number" value="{{data.attributes.damage}}"/>
+            </div>
+            
+            <div class="grid-item sub-subgrid" >
+              <label class="grid-item" for="data.attributes.crit">Crit</label>
+              <input class="grid-item" style="grid-column-end:span 1;" name="data.attributes.crit" type="number" value="{{data.attributes.crit}}"/>
+            </div>
+            
+            <div class="grid-item sub-subgrid" >
+              <label class="grid-item" for="data.attributes.blast">Blast</label>
+              <select name="data.attributes.blast">
+                  {{#select data.attributes.blast}}
+                    <option value="A">A</option>
+                    <option value="B">B</option>
+                    <option value="C">C</option>
+                    <option value="D">D</option>
+                    <option value="-">-</option>
+                    {{/select}}
+                </select>
+            </div>
+            
+            <div class="grid-item sub-subgrid" >
+              <label class="grid-item" for="data.attributes.range">Range</label>
+              <input class="grid-item" style="grid-column-end:span 1;" name="data.attributes.range" type="number" value="{{data.attributes.range}}"/>
+            </div>
+            
+            <div class="grid-item flexcol" >
+              <label class="grid-item">Magazine</label>
+              <div class="flexrow flex-center">
+                <input class="grid-item" style="grid-column-end:span 1;" name="data.attributes.mag.value" type="number" value="{{data.attributes.mag.value}}"/>
+                <span class="sep"> / </span> 
+                <input class="grid-item" style="grid-column-end:span 1;" name="data.attributes.mag.max" type="number" value="{{data.attributes.mag.max}}"/>
+              </div>
+            </div>
+            
+            <div class="grid-item sub-subgrid" >
+              <label class="grid-item" for="data.attributes.armor">AP</label>
+              <input class="grid-item" style="grid-column-end:span 1;" name="data.attributes.armor" type="number" value="{{data.attributes.armor}}"/>
+            </div>
+            
+            <div class="grid-item sub-subgrid" >
+              <label class="grid-item" for="data.attributes.weight">Weight</label>
+              <input class="grid-item" style="grid-column-end:span 1;" name="data.attributes.weight" type="number" value="{{data.attributes.weight}}"/>
+            </div>
+            
+            <div class="grid-item sub-subgrid" >
+              <label class="grid-item" for="data.attributes.price">Price</label>
+              <input class="grid-item" style="grid-column-end:span 1;" name="data.attributes.price" type="number" value="{{data.attributes.price}}"/>
+            </div>
+            
           </div>
         {{/if}}
         </div>
