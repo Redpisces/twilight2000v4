@@ -1,12 +1,13 @@
 {
   "Actor": {
-    "types": ["character"],
+    "types": ["character","vehicle"],
     "templates": {
       "base": {
-      	"version":1
+      	
       }
     },
     "character": {
+	    "version":1,
       "templates": ["base"],
       "bio":{
         "full_name": {"value":"","size":1},
@@ -51,6 +52,20 @@
       "armor":{"head":0,"arms":0,"torso":0,"legs":0},
       "conditions":{"starving":false,"dehydrated":false,"sleep_dep":false,"hypothermic":false},
       "rads":{"temp":0,"permanent":0}
+    },
+    "vehicle"{
+      "version":1,
+      "full_name":"",
+      "type":"",
+      "rel":{"value":"A","max":"A"},
+      "combat_speed":{"road":0,"offroad":0,"type":""},
+      "travel_speed":{"road":0,"offroad":0,"type":""},
+      "armor":{"front":0,"side":0,"rear":0},
+      "fuel":{"type":"","cap":0,"cons":0},
+      "crew":"",
+      "cargo_cap":0,
+      "weapon_mounts":"",
+      "price":0
     }
   },
   "Item": {
