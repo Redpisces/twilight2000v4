@@ -1,11 +1,11 @@
 {{log this}}
-<label class="grid-item" style="grid-column-end:span 1;" for="data.attributes.{{id}}.rating">{{id}}</label>
-<select class="grid-item" style="grid-column-end:span 1;" name="data.attributes.{{id}}.rating">
-	{{#select item.rating}}
+<label class="grid-item" style="grid-column-end:span 1;" for="data.attributes.{{@key}}.rating">{{@key}}</label>
+<select class="grid-item" style="grid-column-end:span 1;" name="data.attributes.{{@key}}.rating">
+	{{#select this.rating}}
     <option value="A">A</option>
     <option value="B">B</option>
     <option value="C">C</option>
     <option value="D">D</option>
     {{/select}}
     </select>
-<div class="grid-item die">{{item.base_die}}</div>
+<div class="grid-item die">{{this.base_die}}</div>
