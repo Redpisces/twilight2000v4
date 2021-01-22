@@ -113,10 +113,32 @@
         <div class="grid-item flexcol" >
           <label class="grid-item" >Combat Speed</label>
           <div   class="flexrow flex-center">
-            <input name="data.attributes.rof" type="number" value="{{data.combat_speed.road}}"/>
+            <input name="data.combat_speed.road" type="number" value="{{data.combat_speed.road}}"/>
             <span class="sep"> / </span> 
-            <input name="data.attributes.rof" type="number" value="{{data.combat_speed.offroad}}"/>
-            <input name="data.attributes.rof" type="text" value="{{data.combat_speed.type}}"/>    
+            <input name="data.combat_speed.offroad" type="number" value="{{data.combat_speed.offroad}}"/>
+            <input name="data.combat_speed.type" type="text" value="{{data.combat_speed.type}}"/>    
+          </div>        
+        </div>
+        
+        <div class="grid-item flexcol" >
+          <label class="grid-item" >Travel Speed</label>
+          <div   class="flexrow flex-center">
+            <input name="data.travel_speed.road" type="number" value="{{data.travel_speed.road}}"/>
+            <span class="sep"> / </span> 
+            <input name="data.travel_speed.offroad" type="number" value="{{data.travel_speed.offroad}}"/>
+            <input name="data.travel_speed.type" type="text" value="{{data.travel_speed.type}}"/>    
+          </div>        
+        </div>
+        
+        <div class="grid-item flexcol" >
+          <label class="grid-item" >Armor</label>
+          <div   class="flexrow flex-center">
+            <span> F: </span> 
+            <input name="data.armor.front" type="number" value="{{data.armor.front}}"/>
+            <span> S: </span> 
+            <input name="data.armor.side" type="number" value="{{data.armor.side}}"/>
+            <span> R: </span> 
+            <input name="data.armor.rear" type="number" value="{{data.armor.rear}}"/>
           </div>        
         </div>
         
