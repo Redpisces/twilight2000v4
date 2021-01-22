@@ -70,7 +70,7 @@
     }
   },
   "Item": {
-    "types": ["gear","specialty","injury","disease","weapon"],
+    "types": ["gear","specialty","injury","disease","weapon","armor"],
     "templates": {
       "base": {
         "description": ""  
