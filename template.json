@@ -55,6 +55,7 @@
     },
     "vehicle":{
       "version":1,
+      "templates": ["base"],
       "full_name":"",
       "type":"",
       "rel":{"value":"A","max":"A"},
