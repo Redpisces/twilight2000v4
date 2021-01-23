@@ -5,14 +5,18 @@
   <span style="flex: 3 1 0px;">OLD WEAPON</span>
   {{/if}}
   {{#if (comp data.version ">=" "2")}}
-  <span style="flex: 1 1 0; text-align:center;"> ROF</span>
-  <span style="flex: 1 1 0;text-align:center;"> Damage</span>
-  <span style="flex: 1 1 0;text-align:center;"> Crit</span>
-  <span style="flex: 1 1 0;text-align:center;"> Armor</span>
-  <span style="flex: 1 1 0;text-align:center;"> Range</span>
-  <span style="flex: 2 1 0;text-align:center;"> Mag</span>
-  <span style="flex: 1 1 0;text-align:center;"> Rel</span>
-  <span style="flex: 1 1 0;text-align:center;"> Blast</span>
+  <span style="flex: 1 1 0; text-align:center;">{{this.data.rof}}</span>
+  <span style="flex: 1 1 0;text-align:center;"> {{this.data.damage}}</span>
+  <span style="flex: 1 1 0;text-align:center;"> {{this.data.crit}}</span>
+  <span style="flex: 1 1 0;text-align:center;"> {{this.data.armor}}</span>
+  <span style="flex: 1 1 0;text-align:center;"> {{this.data.range}}</span>
+  <span style="flex: 2 1 0;text-align:center;" class="flexrow"> 
+    <span>{{this.data.mag.value}}</span>
+    <span>/</span>
+    <span>{{this.data.mag.max}}</span>
+  </span>
+  <span style="flex: 1 1 0;text-align:center;"> {{this.data.rel.value}}</span>
+  <span style="flex: 1 1 0;text-align:center;"> {{this.data.blast}}</span>
   <span style="flex: 1 1 0;text-align:center;"> {{this.data.weight}}</span>
   
   {{/if}}
