@@ -1,0 +1,16 @@
+<table class="items-list weapon-list" style="border: 1px solid black; text-align:center;">
+	<tr class="item item-header">
+		<th class="item-image"></th>
+		<th class="item-name" style="flex-grow: 2;">Item</th>
+		<th> Location</th>
+  		<th> Value</th>
+  		<th> Max</th>
+  		<th> Wt</th>
+		<th>
+			<a class="item-control item-create" title="Create item" data-type="armor"><i class="fas fa-plus"></i></a>
+		</th>
+	</tr>
+	{{#each actor.weapons}}
+		{{> "systems/twilight2000v4/templates/actor/part/armor-slot.hbs" this}}
+	{{/each}}
+</table>
