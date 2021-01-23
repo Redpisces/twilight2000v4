@@ -5,10 +5,10 @@
 		<span> Qty</span>
 		<span> Weight</span>
 		<div class="item-controls">
-		<a class="item-control item-create" title="Create item" data-type="gear"><i class="fas fa-plus"></i> Add weapon</a>
+		<a class="item-control item-create" title="Create item" data-type="gear"><i class="fas fa-plus"></i></a>
 		</div>
 	</li>
-	{{#each actor.gear}}
+	{{#each actor.weapon}}
 		{{> "systems/twilight2000v4/templates/actor/part/weapon-slot.hbs" this}}
 	{{/each}}
 </ol>
