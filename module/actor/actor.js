@@ -45,11 +45,9 @@ export class twilightActor extends Actor {
 		    default:
           break;
       }
-      
-      actorData.gear=gear;
-      actorData.weapons=weapons;
-      
     }
+    actorData.gear=gear;
+    actorData.weapons=weapons;
     
   }
   
@@ -105,14 +103,13 @@ export class twilightActor extends Actor {
         default:
           break;
       }
-      
-      actorData.gear=gear;
-      actorData.specialties=specialties;
-      actorData.injuries=injuries;
-      actorData.diseases=diseases;
-      actorData.weapons=weapons;
-	    actorData.armor=armor;
     }
+    actorData.gear=gear;
+    actorData.specialties=specialties;
+    actorData.injuries=injuries;
+    actorData.diseases=diseases;
+    actorData.weapons=weapons;
+    actorData.armor=armor;
     
   }
   
