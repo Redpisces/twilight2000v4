@@ -17,8 +17,41 @@ export class twilightActor extends Actor {
     // Make separate methods for each Actor type (character, npc, etc.) to keep
     // things organized.
     if (actorData.type === 'character') this._prepareCharacterData(actorData);
+	  if (actorData.type === 'vehicle') this._prepareVehicleData(actorData);
   }
 
+  /**
+   * Prepare Vehicle type specific data
+   */
+  
+  _prepareVehicleData(actorData) {
+    const data = actorData.data;
+    
+    const gear=[];
+    const weapons=[];
+	  
+    for (let i of actorData.items){
+      let item = i.data;
+      i.img = i.img || DEFAULT_TOKEN;
+      
+      switch (i.type){
+        case 'gear':
+          gear.push(i);
+          break;
+        case 'weapon':
+          weapons.push(i);
+          break;
+		    default:
+          break;
+      }
+      
+      actorData.gear=gear;
+      actorData.weapons=weapons;
+      
+    }
+    
+  }
+  
   /**
    * Prepare Character type specific data
    */
