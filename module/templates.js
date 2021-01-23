@@ -12,6 +12,7 @@ export const preloadHandlebarsTemplates = async function() {
 		// Actor Sheet Partials
 		'systems/twilight2000v4/templates/actor/part/attribute-slot.hbs',
 		'systems/twilight2000v4/templates/actor/part/skill-slot.hbs'
+		'systems/twilight2000v4/templates/actor/part/gear-slot.hbs'
 	]);
 }
 
