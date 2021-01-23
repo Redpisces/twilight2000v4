@@ -26,6 +26,7 @@ export class twilightActor extends Actor {
   
   _prepareVehicleData(actorData) {
     const data = actorData.data;
+    console.log(data);
     
     const gear=[];
     const weapons=[];
