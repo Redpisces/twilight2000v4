@@ -111,7 +111,7 @@ export class twilightActor extends Actor {
       actorData.injuries=injuries;
       actorData.diseases=diseases;
       actorData.weapons=weapons;
-	  actorData.armor=armor;
+	    actorData.armor=armor;
     }
     
   }
