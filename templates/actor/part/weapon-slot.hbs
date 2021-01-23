@@ -1,12 +1,21 @@
 <li class="item flexrow" data-item-id="{{ this._id}}">
   <div class="item-image"><img src="{{this.img}}" title="{{this.name}}" width="24" height="24"/></div>
   <h4 class="item-name" style="flex-grow: 4;">{{this.name}}</h4>
-  {{#if (comp data.version "=" "1")}}
+  {{#if (comp data.version "<" "2")}}
   <span style="flex-grow: 4;">OLD WEAPON</span>
   {{/if}}
   {{#if (comp data.version ">=" "2")}}
-  <span> x{{this.data.quantity}}</span>
-  <span> {{math this.data.weight "*" this.data.quantity}}</span>
+  <span> ROF</span>
+  <span> Damage</span>
+  <span> Crit</span>
+  <span> Armor</span>
+  <span> Range</span>
+  <span> Mag</span>
+  <span> Rel</span>
+  <span> Blast</span>
+  <span> {{this.data.weight}}</span>
+  <span> Ammo</span>
+  
   {{/if}}
   <div class="item-controls">
     <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
