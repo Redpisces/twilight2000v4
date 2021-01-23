@@ -12,7 +12,7 @@
       
       .stat-grid{
           display: grid;
-          grid-template-columns: repeat( auto-fit, minmax(100px, 1fr) );
+          grid-template-columns: repeat( auto-fit, minmax(150px, 1fr) );
           gap: 1px;
           grid-auto-rows: minmax(50px, auto);
           grid-auto-flow: dense;
@@ -140,6 +140,45 @@
             <span> R: </span> 
             <input name="data.armor.rear" type="number" value="{{data.armor.rear}}"/>
           </div>        
+        </div>
+        
+        <div class="grid-item flexcol" >
+          <label class="grid-item" >Fuel Tank</label>
+          <div class="flexrow flex-center">
+            <input name="data.fuel.value" type="number" value="{{data.fuel.value}}"/>
+            <span class="sep"> / </span> 
+            <input name="data.fuel.cap" type="number" value="{{data.fuel.cap}}"/>
+          </div>
+        </div>
+        
+        <div class="grid-item sub-subgrid" >
+          <h4 class="item-name">Fuel Type</h4>
+          <input name="data.fuel.type" type="text" value="{{data.fuel.type}}"/>
+        </div>
+        
+        <div class="grid-item sub-subgrid" >
+          <h4 class="item-name">Fuel Cons</h4>
+          <input name="data.fuel.cons" type="number" value="{{data.fuel.cons}}"/>
+        </div>
+        
+        <div class="grid-item sub-subgrid" >
+          <h4 class="item-name">Crew</h4>
+          <input name="data.crew" type="text" value="{{data.crew}}"/>
+        </div>
+        
+        <div class="grid-item sub-subgrid" >
+          <h4 class="item-name">Max Cargo</h4>
+          <input name="data.cargo_cap" type="number" value="{{data.cargo_cap}}"/>
+        </div>
+        
+        <div class="grid-item sub-subgrid" >
+          <h4 class="item-name">Weapon Mounts</h4>
+          <input name="data.weapon_mounts" type="text" value="{{data.weapon_mounts}}"/>
+        </div>
+        
+        <div class="grid-item sub-subgrid" >
+          <h4 class="item-name">Price</h4>
+          <input name="data.price" type="number" value="{{data.price}}"/>
         </div>
         
       </div>
