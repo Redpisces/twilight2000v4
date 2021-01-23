@@ -1,6 +1,6 @@
 <li class="item flexrow" data-item-id="{{ this._id}}">
   <div class="item-image"><img src="{{this.img}}" title="{{this.name}}" width="24" height="24"/></div>
-  <h4 class="item-name">{{this.name}}</h4>
+  <h4 class="item-name" style="flex-grow: 4;">{{this.name}}</h4>
   <span> {{this.data.weight}}</span>
   <span> {{this.data.quantity}}</span>
   <span> {{math this.data.weight "*" this.data.quantity}}</span>
