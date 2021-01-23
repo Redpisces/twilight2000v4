@@ -1,21 +1,21 @@
-<ol class="items-list gear-list" style="border: 1px solid black;">
-	<li class="item flexrow item-header">
-		<div class="item-image"></div>
-		<div class="item-name" style="flex-grow: 3;">Item</div>
-		<span style="flex: 1 1 0; text-align:center;"> ROF</span>
-  		<span style="flex: 1 1 0;text-align:center;"> Damage</span>
-  		<span style="flex: 1 1 0;text-align:center;"> Crit</span>
-  		<span style="flex: 1 1 0;text-align:center;"> Armor</span>
-  		<span style="flex: 1 1 0;text-align:center;"> Range</span>
-  		<span style="flex: 2 1 0;text-align:center;"> Mag</span>
-  		<span style="flex: 1 1 0;text-align:center;"> Rel</span>
-  		<span style="flex: 1 1 0;text-align:center;"> Blast</span>
-  		<span style="flex: 1 1 0;text-align:center;"> Wt</span>
-		<div class="item-controls" style="flex: 1 1 0;text-align:center;">
+<table class="items-list gear-list" style="border: 1px solid black;">
+	<tr class="item flexrow item-header">
+		<th class="item-image"></th>
+		<th class="item-name" style="flex-grow: 3;">Item</th>
+		<th> ROF</th>
+  		<th> Damage</th>
+  		<th> Crit</th>
+  		<th> Armor</th>
+  		<th> Range</th>
+  		<th> Mag</th>
+  		<th> Rel</th>
+  		<th> Blast</th>
+  		<th> Wt</th>
+		<th class="item-controls">
 		<a class="item-control item-create" title="Create item" data-type="weapon"><i class="fas fa-plus"></i></a>
-		</div>
-	</li>
+		</th>
+	</tr>
 	{{#each actor.weapons}}
 		{{> "systems/twilight2000v4/templates/actor/part/weapon-slot.hbs" this}}
 	{{/each}}
-</ol>
+</table>
