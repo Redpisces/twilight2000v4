@@ -27,7 +27,7 @@ export class twilightActorSheet extends ActorSheet {
     const data = super.getData();
     data.dtypes = ["String", "Number", "Boolean"];
     
-	if (data.data.attributes){
+	if (this.actor.data.type=== 'character'){
 		for (let [akey,avalue] of Object.entries(data.data.attributes)) {
 		  avalue.skills={}
 		  for (let [skey,svalue] of Object.entries(data.data.skills)) {
