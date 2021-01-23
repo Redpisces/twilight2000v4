@@ -1,5 +1,5 @@
 <tr class="item flexrow" data-item-id="{{ this._id}}">
-  <td class="item-image"><img src="{{this.img}}" title="{{this.name}}" width="24" height="24"/></div>
+  <td class="item-image"><img src="{{this.img}}" title="{{this.name}}" width="24" height="24"/></td>
   <td class="item-name" style="flex-grow: 3;">{{this.name}}</td>
   {{#if (comp data.version "<" "2")}}
   <td>OLD WEAPON</td>
@@ -11,9 +11,9 @@
   <td> {{this.data.attributes.armor}}</td>
   <td> {{this.data.attributes.range}}</td>
   <td class="flexrow"> 
-    <td>{{this.data.attributes.mag.value}}</td>
-    <td>/</td>
-    <td>{{this.data.attributes.mag.max}}</td>
+    <span>{{this.data.attributes.mag.value}}</span>
+    <span>/</span>
+    <span>{{this.data.attributes.mag.max}}</span>
   </td>
   <td> {{this.data.attributes.rel.value}}</td>
   <td> {{this.data.attributes.blast}}</td>
