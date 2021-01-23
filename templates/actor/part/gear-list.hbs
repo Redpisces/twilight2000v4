@@ -1,12 +1,14 @@
 <ol class="items-list gear-list" style="border: 1px solid black;">
 	<li class="item flexrow item-header">
-	<div class="item-image"></div>
-	<div class="item-name">Item</div>
-	<div class="item-controls">
-	<a class="item-control item-create" title="Create item" data-type="gear"><i class="fas fa-plus"></i> Add item</a>
-	</div>
+		<div class="item-image"></div>
+		<div class="item-name" style="flex-grow: 4;">Item</div>
+		<span> Qty</span>
+		<span> Encumbrance</span>
+		<div class="item-controls">
+		<a class="item-control item-create" title="Create item" data-type="gear"><i class="fas fa-plus"></i> Add item</a>
+		</div>
 	</li>
 	{{#each actor.gear}}
-	{{> "systems/twilight2000v4/templates/actor/part/gear-slot.hbs" this}}
+		{{> "systems/twilight2000v4/templates/actor/part/gear-slot.hbs" this}}
 	{{/each}}
 </ol>

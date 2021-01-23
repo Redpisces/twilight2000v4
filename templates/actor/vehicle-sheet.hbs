@@ -187,30 +187,19 @@
     {{!-- Owned Items Tab --}}
     <div class="tab items" data-group="primary" data-tab="items">
 	  <ol class="items-list" style="border: 1px solid black;">
-        <li class="item flexrow item-header">
-          <div class="item-image"></div>
-          <div class="item-name">Weapon</div>
-          <div class="item-controls">
-            <a class="item-control item-create" title="Create item" data-type="weapon"><i class="fas fa-plus"></i> Add item</a>
-          </div>
-        </li>
-        {{#each actor.weapons as |item id|}}
-        {{> "systems/twilight2000v4/templates/actor/part/gear-slot.hbs" this}}
-        {{/each}}
-      </ol>
+      <li class="item flexrow item-header">
+        <div class="item-image"></div>
+        <div class="item-name">Weapon</div>
+        <div class="item-controls">
+          <a class="item-control item-create" title="Create item" data-type="weapon"><i class="fas fa-plus"></i> Add item</a>
+        </div>
+      </li>
+      {{#each actor.weapons as |item id|}}
+      {{> "systems/twilight2000v4/templates/actor/part/gear-slot.hbs" this}}
+      {{/each}}
+    </ol>
       
-      <ol class="items-list" style="border: 1px solid black;">
-        <li class="item flexrow item-header">
-          <div class="item-image"></div>
-          <div class="item-name">Item</div>
-          <div class="item-controls">
-            <a class="item-control item-create" title="Create item" data-type="gear"><i class="fas fa-plus"></i> Add item</a>
-          </div>
-        </li>
-        {{#each actor.gear as |item id|}}
-        {{> "systems/twilight2000v4/templates/actor/part/gear-slot.hbs" this}}
-        {{/each}}
-      </ol>
+    {{> "systems/twilight2000v4/templates/actor/part/gear-list.hbs" this}}
 		
 		
       
