@@ -111,8 +111,7 @@
   {{!-- Sheet Tab Navigation --}}
   <nav class="sheet-tabs tabs" data-group="primary">
     <a class="item" data-tab="description">Description</a>
-    {{log this}}
-    {{#unless limted}}
+    {{#unless this.limited}}
     <a class="item" data-tab="stats">Stats</a>
     <a class="item" data-tab="items">Items</a>
     {{/unless}}
