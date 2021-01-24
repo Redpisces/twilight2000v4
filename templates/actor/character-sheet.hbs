@@ -145,7 +145,7 @@
         </div>
         {{#each this.skills}}
         <div class="grid-item sub-subgrid" style="grid-column:{{math @../index '+' 1}};grid-row:{{math @index '+' 3}};">
-          {{> "systems/twilight2000v4/templates/actor/part/skill-slot.hbs" this attribute=../this}}
+          {{> "systems/twilight2000v4/templates/actor/part/skill-slot.hbs" this attribute=../this.rating}}
         </div>
         {{/each}}
         {{/each}}
