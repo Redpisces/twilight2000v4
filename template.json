@@ -3,7 +3,7 @@
     "types": ["character","vehicle"],
     "templates": {
       "base": {
-      	
+      	"description": ""
       }
     },
     "character": {
