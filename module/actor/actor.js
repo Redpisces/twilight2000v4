@@ -97,6 +97,7 @@ export class twilightActor extends Actor {
       
       switch (i.type){
         case 'gear':
+          countWeight(i.data);
           gear.push(i);
           break;
         case 'specialty':
@@ -109,9 +110,11 @@ export class twilightActor extends Actor {
           diseases.push(i);
           break;
         case 'weapon':
+          countWeight(i.data);
           weapons.push(i);
           break;
         case 'armor':
+          countWeight(i.data);
           let d = i.data
           if (d.equipped && d.value > parts[d.location]){
             parts[d.location]=d.value;
