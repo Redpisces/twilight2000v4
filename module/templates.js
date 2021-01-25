@@ -21,7 +21,10 @@ export const preloadHandlebarsTemplates = async function() {
 		'systems/twilight2000v4/templates/actor/part/armor-list.hbs',
 		'systems/twilight2000v4/templates/actor/part/armor-slot.hbs',
 		
-		'systems/twilight2000v4/templates/actor/part/skill-slot.hbs'
+		'systems/twilight2000v4/templates/actor/part/skill-slot.hbs',
+    
+    
+    'systems/twilight2000v4/templates/item/blocks/weight-block.hbs'
 		
 	]);
 }
