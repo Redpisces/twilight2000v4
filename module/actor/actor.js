@@ -110,8 +110,7 @@ export class twilightActor extends Actor {
     actorData.diseases=diseases;
     actorData.weapons=weapons;
     actorData.armor=armor;
-    console.log(Math.ceil((data.attributes.str+data.attributes.agi)/4));
-    data.hits.max=Math.ceil((data.attributes.str+data.attributes.agi)/4);
+    data.hits.max=Math.ceil((data.attributes.str.base_die+data.attributes.agi.base_die)/4);
   }
   
   
