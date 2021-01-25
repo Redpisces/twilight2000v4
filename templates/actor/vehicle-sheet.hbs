@@ -186,6 +186,13 @@
 	  </div>
     {{!-- Owned Items Tab --}}
     <div class="tab items" data-group="primary" data-tab="items">
+    
+    <div class="flexrow">
+      <span>
+        Cargo:{{actor.weight.cargo}}/{{actor.weight.max}}
+      </span>
+    </div>
+    
 	  {{> "systems/twilight2000v4/templates/actor/part/weapon-list.hbs" this}}
       
     {{> "systems/twilight2000v4/templates/actor/part/gear-list.hbs" this}}

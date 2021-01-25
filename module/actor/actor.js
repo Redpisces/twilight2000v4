@@ -30,16 +30,26 @@ export class twilightActor extends Actor {
     
     const gear=[];
     const weapons=[];
-	  
+    
+	  let cargoWeight=0.0;
+    
+    function countWeight(itemData){
+      if (itemData.equipped || itemData.carried || itemData.packed){
+        cargoWeight+=itemData.weight*itemData.quantity;
+      }
+    }
+    
     for (let i of actorData.items){
       let item = i.data;
       i.img = i.img || DEFAULT_TOKEN;
       
       switch (i.type){
         case 'gear':
+          countWeight(i.data);
           gear.push(i);
           break;
         case 'weapon':
+          countWeight(i.data);
           weapons.push(i);
           break;
 		    default:
@@ -49,6 +59,8 @@ export class twilightActor extends Actor {
     actorData.gear=gear;
     actorData.weapons=weapons;
     
+    actorData.weight={'cargo':cargoWeight,'max':data.cargo_cap};
+    console.log(actorData.weight);
   }
   
   /**

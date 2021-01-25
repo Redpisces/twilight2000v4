@@ -55,7 +55,7 @@
     },
     "npc":{
       "version":1,
-      "templates": ["npc"]
+      "templates": ["human"]
     },
     "vehicle":{
       "version":1,
