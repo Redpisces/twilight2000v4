@@ -183,7 +183,7 @@
           <label class="grid-item" for="data.hits.value">Hits</label>
           <input class="grid-item" name="data.hits.value" type="number" value="{{data.hits.value}}"/>
           <label class="grid-item" for="data.hits.max">Hit Cap</label>
-          <span  class="grid-item">{{data.hits.max}}"</span>
+          <span  class="grid-item">{{data.hits.max}}</span>
         </div>
         
         <div class="grid-item stats-subgrid" style="grid-column-end:span 1;grid-row-end:span 3;">
@@ -191,7 +191,7 @@
           <label class="grid-item" for="data.stress.value">Stress</label>
           <input class="grid-item" name="data.stress.value" type="number" value="{{data.stress.value}}"/>
           <label class="grid-item" for="data.stress.max">Stress Cap</label>
-          <span  class="grid-item">{{data.stress.max}}"</span>
+          <span  class="grid-item">{{data.stress.max}}</span>
         </div>
         
         <div class="grid-item stats-subgrid" style="grid-column-end:span 1;grid-row-end:span 3;">
@@ -229,7 +229,7 @@
         <div class="grid-item armor-subgrid" style="grid-column-end:span 1;grid-row-end:span 5;">
           <div style="grid-column-end:span 2;border-bottom: 1px solid black;"> Armor</div>
           {{#each data.armor as |value id|}}
-          <label for="data.armor.{{id}}">{{id}}</label><input name="data.armor.{{id}}" type="number" value="{{value}}"/>
+          <label for="data.armor.{{id}}">{{id}}</label><span>{{data.armor.(id)}}</span>
           {{/each}}
         </div>
         <div class="grid-item armor-subgrid" style="grid-column-end:span 1;grid-row-end:span 5;">
