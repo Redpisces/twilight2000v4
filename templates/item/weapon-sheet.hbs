@@ -50,7 +50,7 @@
               </div>
         {{/if}}
 			
-        {{#if (gt data.version "2")}}
+        {{#if (gte data.version "2")}}
           <div class="grid-container stat-grid">
             <div class="grid-item flexcol" >
               <label class="grid-item" for="data.attributes.type">Type</label>
