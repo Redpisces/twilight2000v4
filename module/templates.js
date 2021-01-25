@@ -71,5 +71,10 @@ export function registerHandlebars(){
 		"<=": lvalue <= rvalue
 	}[operator];
   });
+  
+  Handlebars.registerHelper("str_comp", function(lvalue,rvalue,options){
+    return lvalue==rvale;
+	});
+  
 }
 		
