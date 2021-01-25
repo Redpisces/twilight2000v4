@@ -81,9 +81,9 @@
                     {{/select}}
                 </select>
             </div>
-            {{#unless (str_comp data.attributes.type "melee")}}
-            {{#unless (str_comp data.attributes.type "bow_thrown")}}
-            {{#unless (str_comp data.attributes.type "grenade")}}
+            {{#unless (eq data.attributes.type "melee")}}
+            {{#unless (eq data.attributes.type "bow_thrown")}}
+            {{#unless (eq data.attributes.type "grenade")}}
             <div class="grid-item flexcol" >
               <label class="grid-item" for="data.attributes.ammo">Ammo</label>
               <input class="grid-item" style="grid-column-end:span 1;" name="data.attributes.ammo" type="text" value="{{data.attributes.ammo}}"/>
@@ -134,8 +134,8 @@
               <input class="grid-item" style="grid-column-end:span 1;" name="data.attributes.crit" type="number" value="{{data.attributes.crit}}"/>
             </div>
             
-            {{#unless (str_comp data.attributes.type "melee")}}
-            {{#unless (str_comp data.attributes.type "bow_thrown")}}
+            {{#unless (eq data.attributes.type "melee")}}
+            {{#unless (eq data.attributes.type "bow_thrown")}}
             <div class="grid-item flexcol" >
               <label class="grid-item" for="data.attributes.blast">Blast</label>
               <select name="data.attributes.blast">
@@ -155,8 +155,8 @@
               <input class="grid-item" style="grid-column-end:span 1;" name="data.attributes.range" type="number" value="{{data.attributes.range}}"/>
             </div>
             
-            {{#unless (str_comp data.attributes.type "bow_thrown")}}
-            {{#unless (str_comp data.attributes.type "grenade")}}
+            {{#unless (eq data.attributes.type "bow_thrown")}}
+            {{#unless (eq data.attributes.type "grenade")}}
             <div class="grid-item flexcol" >
               <label class="grid-item">Magazine</label>
               <div class="flexrow flex-center">
