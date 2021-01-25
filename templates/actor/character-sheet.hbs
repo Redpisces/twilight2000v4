@@ -228,7 +228,6 @@
         
         <div class="grid-item armor-subgrid" style="grid-column-end:span 1;grid-row-end:span 5;">
           <div style="grid-column-end:span 2;border-bottom: 1px solid black;"> Armor</div>
-          {{log actor}}
           {{#each actor.armorValue as |value id|}}
           <label for="actor.armorValue.{{id}}">{{id}}</label><span>{{value}}</span>
           {{/each}}
