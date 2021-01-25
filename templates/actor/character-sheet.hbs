@@ -31,7 +31,7 @@
       }
       .stat-grid {
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
+      grid-template-columns: repeat(2, 1fr);
       gap: 1px;
       grid-auto-rows: minmax(25px, auto);
       border: 1px solid black;
@@ -39,10 +39,8 @@
       }
       .stat-grid .sub-subgrid{
       display: grid;
-      grid-template-columns: 4fr 2fr 1fr;
-      gap: 0px;
+      grid-template-columns: 2fr 1fr 1fr;
       grid-auto-rows: minmax(25px, auto);
-      grid-auto-flow: dense;
       }
       .stat-grid .grid-item{
         background: url(../ui/parchment.jpg) repeat;
@@ -144,16 +142,11 @@
     {{!-- Skill Tab --}}
     <div class="tab stats" data-group="primary" data-tab="stats">
       <div class="grid-container stat-grid">
-        <div class="grid-item sub-subgrid" style="grid-column:span 4;grid-row:1;"> Attributes &#38; Skills </div>
+        <div class="grid-item sub-subgrid" style="grid-column:span 2;"> Attributes &#38; Skills </div>
         {{#each data.attributes}}
-        <div class="grid-item sub-subgrid" style="grid-column:{{math @index '+' 1}};grid-row:2;">
+        <div class="grid-item sub-subgrid">
           {{> "systems/twilight2000v4/templates/actor/part/attribute-slot.hbs" this}}
         </div>
-        {{#each this.skills}}
-        <div class="grid-item sub-subgrid" style="grid-column:{{math @../index '+' 1}};grid-row:{{math @index '+' 3}};">
-          {{> "systems/twilight2000v4/templates/actor/part/skill-slot.hbs" this attribute=../this.rating}}
-        </div>
-        {{/each}}
         {{/each}}
       </div>
       <ol class="items-list" style="border: 1px solid black;">
