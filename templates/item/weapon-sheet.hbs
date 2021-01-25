@@ -54,7 +54,32 @@
           <div class="grid-container stat-grid">
             <div class="grid-item flexcol" >
               <label class="grid-item" for="data.attributes.type">Type</label>
-              <input class="grid-item" style="grid-column-end:span 1;" name="data.attributes.type" type="text" value="{{data.attributes.type}}"/>
+              <select name="data.attributes.type">
+                  {{#select data.attributes.type}}
+                    <option value="melee">Melee</option>
+                    <option value="bow_thrown">Bow&#47;Thrown</option>
+                    <option value="revolver">Revolver</option>
+                    <option value="pistol">Pistol</option>
+                    <option value="hunting_rifle">Hunting Rifle</option>
+                    <option value="shotgun">Shotgun</option>
+                    <option value="assault_rifle">Assault Rifle</option>
+                    <option value="sniper_rifle">Sniper Rifle</option>
+                    <option value="gl">GL</option>
+                    <option value="lmg">LMG</option>
+                    <option value="gpmg">GPMG</option>
+                    <option value="hmg">HMG</option>
+                    <option value="atrl">ATRL</option>
+                    <option value="atgm">ATGM</option>
+                    <option value="battle_rifle">Battle Rifle</option>
+                    <option value="smg">SMG</option>
+                    <option value="grenade">Hand Grenade</option>
+                    <option value="cannon">Cannon</option>
+                    <option value="mortar">Mortar</option>
+                    <option value="howitzer">Howitzer</option>
+                    <option value="mine">Mine</option>
+                    <option value="-">-</option>
+                    {{/select}}
+                </select>
             </div>
 
             <div class="grid-item flexcol" >
