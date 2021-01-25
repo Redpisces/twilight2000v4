@@ -14,16 +14,15 @@
 </div>
 
 <div class="grid-item sub-subgrid" >
-  <label class="grid-item" for="data.equipped">Equipped</label>
-  <input class="grid-item" style="grid-column-end:span 1;" name="data.equipped" type="checkbox" {{checked data.equipped}}/>
+  <label class="grid-item" for="data.container">Container</label>
+  <select class="grid-item" style="grid-column-end:span 1;" name="data.container">
+	{{#select this.container}}
+    <option value="equipped">Equipped</option>
+    <option value="carried">Carried</option>
+    <option value="packed">Backpack</option>
+    <option value="none">None</option>
+    {{/select}}
+  </select>
 </div>
 
-<div class="grid-item sub-subgrid" >
-  <label class="grid-item" for="data.carried">Carried</label>
-  <input class="grid-item" style="grid-column-end:span 1;" name="data.carried" type="checkbox" {{checked data.carried}}/>
-</div>
 
-<div class="grid-item sub-subgrid" >
-  <label class="grid-item" for="data.packed">Packed</label>
-  <input class="grid-item" style="grid-column-end:span 1;" name="data.packed" type="checkbox" {{checked data.packed}}/>
-</div>

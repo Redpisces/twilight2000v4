@@ -34,7 +34,7 @@ export class twilightActor extends Actor {
 	  let cargoWeight=0.0;
     
     function countWeight(itemData){
-      if (itemData.equipped || itemData.carried || itemData.packed){
+      if (itemData.container!='none'){
         cargoWeight+=itemData.weight*itemData.quantity;
       }
     }
@@ -95,10 +95,10 @@ export class twilightActor extends Actor {
     let packWeight=0.0;
     
     function countWeight(itemData){
-      if (itemData.equipped || itemData.carried){
+      if (itemData.container=='carried' || itemData.container=='equipped'){
         carryWeight+=itemData.weight*itemData.quantity;
       }
-      else if (itemData.packed){
+      else if (itemData.container=='packed'){
         packWeight+=itemData.weight*itemData.quantity;
       }
     }
@@ -128,7 +128,7 @@ export class twilightActor extends Actor {
         case 'armor':
           countWeight(i.data);
           let d = i.data
-          if (d.equipped && d.value > parts[d.location]){
+          if (d.container=='equipped' && d.value > parts[d.location]){
             parts[d.location]=d.value;
           }
           armor.push(i);
