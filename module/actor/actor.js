@@ -116,12 +116,11 @@ export class twilightActor extends Actor {
     
     let parts= {"head":0,"arms":0,"torso":0,"legs":0};
     for (let a of actorData.armors){
-      console.log(a);
-      if (a.value > parts[a.location]){
-        parts[a.location]=a.value;
+      let d = a.data
+      if (d.value > parts[d.location]){
+        parts[d.location]=d.value;
       }
     }
-    console.log(parts);
     actorData.armorValue=parts;
   }
   
