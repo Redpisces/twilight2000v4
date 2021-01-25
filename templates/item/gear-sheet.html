@@ -1,18 +1,39 @@
 <form class="{{cssClass}}" autocomplete="off">
+    <head>
+      <style>
+        .stat-grid{
+          display: grid;
+          grid-template-columns: repeat( auto-fit, minmax(100px, 1fr) );
+          gap: 1px;
+          grid-auto-rows: minmax(50px, auto);
+          grid-auto-flow: dense;
+          border: 1px solid black;
+          background-color: black;
+        }
+        .stat-grid .sub-subgrid{
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 1px;
+        grid-auto-rows: minmax(25px, auto);
+        grid-auto-flow: dense;
+        }
+        .stat-grid .grid-item{
+        background: url(../ui/parchment.jpg) repeat;
+        }
+        .stat-grid .sub-subgrid .grid-item{
+        border: 1px none grey;
+        }
+        .stat-grid .sub-subgrid input[type="text"], input[type="number"], input[type="password"], input[type="date"], input[type="time"]{
+        background: rgba(0,0,0,0.05);
+        border: 1px solid #7a7971;
+        }
+      </style>
+    </head>
     <header class="sheet-header">
         <img class="profile-img" src="{{item.img}}" data-edit="img" title="{{item.name}}"/>
         <div class="header-fields">
             <h1 class="charname"><input name="name" type="text" value="{{item.name}}" placeholder="Name"/></h1>
-            <div class="grid grid-2col">
-              <div class="resource">
-                <label class="resource-label">Quantity</label>
-                  <input type="text" name="data.quantity" value="{{data.quantity}}" data-dtype="Number"/>
-              </div>
-              <div class="resource">
-                <label class="resource-label">Weight</label>
-                  <input type="text" name="data.weight" value="{{data.weight}}" data-dtype="Number"/>
-              </div>
-            </div>
+            
         </div>
     </header>
 
@@ -32,7 +53,41 @@
 
         {{!-- Attributes Tab --}}
         <div class="tab attributes" data-group="primary" data-tab="attributes">
-            {{!-- As you add new fields, add them in here! --}}
+          <div class="grid-container stat-grid">
+            
+            <div class="grid-item sub-subgrid" >
+              <label class="grid-item" for="data.weight">Weight</label>
+              <input class="grid-item" style="grid-column-end:span 1;" name="data.weight" type="number" value="{{data.weight}}"/>
+            </div>
+            
+            <div class="grid-item sub-subgrid" >
+              <label class="grid-item" for="data.price">Price</label>
+              <input class="grid-item" style="grid-column-end:span 1;" name="data.price" type="number" value="{{data.price}}"/>
+            </div>
+            
+            <div class="grid-item sub-subgrid" >
+              <label class="grid-item" for="data.quantity">Quantity</label>
+              <input class="grid-item" style="grid-column-end:span 1;" name="data.quantity" type="number" value="{{data.quantity}}"/>
+            </div>
+            
+            <div class="grid-item sub-subgrid" >
+              <label class="grid-item" for="data.equipped">Equipped</label>
+              <input class="grid-item" style="grid-column-end:span 1;" name="data.equipped" type="checkbox" {{checked data.equipped}}/>
+            </div>
+            
+            <div class="grid-item sub-subgrid" >
+              <label class="grid-item" for="data.carried">Carried</label>
+              <input class="grid-item" style="grid-column-end:span 1;" name="data.carried" type="checkbox" {{checked data.carried}}/>
+            </div>
+            
+            <div class="grid-item sub-subgrid" >
+              <label class="grid-item" for="data.packed">Equipped</label>
+              <input class="grid-item" style="grid-column-end:span 1;" name="data.packed" type="checkbox" {{checked data.packed}}/>
+            </div>
+            
+          </div>
         </div>
+        
+        
     </section>
 </form>
