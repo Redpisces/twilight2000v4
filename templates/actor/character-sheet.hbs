@@ -112,7 +112,8 @@
   <nav class="sheet-tabs tabs" data-group="primary">
     <a class="item" data-tab="description">Description</a>
     {{#if this.owner}}
-    <a class="item" data-tab="stats">Stats</a>
+    <a class="item" data-tab="stats">Skills</a>
+    <a class="item" data-tab="combat">Combat</a>
     <a class="item" data-tab="items">Items</a>
     {{/if}}
   </nav>
@@ -140,7 +141,7 @@
       {{editor content=data.description target="data.description" button=true owner=owner editable=editable}}
     </div>
     {{#if this.owner}}
-    {{!-- Stat Tab --}}
+    {{!-- Skill Tab --}}
     <div class="tab stats" data-group="primary" data-tab="stats">
       <div class="grid-container stat-grid">
         <div class="grid-item sub-subgrid" style="grid-column:span 4;grid-row:1;"> Attributes &#38; Skills </div>
@@ -174,6 +175,11 @@
         </li>
         {{/each}}
       </ol>
+      
+    </div>
+    </div>
+    {{!-- Combat Tab --}}
+    <div class="tab items" data-group="primary" data-tab="combat">
       <div class="grid-container combat-grid">
         
         <div class="grid-item stats-subgrid" style="grid-column-end:span 1;grid-row-end:span 3;">
@@ -283,7 +289,6 @@
           </ol>
         </div>
       </div>
-    </div>
     </div>
     {{!-- Owned Items Tab --}}
     <div class="tab items" data-group="primary" data-tab="items">
