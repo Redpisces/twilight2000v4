@@ -39,7 +39,7 @@
       }
       .stat-grid .sub-subgrid{
       display: grid;
-      grid-template-columns: 2fr 1fr 1fr;
+      grid-template-columns: 3fr 1fr 1fr;
       grid-auto-rows: minmax(25px, auto);
       }
       .stat-grid .grid-item{
@@ -146,6 +146,9 @@
         {{#each data.attributes}}
         <div class="grid-item sub-subgrid">
           {{> "systems/twilight2000v4/templates/actor/part/attribute-slot.hbs" this}}
+          {{#each this.skills}}
+          {{> "systems/twilight2000v4/templates/actor/part/skill-slot.hbs" this, attribute=../this.rating}}
+          {{/each}}
         </div>
         {{/each}}
       </div>
