@@ -58,23 +58,23 @@ export function registerHandlebars(){
     }[operator];
   });
 	
-  Handlebars.registerHelper("comp", function(lvalue,operator,rvalue,options){
-	lvalue = parseFloat (lvalue);  
-	rvalue = parseFloat (rvalue);
-	
-	return {
-		">": lvalue > rvalue,
-		"<": lvalue < rvalue,
-		"=": lvalue == rvalue,
-		"!=": lvalue != rvalue,
-		">=": lvalue >= rvalue,
-		"<=": lvalue <= rvalue
-	}[operator];
-  });
-  
-  Handlebars.registerHelper("str_comp", function(lvalue,rvalue,options){
-    return lvalue==rvalue;
-	});
+//   Handlebars.registerHelper("comp", function(lvalue,operator,rvalue,options){
+// 	lvalue = parseFloat (lvalue);  
+// 	rvalue = parseFloat (rvalue);
+// 	
+// 	return {
+// 		">": lvalue > rvalue,
+// 		"<": lvalue < rvalue,
+// 		"=": lvalue == rvalue,
+// 		"!=": lvalue != rvalue,
+// 		">=": lvalue >= rvalue,
+// 		"<=": lvalue <= rvalue
+// 	}[operator];
+//   });
+//   
+//   Handlebars.registerHelper("str_comp", function(lvalue,rvalue,options){
+//     return lvalue==rvalue;
+// 	});
   
 }
 		
