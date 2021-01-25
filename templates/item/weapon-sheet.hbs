@@ -39,7 +39,7 @@
 
         {{!-- Attributes Tab --}}
         <div class="tab attributes" data-group="primary" data-tab="attributes">
-        {{#if (comp data.version "=" "1")}}
+        {{#if (eq data.version "1")}}
               <div class="grid-container stat-grid">
                 {{#each data.attributes as |item id|}}
                 <div class="grid-item flexcol" >
@@ -50,7 +50,7 @@
               </div>
         {{/if}}
 			
-        {{#if (comp data.version ">=" "2")}}
+        {{#if (gt data.version "2")}}
           <div class="grid-container stat-grid">
             <div class="grid-item flexcol" >
               <label class="grid-item" for="data.attributes.type">Type</label>
