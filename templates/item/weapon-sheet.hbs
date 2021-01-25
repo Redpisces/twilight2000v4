@@ -83,6 +83,7 @@
             </div>
             {{#unless (str_comp data.attributes.type "melee")}}
             {{#unless (str_comp data.attributes.type "bow_thrown")}}
+            {{#unless (str_comp data.attributes.type "grenade")}}
             <div class="grid-item flexcol" >
               <label class="grid-item" for="data.attributes.ammo">Ammo</label>
               <input class="grid-item" style="grid-column-end:span 1;" name="data.attributes.ammo" type="text" value="{{data.attributes.ammo}}"/>
@@ -121,6 +122,7 @@
             </div>
             {{/unless}}
             {{/unless}}
+            {{/unless}}
 
             <div class="grid-item flexcol" >
               <label class="grid-item" for="data.attributes.damage">Damage</label>
@@ -154,6 +156,7 @@
             </div>
             
             {{#unless (str_comp data.attributes.type "bow_thrown")}}
+            {{#unless (str_comp data.attributes.type "grenade")}}
             <div class="grid-item flexcol" >
               <label class="grid-item">Magazine</label>
               <div class="flexrow flex-center">
@@ -162,6 +165,7 @@
                 <input class="grid-item" style="grid-column-end:span 1;" name="data.attributes.mag.max" type="number" value="{{data.attributes.mag.max}}"/>
               </div>
             </div>
+            {{/unless}}
             {{/unless}}
             {{/unless}}
             
