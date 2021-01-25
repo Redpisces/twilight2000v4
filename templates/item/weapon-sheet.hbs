@@ -130,6 +130,7 @@
               <input class="grid-item" style="grid-column-end:span 1;" name="data.attributes.crit" type="number" value="{{data.attributes.crit}}"/>
             </div>
             
+            {{#unless (str_comp data.attributes.type "melee")}}
             <div class="grid-item flexcol" >
               <label class="grid-item" for="data.attributes.blast">Blast</label>
               <select name="data.attributes.blast">
@@ -156,6 +157,7 @@
                 <input class="grid-item" style="grid-column-end:span 1;" name="data.attributes.mag.max" type="number" value="{{data.attributes.mag.max}}"/>
               </div>
             </div>
+            {{/unless}}
             
             <div class="grid-item flexcol" >
               <label class="grid-item" for="data.attributes.armor">Armor Mod</label>
