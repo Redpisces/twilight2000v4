@@ -76,7 +76,8 @@ export class twilightActor extends Actor {
     const diseases=[];
     const weapons=[];
     const armor=[];
-	  
+	  let parts= {"head":0,"arms":0,"torso":0,"legs":0};
+    
     for (let i of actorData.items){
       let item = i.data;
       i.img = i.img || DEFAULT_TOKEN;
@@ -97,7 +98,11 @@ export class twilightActor extends Actor {
         case 'weapon':
           weapons.push(i);
           break;
-		case 'armor':
+        case 'armor':
+          let d = i.data
+          if (d.equipped && d.value > parts[d.location]){
+            parts[d.location]=d.value;
+          }
           armor.push(i);
           break;
         default:
@@ -111,17 +116,12 @@ export class twilightActor extends Actor {
     actorData.weapons=weapons;
     actorData.armors=armor;
     
+    actorData.armorValue=parts;
+    
     data.hits.max=Math.ceil((data.attributes.str.base_die+data.attributes.agi.base_die)/4);
     data.stress.max=Math.ceil((data.attributes.int.base_die+data.attributes.emp.base_die)/4);
     
-    let parts= {"head":0,"arms":0,"torso":0,"legs":0};
-    for (let a of actorData.armors){
-      let d = a.data
-      if (d.equipped && d.value > parts[d.location]){
-        parts[d.location]=d.value;
-      }
-    }
-    actorData.armorValue=parts;
+    
   }
   
   
