@@ -82,7 +82,10 @@
       "gear":{
         "quantity": 1,
         "weight": 0,
-        "price":0
+        "price":0,
+        "equipped":false,
+        "carried":false,
+        "packed":false
       }
     },
     "gear": {
