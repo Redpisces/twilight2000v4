@@ -73,7 +73,7 @@ export function registerHandlebars(){
   });
   
   Handlebars.registerHelper("str_comp", function(lvalue,rvalue,options){
-    return lvalue==rvale;
+    return lvalue==rvalue;
 	});
   
 }
