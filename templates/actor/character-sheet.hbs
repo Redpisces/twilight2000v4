@@ -111,10 +111,10 @@
   {{!-- Sheet Tab Navigation --}}
   <nav class="sheet-tabs tabs" data-group="primary">
     <a class="item" data-tab="description">Description</a>
-    {{#unless this.limited}}
+    {{#if this.owner}}
     <a class="item" data-tab="stats">Stats</a>
     <a class="item" data-tab="items">Items</a>
-    {{/unless}}
+    {{/if}}
   </nav>
   {{!-- Sheet Body --}}
   <section class="sheet-body" style="padding-bottom:50px;">
@@ -139,7 +139,7 @@
       </div>
       {{editor content=data.description target="data.description" button=true owner=owner editable=editable}}
     </div>
-    {{#unless this.limited}}
+    {{#if this.owner}}
     {{!-- Stat Tab --}}
     <div class="tab stats" data-group="primary" data-tab="stats">
       <div class="grid-container stat-grid">
@@ -294,7 +294,7 @@
     {{> "systems/twilight2000v4/templates/actor/part/gear-list.hbs" this}}
             
     </div>
-    {{/unless}}
+    {{/if}}
   </section>
 </form>
 

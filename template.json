@@ -1,14 +1,40 @@
 {
   "Actor": {
-    "types": ["character","vehicle"],
+    "types": ["character","npc","vehicle"],
     "templates": {
       "base": {
       	"description": ""
+      },
+      "human":{
+        "attributes": {
+          "str":{"rating":"C"},"agi":{"rating":"C"},"int":{"rating":"C"},"emp":{"rating":"C"}
+        },
+        "skills":{
+          "heavy_weapons":{"rating":"F","linked_atr":"str"},
+          "melee":{"rating":"F","linked_atr":"str"},
+          "stamina":{"rating":"F","linked_atr":"str"},
+          
+          "driving":{"rating":"F","linked_atr":"agi"},
+          "mobility":{"rating":"F","linked_atr":"agi"},
+          "ranged_combat":{"rating":"F","linked_atr":"agi"},
+          
+          "recon":{"rating":"F","linked_atr":"int"},
+          "survival":{"rating":"F","linked_atr":"int"},
+          "tech":{"rating":"F","linked_atr":"int"},
+          
+          "command":{"rating":"F","linked_atr":"emp"},
+          "persuasion":{"rating":"F","linked_atr":"emp"},
+          "mecical_aid":{"rating":"F","linked_atr":"emp"}
+        },
+        "cuf":{"rating":"D"},
+        "morale":{"rating":"D"},
+        "hits":{"max":5,"value":5},
+        "armor":{"head":0,"arms":0,"torso":0,"legs":0},
       }
     },
     "character": {
-	    "version":1,
-      "templates": ["base"],
+	    "version":2,
+      "templates": ["base","human"],
       "bio":{
         "full_name": {"value":"","size":1},
         "nationality": {"value":"","size":1},
@@ -24,34 +50,13 @@
         "current":0,
         "total":0
       },
-      "attributes": {
-        "str":{"rating":"C"},"agi":{"rating":"C"},"int":{"rating":"C"},"emp":{"rating":"C"}
-      },
-      "skills":{
-        "heavy_weapons":{"rating":"F","linked_atr":"str"},
-        "melee":{"rating":"F","linked_atr":"str"},
-        "stamina":{"rating":"F","linked_atr":"str"},
-        
-        "driving":{"rating":"F","linked_atr":"agi"},
-        "mobility":{"rating":"F","linked_atr":"agi"},
-        "ranged_combat":{"rating":"F","linked_atr":"agi"},
-        
-        "recon":{"rating":"F","linked_atr":"int"},
-        "survival":{"rating":"F","linked_atr":"int"},
-        "tech":{"rating":"F","linked_atr":"int"},
-        
-        "command":{"rating":"F","linked_atr":"emp"},
-        "persuasion":{"rating":"F","linked_atr":"emp"},
-        "mecical_aid":{"rating":"F","linked_atr":"emp"}
-        
-      },
-      "hits":{"max":10,"value":0},
-      "stress":{"max":10,"value":0},
-      "cuf":{"rating":"D"},
-      "morale":{"rating":"D"},
-      "armor":{"head":0,"arms":0,"torso":0,"legs":0},
+      "stress":{"max":5,"value":5},
       "conditions":{"starving":false,"dehydrated":false,"sleep_dep":false,"hypothermic":false},
       "rads":{"temp":0,"permanent":0}
+    },
+    "npc":{
+      "version":1,
+      "templates": ["npc"]
     },
     "vehicle":{
       "version":1,
