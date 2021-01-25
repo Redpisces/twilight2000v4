@@ -111,7 +111,7 @@ export class twilightActor extends Actor {
     actorData.weapons=weapons;
     actorData.armor=armor;
     
-    data.hits.max=Math.ceil((data.attribute.str+data.attribute.agi)/4);
+    data.hits.max=Math.ceil((data.attributes.str+data.attributes.agi)/4);
   }
   
   
