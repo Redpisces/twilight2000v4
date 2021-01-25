@@ -288,6 +288,15 @@
     </div>
     {{!-- Owned Items Tab --}}
     <div class="tab items" data-group="primary" data-tab="items">
+    <div class="flexrow">
+      <span>
+        Carried:{{actor.weight.carried}}/{{actor.weight.max}}
+      </span>
+      <span>
+        Packed:{{actor.weight.packed}}/{{actor.weight.max}}
+      </span>
+    </div>
+    
 	  {{> "systems/twilight2000v4/templates/actor/part/weapon-list.hbs" this}}
       
     {{> "systems/twilight2000v4/templates/actor/part/armor-list.hbs" this}}

@@ -76,7 +76,20 @@ export class twilightActor extends Actor {
     const diseases=[];
     const weapons=[];
     const armor=[];
+    
 	  let parts= {"head":0,"arms":0,"torso":0,"legs":0};
+    
+    let carryWeight=0.0;
+    let packWeight=0.0;
+    
+    function countWeight(itemData){
+      if (itemData.equipped || itemData.carried){
+        carryWeight+=itemData.weight*itemData.quantity;
+      }
+      else if (itemData.packed){
+        packWeight+=itemData.weight*itemData.quantity;
+      }
+    }
     
     for (let i of actorData.items){
       let item = i.data;
@@ -117,6 +130,9 @@ export class twilightActor extends Actor {
     actorData.armors=armor;
     
     actorData.armorValue=parts;
+    
+    actorData.weight={'carried':carryWeight,'packed':packWeight,'max':data.attributes.str.base_die};
+    console.log(actorData.weight);
     
     data.hits.max=Math.ceil((data.attributes.str.base_die+data.attributes.agi.base_die)/4);
     data.stress.max=Math.ceil((data.attributes.int.base_die+data.attributes.emp.base_die)/4);
