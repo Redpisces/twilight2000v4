@@ -113,14 +113,14 @@ export class twilightActor extends Actor {
     
     data.hits.max=Math.ceil((data.attributes.str.base_die+data.attributes.agi.base_die)/4);
     data.stress.max=Math.ceil((data.attributes.int.base_die+data.attributes.emp.base_die)/4);
-    for (let p of actorData.armor){
-      p=0;
-    }
+    
+    let parts= {"head":0,"arms":0,"torso":0,"legs":0};
     for (let a of actorData.armors){
-      if (a.value > actorData.armor[a.location]){
-        actorData.armor[a.location]=a.value;
+      if (a.value > parts[a.location]){
+        parts[a.location]=a.value;
       }
     }
+    actorData.armorValue=parts;
   }
   
   

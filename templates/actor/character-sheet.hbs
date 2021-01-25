@@ -228,8 +228,9 @@
         
         <div class="grid-item armor-subgrid" style="grid-column-end:span 1;grid-row-end:span 5;">
           <div style="grid-column-end:span 2;border-bottom: 1px solid black;"> Armor</div>
-          {{#each data.armor as |value id|}}
-          <label for="data.armor.{{id}}">{{id}}</label><span>{{value}}</span>
+          {{log this}}
+          {{#each this.armor as |value id|}}
+          <label for="this.armor.{{id}}">{{id}}</label><span>{{value}}</span>
           {{/each}}
         </div>
         <div class="grid-item armor-subgrid" style="grid-column-end:span 1;grid-row-end:span 5;">

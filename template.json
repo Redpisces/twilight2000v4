@@ -28,8 +28,7 @@
         },
         "cuf":{"rating":"D"},
         "morale":{"rating":"D"},
-        "hits":{"max":5,"value":0},
-        "armor":{"head":0,"arms":0,"torso":0,"legs":0}
+        "hits":{"max":5,"value":0}
       }
     },
     "character": {
