@@ -1,11 +1,13 @@
-<label class="grid-item" style="grid-column-end:span 1;" for="data.skills.{{@key}}.rating"><button class="rollable" data-roll="{{attribute}}{{this.rating}}">{{@key}}</button></label>
-<select class="grid-item" style="grid-column-end:span 1;" name="data.skills.{{@key}}.rating">
-	{{#select this.rating}}
-    <option value="A">A</option>
-    <option value="B">B</option>
-    <option value="C">C</option>
-    <option value="D">D</option>
-    <option value="F">F</option>
-  {{/select}}
-</select>
-<div class="grid-item die">{{this.base_die}}</div>
+<div class="flexrow" style="text-align: center;align-items: center;">
+  <button style="width: 0;overflow:hidden;flex-grow:2;" class="rollable" data-roll="{{attribute}}{{this.rating}}">{{@key}}</button>
+  <select style="width: 0;" name="data.skills.{{@key}}.rating">
+    {{#select this.rating}}
+      <option value="A">A</option>
+      <option value="B">B</option>
+      <option value="C">C</option>
+      <option value="D">D</option>
+      <option value="F">F</option>
+    {{/select}}
+  </select>
+  <div style="width: 0;" class="die">{{this.base_die}}</div>
+</div>

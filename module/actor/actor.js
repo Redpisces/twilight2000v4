@@ -17,6 +17,7 @@ export class twilightActor extends Actor {
     // Make separate methods for each Actor type (character, npc, etc.) to keep
     // things organized.
     if (actorData.type === 'character') this._prepareCharacterData(actorData);
+    if (actorData.type === 'npc') this._prepareNpcData(actorData);
 	  if (actorData.type === 'vehicle') this._prepareVehicleData(actorData);
   }
 
@@ -61,6 +62,81 @@ export class twilightActor extends Actor {
     
     actorData.weight={'cargo':cargoWeight,'max':data.cargo_cap};
     console.log(actorData.weight);
+  }
+  /**
+   * Prepare NPC type specific data
+   */
+  _prepareNpcData(actorData) {
+    const data = actorData.data;
+    
+    // Make modifications to data here. For example:
+    const rankValues = {"A":12,"B":10,"C":8,"D":6,"F":0,"-":0};
+    for (let [key, attribute] of Object.entries(data.attributes)) {
+      // Calculate the modifier using d20 rules.
+      attribute.base_die = rankValues[attribute.rating];
+    }
+    for (let [key, skill] of Object.entries(data.skills)) {
+      // Calculate the modifier using d20 rules.
+      skill.base_die = rankValues[skill.rating];
+    }
+    data.cuf.base_die=rankValues[data.cuf.rating];
+    data.morale.base_die=rankValues[data.morale.rating];
+    
+    const gear=[];
+    const weapons=[];
+    const armor=[];
+    
+	  let parts= {"head":0,"arms":0,"torso":0,"legs":0};
+    
+    let carryWeight=0.0;
+    let packWeight=0.0;
+    
+    function countWeight(itemData){
+      if (itemData.container=='carried' || itemData.container=='equipped'){
+        carryWeight+=itemData.weight*itemData.quantity;
+      }
+      else if (itemData.container=='packed'){
+        packWeight+=itemData.weight*itemData.quantity;
+      }
+    }
+    
+    for (let i of actorData.items){
+      let item = i.data;
+      i.img = i.img || DEFAULT_TOKEN;
+      
+      switch (i.type){
+        case 'gear':
+          countWeight(i.data);
+          gear.push(i);
+          break;
+        case 'weapon':
+          countWeight(i.data);
+          weapons.push(i);
+          break;
+        case 'armor':
+          countWeight(i.data);
+          let d = i.data
+          if (d.container=='equipped' && d.value > parts[d.location]){
+            parts[d.location]=d.value;
+          }
+          armor.push(i);
+          break;
+        default:
+          break;
+      }
+    }
+    actorData.gear=gear;
+    actorData.weapons=weapons;
+    actorData.armors=armor;
+    
+    actorData.armorValue=parts;
+    
+    actorData.weight={'carried':carryWeight,'packed':packWeight,'max':data.attributes.str.base_die};
+    console.log(actorData.weight);
+    
+    data.hits.max=Math.ceil((data.attributes.str.base_die+data.attributes.agi.base_die)/4);
+    
+    
   }
   
   /**

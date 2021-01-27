@@ -1,0 +1,25 @@
+ <div class="grid-item morale-display flexcol">
+  <div><button class="rollable" data-roll="{{data.cuf.rating}}{{data.morale.rating}}">Morale</button></div>
+  <div class="flexrow" style="align-items:center;text-align:center;">
+    <label for="data.cuf.rating">CUF</label>
+    <select name="data.cuf.rating">
+      {{#select data.cuf.rating}}
+      <option value="A">A</option>
+      <option value="B">B</option>
+      <option value="C">C</option>
+      <option value="D">D</option>
+      <option value="F">F</option>
+      {{/select}}
+    </select>
+    <label for="data.morale.rating">Morale</label>
+    <select name="data.morale.rating">
+      {{#select data.morale.rating}}
+      <option value="A">A</option>
+      <option value="B">B</option>
+      <option value="C">C</option>
+      <option value="D">D</option>
+      <option value="F">F</option>
+      {{/select}}
+    </select>
+  </div>
+</div>

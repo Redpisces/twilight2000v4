@@ -8,7 +8,7 @@ export class twilightActorSheet extends ActorSheet {
   static get defaultOptions() {
     return mergeObject(super.defaultOptions, {
       classes: ["twilight2000v4", "sheet", "actor"],
-      width: 600,
+      width: 800,
       height: 600,
       tabs: [{ navSelector: ".sheet-tabs", contentSelector: ".sheet-body", initial: "description" }]
     });
@@ -27,7 +27,7 @@ export class twilightActorSheet extends ActorSheet {
     const data = super.getData();
     data.dtypes = ["String", "Number", "Boolean"];
     
-	if (this.actor.data.type=== 'character'){
+	if (this.actor.data.type=== 'character' || this.actor.data.type=== 'npc'){
 		for (let [akey,avalue] of Object.entries(data.data.attributes)) {
 		  avalue.skills={}
 		  for (let [skey,svalue] of Object.entries(data.data.skills)) {

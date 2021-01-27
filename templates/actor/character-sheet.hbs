@@ -31,53 +31,35 @@
       }
       .stat-grid {
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
+      grid-template-columns: repeat(4, 1fr);
       gap: 1px;
       grid-auto-rows: minmax(25px, auto);
-      border: 1px solid black;
       background-color: black;
-      }
-      .stat-grid .sub-subgrid{
-      display: grid;
-      grid-template-columns: 3fr 1fr 1fr;
-      grid-auto-rows: minmax(25px, auto);
+      border: 1px solid black;
       }
       .stat-grid .grid-item{
         background: url(../ui/parchment.jpg) repeat;
       }
-      .stat-grid .sub-subgrid .grid-item{
-        overflow:hidden;
-      }
-      .combat-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 3px;
-      grid-auto-rows: minmax(25px, auto);
-      }
-      .combat-grid .grid-item{
-      border: 1px solid black;
-      }
-      .combat-grid .armor-subgrid{
+      .stat-grid .armor-subgrid{
       display: grid;
       grid-template-columns: 2fr 1fr;
       gap: 3px;
       grid-auto-rows: minmax(25px, auto);
       }
-      .combat-grid .stats-subgrid{
+      .stat-grid .stats-subgrid{
       display: grid;
       grid-template-columns: 2fr 1fr;
       grid-auto-rows: minmax(25px, auto);
       }
-      .combat-grid .stats-subgrid .grid-item{
-      border: 0px none black;
+      .stat-grid .morale-display{
+      grid-column-end:span 2;
       }
-      
-      .combat-grid.stats-subgrid.grid-item input[type="text"], input[type="number"], input[type="password"], input[type="date"], input[type="time"]{
+      .stat-grid.stats-subgrid.grid-item input[type="text"], input[type="number"], input[type="password"], input[type="date"], input[type="time"]{
       border: 1px solid #7a7971;
       }
       .health-grid {
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
+      grid-template-columns: repeat(3, 1fr);
       gap: 3px;
       grid-auto-rows: minmax(25px, auto);
       }
@@ -97,6 +79,14 @@
       .weapon-grid .grid-item{
         background: url(../ui/parchment.jpg) repeat;
       }
+      .header_row{
+        margin:-3px;
+        margin-bottom:3px;
+        padding:0px;
+        background: rgba(0, 0, 0, 0.1);
+        text-align: center;
+        align-content: center;
+      }
     </style>
   </head>
   {{!-- Sheet Header --}}
@@ -110,8 +100,7 @@
   <nav class="sheet-tabs tabs" data-group="primary">
     <a class="item" data-tab="description">Description</a>
     {{#if this.owner}}
-    <a class="item" data-tab="stats">Skills</a>
-    <a class="item" data-tab="combat">Combat</a>
+    <a class="item" data-tab="stats">Stats</a>
     <a class="item" data-tab="items">Items</a>
     {{/if}}
   </nav>
@@ -142,111 +131,46 @@
     {{!-- Skill Tab --}}
     <div class="tab stats" data-group="primary" data-tab="stats">
       <div class="grid-container stat-grid">
-        <div class="grid-item sub-subgrid" style="grid-column:span 2;"> Attributes &#38; Skills </div>
         {{#each data.attributes}}
-        <div class="grid-item sub-subgrid">
+        <div class="grid-item flexcol">
           {{> "systems/twilight2000v4/templates/actor/part/attribute-slot.hbs" this}}
           {{#each this.skills}}
           {{> "systems/twilight2000v4/templates/actor/part/skill-slot.hbs" this attribute=../this.rating}}
           {{/each}}
         </div>
         {{/each}}
-      </div>
-      <ol class="items-list" style="border: 1px solid black;">
-        <li class="item flexrow item-header">
-          <div class="item-image"></div>
-          <div class="item-name">Specialties</div>
-          <div class="item-controls">
-            <a class="item-control item-create" title="Create item" data-type="specialty"><i class="fas fa-plus"></i> Add</a>
-          </div>
-        </li>
-        {{#each actor.specialties as |item id|}}
-        <li class="item flexrow" data-item-id="{{item._id}}">
-          <div class="item-image"><img src="{{item.img}}" title="{{item.name}}" width="24" height="24"/></div>
-          <h4 class="item-name">{{item.name}}</h4>
-          <div class="item-controls">
-            <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
-            <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
-          </div>
-        </li>
-        {{/each}}
-      </ol>
       
-    </div>
-    </div>
-    {{!-- Combat Tab --}}
-    <div class="tab items" data-group="primary" data-tab="combat">
-      <div class="grid-container combat-grid">
+        {{> "systems/twilight2000v4/templates/actor/part/resource-display.hbs" data.hits r_title="Damage" r_loc="data.hits"}}
         
-        <div class="grid-item stats-subgrid" style="grid-column-end:span 1;grid-row-end:span 3;">
-          <div style="grid-column-end:span 2;border-bottom: 1px solid black;"> Damage</div>
-          <label class="grid-item" for="data.hits.value">Hits</label>
-          <input class="grid-item" name="data.hits.value" type="number" value="{{data.hits.value}}"/>
-          <label class="grid-item" for="data.hits.max">Hit Cap</label>
-          <span  class="grid-item">{{data.hits.max}}</span>
-        </div>
+        {{> "systems/twilight2000v4/templates/actor/part/resource-display.hbs" data.hits r_title="Stress" r_loc="data.stress"}}
         
-        <div class="grid-item stats-subgrid" style="grid-column-end:span 1;grid-row-end:span 3;">
-          <div style="grid-column-end:span 2;border-bottom: 1px solid black;"> Stress</div>
-          <label class="grid-item" for="data.stress.value">Stress</label>
-          <input class="grid-item" name="data.stress.value" type="number" value="{{data.stress.value}}"/>
-          <label class="grid-item" for="data.stress.max">Stress Cap</label>
-          <span  class="grid-item">{{data.stress.max}}</span>
-        </div>
+        {{> "systems/twilight2000v4/templates/actor/part/armor-display.hbs" actor}}
         
-        <div class="grid-item stats-subgrid" style="grid-column-end:span 1;grid-row-end:span 3;">
-          <div style="grid-column-end:span 2;border-bottom: 1px solid black;"> Rads</div>
-          <label class="grid-item" for="data.rads.temp">Temporary</label>
-          <input class="grid-item" name="data.rads.temp" type="number" value="{{data.rads.temp}}"/>
-          <label class="grid-item" for="data.rads.permanent">Permanant</label>
-          <input class="grid-item" name="data.rads.permanent" type="number" value="{{data.rads.permanent}}"/>
-        </div>
-        
-        <div class="grid-item stats-subgrid" style="grid-column-end:span 1;grid-row-end:span 3;">
-          <div style="grid-column-end:span 2;border-bottom: 1px solid black;"><button class="rollable" data-roll="{{data.cuf.rating}}{{data.morale.rating}}">Morale</button></div>
-          <label class="grid-item" for="data.cuf.rating">CUF</label>
-          <select class="grid-item" name="data.cuf.rating">
-            {{#select data.cuf.rating}}
-            <option value="A">A</option>
-            <option value="B">B</option>
-            <option value="C">C</option>
-            <option value="D">D</option>
-            <option value="F">F</option>
-            {{/select}}
-          </select>
-          <label class="grid-item" for="data.morale.rating">Morale</label>
-          <select class="grid-item" name="data.morale.rating">
-            {{#select data.morale.rating}}
-            <option value="A">A</option>
-            <option value="B">B</option>
-            <option value="C">C</option>
-            <option value="D">D</option>
-            <option value="F">F</option>
-            {{/select}}
-          </select>
-        </div>
-        
-        <div class="grid-item armor-subgrid" style="grid-column-end:span 1;grid-row-end:span 5;">
-          <div style="grid-column-end:span 2;border-bottom: 1px solid black;"> Armor</div>
-          {{#each actor.armorValue as |value id|}}
-          <label for="actor.armorValue.{{id}}">{{id}}</label><span>{{value}}</span>
-          {{/each}}
-        </div>
-        <div class="grid-item armor-subgrid" style="grid-column-end:span 1;grid-row-end:span 5;">
-          <div style="grid-column-end:span 2;border-bottom: 1px solid black;"> Conditions</div>
+        <div class="grid-item armor-subgrid" style="grid-column-end:span 1;grid-row-end:span 2;">
+          <div class="header_row flexrow" style="grid-column-end:span 2;"><span>Conditions</span></div>
           {{#each data.conditions as |value id|}}
           <label for="data.conditions.{{id}}">{{id}}</label>
           <input name="data.conditions.{{id}}" type="checkbox" {{checked value}}/>
           {{/each}}
         </div>
         
+        {{> "systems/twilight2000v4/templates/actor/part/morale-display.hbs" this}}
+        
+        <div class="grid-item stats-subgrid" style="grid-column-end:span 1;">
+          <div class="header_row flexrow" style="grid-column-end:span 2;"><span>Rads</span></div>
+          <label class="grid-item" for="data.rads.temp">Temporary</label>
+          <input class="grid-item" name="data.rads.temp" type="number" value="{{data.rads.temp}}"/>
+          <label class="grid-item" for="data.rads.permanent">Permanant</label>
+          <input class="grid-item" name="data.rads.permanent" type="number" value="{{data.rads.permanent}}"/>
+        </div>
+        
       </div>
       <div class="grid-container health-grid">
         <div>
           <ol class="items-list">
-            <li class="item flexrow item-header">
+            <li class="item flexrow item-header header_row" style="margin:0px;">
               <div class="item-image"></div>
-              <div class="item-name">Critical Injuries</div>
+              <div class="item-name">Injuries</div>
               <div class="item-controls">
                 <a class="item-control item-create" title="Create item" data-type="injury"><i class="fas fa-plus"></i> Add</a>
               </div>
@@ -265,7 +189,7 @@
         </div>
         <div>
           <ol class="items-list">
-            <li class="item flexrow item-header">
+            <li class="item flexrow item-header header_row" style="margin:0px;">
               <div class="item-image"></div>
               <div class="item-name">Diseases</div>
               <div class="item-controls">
@@ -273,6 +197,27 @@
               </div>
             </li>
             {{#each actor.diseases as |item id|}}
+            <li class="item flexrow" data-item-id="{{item._id}}">
+              <div class="item-image"><img src="{{item.img}}" title="{{item.name}}" width="24" height="24"/></div>
+              <h4 class="item-name">{{item.name}}</h4>
+              <div class="item-controls">
+                <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
+                <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
+              </div>
+            </li>
+            {{/each}}
+          </ol>
+        </div>
+        <div>
+          <ol class="items-list" style="border: 1px solid black;">
+            <li class="item flexrow item-header header_row" style="margin:0px;">
+              <div class="item-image"></div>
+              <div class="item-name">Specialties</div>
+              <div class="item-controls">
+                <a class="item-control item-create" title="Create item" data-type="specialty"><i class="fas fa-plus"></i> Add</a>
+              </div>
+            </li>
+            {{#each actor.specialties as |item id|}}
             <li class="item flexrow" data-item-id="{{item._id}}">
               <div class="item-image"><img src="{{item.img}}" title="{{item.name}}" width="24" height="24"/></div>
               <h4 class="item-name">{{item.name}}</h4>
