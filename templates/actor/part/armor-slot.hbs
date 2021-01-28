@@ -4,7 +4,7 @@
   <td> {{this.data.location}}</td>
   <td> {{this.data.value}}</td>
   <td> {{this.data.max}}</td>
-  <td> {{this.data.weight}}</td>
+  <td> {{math this.data.weight "*" this.data.quantity}}</td>
   <td>
     <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
     <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>

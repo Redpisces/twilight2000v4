@@ -61,5 +61,31 @@ export function registerHandlebars() {
     }[operator];
   });
 
+  Handlebars.registerHelper('find', function(collection,id){
+    var collectionLength = collection.length;
+
+    for (var i = 0; i < collectionLength; i++) {
+      if (collection[i]._id === id) {
+        return collection[i];
+      }
+
+    }
+
+    return null;
+  })
+
+  Handlebars.registerHelper('getIndex', function (collection, id) {
+    var collectionLength = collection.length;
+
+    for (var i = 0; i < collectionLength; i++) {
+      if (collection[i]._id === id) {
+        return i;
+      }
+
+    }
+
+    return null;
+  })
+
 }
 

@@ -67,6 +67,8 @@ export class twilightActorSheet extends ActorSheet {
 
     // Rollable abilities.
     html.find('.rollable').click(this._onRoll.bind(this));
+
+    html.find('.embedded-item-attribute').change(this._onEmbededChange.bind(this));
   }
 
   /* -------------------------------------------- */
@@ -113,4 +115,19 @@ export class twilightActorSheet extends ActorSheet {
     }
   }
 
+
+  async _onEmbededChange(event){
+    event.preventDefault();
+    const element = event.currentTarget;
+    const dataset = element.dataset;
+
+    let path = event.target.name.split(/\.(.+)/)
+    let name=path[1];
+    let value=event.target.value;
+    let actor=this.actor;
+    let item = actor.data.items.find(i => i._id === path[0]);
+    let update={_id:item._id,[name]:value};
+    const updated = await actor.updateEmbeddedEntity("OwnedItem",update);
+    
+  }
 }

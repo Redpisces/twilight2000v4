@@ -1,5 +1,5 @@
 <tr class="item" data-item-id="{{ this._id}}">
-  <td class="item-image"><img src="{{this.img}}" title="{{this.name}}" width="24" height="24"/></td>
+  <td class="item-image"><img src="{{this.img}}" title="{{this.name}}" width="24" height="24" /></td>
   <td class="item-name" style="flex-grow: 2;">{{this.name}}</td>
   {{#if (lt data.version "2")}}
   <td>OLD WEAPON</td>
@@ -10,16 +10,27 @@
   <td> {{this.data.attributes.crit}}</td>
   <td> {{this.data.attributes.armor}}</td>
   <td> {{this.data.attributes.range}}</td>
-  <td class="flexrow" style="flex-grow: 2;"> 
-    <span>{{this.data.attributes.mag.value}}</span>
+  <td class="flexrow" style="flex-grow: 1;">
+    <input class="embedded-item-attribute" size="3" name={{concat this._id ".data.attributes.mag.value" }} type="number"
+      value="{{this.data.attributes.mag.value}}" />
     <span>/</span>
     <span>{{this.data.attributes.mag.max}}</span>
   </td>
-  <td> {{this.data.attributes.rel.value}}</td>
+  {{log this.data.attributes.rel.value}}
+  <td>
+    <select class="embedded-item-attribute" name={{concat this._id ".data.attributes.rel.value" }}>
+      {{#select this.data.attributes.rel.value}}
+      <option value="A">A</option>
+      <option value="B">B</option>
+      <option value="C">C</option>
+      <option value="D">D</option>
+      <option value="F">F</option>
+      <option value="-">-</option>
+      {{/select}}
+    </select>
+  </td>
   <td> {{this.data.attributes.blast}}</td>
-  <td> {{this.data.weight}}</td>
-  <td> {{this.data.quantity}}</td>
-  
+  <td> {{math this.data.weight "*" this.data.quantity}}</td>
   {{/if}}
   <td>
     <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>

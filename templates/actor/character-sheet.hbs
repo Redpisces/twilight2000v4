@@ -1,9 +1,9 @@
 <form class="{{cssClass}} flexcol" autocomplete="off">
   {{!-- Sheet Header --}}
   <header class="sheet-header">
-    <img class="profile-img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}" height="100" width="100"/>
+    <img class="profile-img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}" height="100" width="100" />
     <div class="header-fields">
-      <h1 class="charname"><input name="name" type="text" value="{{actor.name}}" placeholder="Name"/></h1>
+      <h1 class="charname"><input name="name" type="text" value="{{actor.name}}" placeholder="Name" /></h1>
     </div>
   </header>
   {{!-- Sheet Tab Navigation --}}
@@ -24,14 +24,16 @@
         </div>
         {{#each data.bio as |bio id|}}
         <div class="grid-item" style="grid-column-end:span {{bio.size}};">
-          <label for="data.bio.{{id}}.value">{{id}}</label><input name="data.bio.{{id}}.value" type="text" value="{{bio.value}}"/>
+          <label for="data.bio.{{id}}.value">{{id}}</label><input name="data.bio.{{id}}.value" type="text"
+            value="{{bio.value}}" />
         </div>
         {{/each}}
         <div class="grid-item subgrid" style="grid-column-end:span 1;">
           <div class="grid-item" style="grid-column-end:span 4;">Experience</div>
           {{#each data.experience as |value id|}}
           <label class="grid-item" style="grid-column-end:span 1;" for="data.experience.{{id}}">{{id}}</label>
-          <input class="grid-item" style="grid-column-end:span 1;" name="data.experience.{{id}}" type="number" value="{{value}}"/>
+          <input class="grid-item" style="grid-column-end:span 1;" name="data.experience.{{id}}" type="number"
+            value="{{value}}" />
           {{/each}}
         </div>
       </div>
@@ -49,35 +51,61 @@
           {{/each}}
         </div>
         {{/each}}
-      
-        {{> "systems/twilight2000v4/templates/actor/part/resource-display.hbs" data.hits r_title="Damage" r_loc="data.hits"}}
-        
-        {{> "systems/twilight2000v4/templates/actor/part/resource-display.hbs" data.hits r_title="Stress" r_loc="data.stress"}}
-        
-        {{> "systems/twilight2000v4/templates/actor/part/armor-display.hbs" actor}}
-        
+
+        {{> "systems/twilight2000v4/templates/actor/part/resource-display.hbs" data.hits r_title="Damage"
+        r_loc="data.hits"}}
+
+        {{> "systems/twilight2000v4/templates/actor/part/resource-display.hbs" data.stress r_title="Stress"
+        r_loc="data.stress"}}
+
+        {{> "systems/twilight2000v4/templates/actor/part/morale-display.hbs" this}}
+
         <div class="grid-item armor-subgrid" style="grid-column-end:span 1;grid-row-end:span 2;">
           <div class="header_row flexrow" style="grid-column-end:span 2;"><span>Conditions</span></div>
           {{#each data.conditions as |value id|}}
           <label for="data.conditions.{{id}}">{{id}}</label>
-          <input name="data.conditions.{{id}}" type="checkbox" {{checked value}}/>
+          <input name="data.conditions.{{id}}" type="checkbox" {{checked value}} />
           {{/each}}
         </div>
-        
-        {{> "systems/twilight2000v4/templates/actor/part/morale-display.hbs" this}}
-        
+
         <div class="grid-item stats-subgrid" style="grid-column-end:span 1;">
           <div class="header_row flexrow" style="grid-column-end:span 2;"><span>Rads</span></div>
-          <label class="grid-item" for="data.rads.temp">Temporary</label>
-          <input class="grid-item" name="data.rads.temp" type="number" value="{{data.rads.temp}}"/>
+          <label class="grid-item" size="2" for="data.rads.temp">Temporary</label>
+          <input class="grid-item" name="data.rads.temp" type="number" value="{{data.rads.temp}}" />
           <label class="grid-item" for="data.rads.permanent">Permanant</label>
-          <input class="grid-item" name="data.rads.permanent" type="number" value="{{data.rads.permanent}}"/>
+          <input class="grid-item" size="2" name="data.rads.permanent" type="number" value="{{data.rads.permanent}}" />
         </div>
-        
-        <div class="grid-item">
-          
+
+        {{> "systems/twilight2000v4/templates/actor/part/armor-display.hbs" actor}}
+
+        <div class="grid-item flexcol item" style="grid-column-end:span 1;" data-item-id="{{ actor.primaryWeapon._id}}">
+          {{#if actor.primaryWeapon}}
+          <button class="item-edit" style="
+                    background-image: url({{actor.primaryWeapon.img}});
+                    background-repeat: no-repeat;
+                    background-position: center center;
+                    background-size: contain;
+                    ">
+          </button>
+          {{!-- <div class="flexrow">
+            <div class="flexrow" style="flex-grow: 2;">
+              <input class="grid-item embedded-item-attribute" name={{concat
+                actor.primaryWeapon._id ".data.attributes.mag.value" }} type="number"
+                value="{{actor.primaryWeapon.data.attributes.mag.value}}" />
+              <span>/</span>
+              <span>{{actor.primaryWeapon.data.attributes.mag.max}}</span>
+            </div>
+            <div class="flexrow" style="flex-grow: 2;">
+              <span>{{actor.primaryWeapon.data.attributes.rel.value}}</span>
+              <span>/</span>
+              <span>{{actor.primaryWeapon.data.attributes.rel.max}}</span>
+            </div>
+          </div> --}}
+          {{else}}
+          <div>No Weapon Equipped</div>
+          {{/if}}
         </div>
-        
+
       </div>
       <div class="grid-container health-grid">
         <div>
@@ -86,12 +114,13 @@
               <div class="item-image"></div>
               <div class="item-name">Injuries</div>
               <div class="item-controls">
-                <a class="item-control item-create" title="Create item" data-type="injury"><i class="fas fa-plus"></i> Add</a>
+                <a class="item-control item-create" title="Create item" data-type="injury"><i class="fas fa-plus"></i>
+                  Add</a>
               </div>
             </li>
             {{#each actor.injuries as |item id|}}
             <li class="item flexrow" data-item-id="{{item._id}}">
-              <div class="item-image"><img src="{{item.img}}" title="{{item.name}}" width="24" height="24"/></div>
+              <div class="item-image"><img src="{{item.img}}" title="{{item.name}}" width="24" height="24" /></div>
               <h4 class="item-name">{{item.name}}</h4>
               <div class="item-controls">
                 <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
@@ -107,12 +136,13 @@
               <div class="item-image"></div>
               <div class="item-name">Diseases</div>
               <div class="item-controls">
-                <a class="item-control item-create" title="Create item" data-type="disease"><i class="fas fa-plus"></i> Add</a>
+                <a class="item-control item-create" title="Create item" data-type="disease"><i class="fas fa-plus"></i>
+                  Add</a>
               </div>
             </li>
             {{#each actor.diseases as |item id|}}
             <li class="item flexrow" data-item-id="{{item._id}}">
-              <div class="item-image"><img src="{{item.img}}" title="{{item.name}}" width="24" height="24"/></div>
+              <div class="item-image"><img src="{{item.img}}" title="{{item.name}}" width="24" height="24" /></div>
               <h4 class="item-name">{{item.name}}</h4>
               <div class="item-controls">
                 <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
@@ -128,12 +158,13 @@
               <div class="item-image"></div>
               <div class="item-name">Specialties</div>
               <div class="item-controls">
-                <a class="item-control item-create" title="Create item" data-type="specialty"><i class="fas fa-plus"></i> Add</a>
+                <a class="item-control item-create" title="Create item" data-type="specialty"><i
+                    class="fas fa-plus"></i> Add</a>
               </div>
             </li>
             {{#each actor.specialties as |item id|}}
             <li class="item flexrow" data-item-id="{{item._id}}">
-              <div class="item-image"><img src="{{item.img}}" title="{{item.name}}" width="24" height="24"/></div>
+              <div class="item-image"><img src="{{item.img}}" title="{{item.name}}" width="24" height="24" /></div>
               <h4 class="item-name">{{item.name}}</h4>
               <div class="item-controls">
                 <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
@@ -147,23 +178,22 @@
     </div>
     {{!-- Owned Items Tab --}}
     <div class="tab items" data-group="primary" data-tab="items">
-    <div class="flexrow">
-      <span>
-        Carried:{{actor.weight.carried}}/{{actor.weight.max}}
-      </span>
-      <span>
-        Packed:{{actor.weight.packed}}/{{actor.weight.max}}
-      </span>
-    </div>
-    
-	  {{> "systems/twilight2000v4/templates/actor/part/weapon-list.hbs" this}}
-      
-    {{> "systems/twilight2000v4/templates/actor/part/armor-list.hbs" this}}
-      
-    {{> "systems/twilight2000v4/templates/actor/part/gear-list.hbs" this}}
-            
+      <div class="flexrow">
+        <span>
+          Carried:{{actor.weight.carried}}/{{actor.weight.max}}
+        </span>
+        <span>
+          Packed:{{actor.weight.packed}}/{{actor.weight.max}}
+        </span>
+      </div>
+
+      {{> "systems/twilight2000v4/templates/actor/part/weapon-list.hbs" this}}
+
+      {{> "systems/twilight2000v4/templates/actor/part/armor-list.hbs" this}}
+
+      {{> "systems/twilight2000v4/templates/actor/part/gear-list.hbs" this}}
+
     </div>
     {{/if}}
   </section>
 </form>
-

@@ -1,14 +1,16 @@
-{{log this}}
 <div class="grid-item flexcol" style="grid-column-end:span 1;">
   <div class="header_row flexrow"><span>Armor<span></div>
   <div class="flexrow">
     {{#each this.armorValue as |value id|}}
-    <span>{{id}}</span>
+    <span class="item" data-item-id="{{ value._id}}"><a class="item-control item-edit">{{id}}</a></span>
     {{/each}}
   </div>
   <div class="flexrow">
     {{#each this.armorValue as |value id|}}
-    <span>{{value}}</span>
+    <span class="item" data-item-id="{{ value._id}}">
+      <input class="grid-item embedded-item-attribute" name={{concat value._id ".data.value" }}
+        type="number" size="2" value="{{value.data.value}}" />
+    </span>
     {{/each}}
   </div>
 </div>

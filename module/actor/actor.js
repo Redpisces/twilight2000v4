@@ -20,14 +20,12 @@ export class twilightActor extends Actor {
     if (actorData.type === 'npc') this._prepareNpcData(actorData);
     if (actorData.type === 'vehicle') this._prepareVehicleData(actorData);
   }
-
   /**
-   * Prepare Vehicle type specific data
-   */
+     * Prepare Vehicle type specific data
+     */
 
   _prepareVehicleData(actorData) {
     const data = actorData.data;
-    console.log("ASDF", actorData);
 
     const gear = [];
     const weapons = [];
@@ -61,98 +59,19 @@ export class twilightActor extends Actor {
     actorData.weapons = weapons;
 
     actorData.weight = { 'cargo': cargoWeight, 'max': data.cargo_cap };
-    console.log(actorData.weight);
-  }
-  /**
-   * Prepare NPC type specific data
-   */
-  _prepareNpcData(actorData) {
-    const data = actorData.data;
-
-    // Make modifications to data here. For example:
-    const rankValues = { "A": 12, "B": 10, "C": 8, "D": 6, "F": 0, "-": 0 };
-    for (let [key, attribute] of Object.entries(data.attributes)) {
-      // Calculate the modifier using d20 rules.
-      attribute.base_die = rankValues[attribute.rating];
-    }
-    for (let [key, skill] of Object.entries(data.skills)) {
-      // Calculate the modifier using d20 rules.
-      skill.base_die = rankValues[skill.rating];
-    }
-    data.cuf.base_die = rankValues[data.cuf.rating];
-    data.morale.base_die = rankValues[data.morale.rating];
-
-    const gear = [];
-    const weapons = [];
-    const armor = [];
-
-    let parts = { "head": 0, "arms": 0, "torso": 0, "legs": 0 };
-
-    let carryWeight = 0.0;
-    let packWeight = 0.0;
-
-    function countWeight(itemData) {
-      if (itemData.container == 'carried') {
-        carryWeight += itemData.weight * itemData.quantity;
-      }
-      else if (itemData.container == 'packed') {
-        packWeight += itemData.weight * itemData.quantity;
-      }
-    }
-
-    for (let i of actorData.items) {
-      let item = i.data;
-      i.img = i.img || DEFAULT_TOKEN;
-
-      switch (i.type) {
-        case 'gear':
-          countWeight(i.data);
-          gear.push(i);
-          break;
-        case 'weapon':
-          countWeight(i.data);
-          weapons.push(i);
-          break;
-        case 'armor':
-          countWeight(i.data);
-          let d = i.data
-          if (d.equipped && d.value > parts[d.location]) {
-            parts[d.location] = d.value;
-          }
-          armor.push(i);
-          break;
-        default:
-          break;
-      }
-    }
-    actorData.gear = gear;
-    actorData.weapons = weapons;
-    actorData.armors = armor;
-
-    actorData.armorValue = parts;
-
-    actorData.weight = { 'carried': carryWeight, 'packed': packWeight, 'max': data.attributes.str.base_die };
-    console.log(actorData.weight);
-
-    data.hits.max = Math.ceil((data.attributes.str.base_die + data.attributes.agi.base_die) / 4);
-
-
   }
 
   /**
-   * Prepare Character type specific data
-   */
-  _prepareCharacterData(actorData) {
+  * Prepare data specific to the human template used by npcs and characters
+  */
+  _prepareHumanData(actorData) {
     const data = actorData.data;
 
-    // Make modifications to data here. For example:
     const rankValues = { "A": 12, "B": 10, "C": 8, "D": 6, "F": 0, "-": 0 };
     for (let [key, attribute] of Object.entries(data.attributes)) {
-      // Calculate the modifier using d20 rules.
       attribute.base_die = rankValues[attribute.rating];
     }
     for (let [key, skill] of Object.entries(data.skills)) {
-      // Calculate the modifier using d20 rules.
       skill.base_die = rankValues[skill.rating];
     }
     data.cuf.base_die = rankValues[data.cuf.rating];
@@ -165,7 +84,7 @@ export class twilightActor extends Actor {
     const weapons = [];
     const armor = [];
 
-    let parts = { "head": 0, "arms": 0, "torso": 0, "legs": 0 };
+    let parts = {};
 
     let carryWeight = 0.0;
     let packWeight = 0.0;
@@ -198,16 +117,27 @@ export class twilightActor extends Actor {
           diseases.push(i);
           break;
         case 'weapon':
+          
+          if (i.data.equipped && actorData.primaryWeapon === undefined){
+            actorData.primaryWeapon=i;
+          }
+          
           countWeight(i.data);
           weapons.push(i);
           break;
         case 'armor':
           countWeight(i.data);
-          let d = i.data
-          if (d.equipped && d.value > parts[d.location]) {
-            parts[d.location] = d.value;
-          }
+          let d = i.data;
           armor.push(i);
+          if (!d.equipped){
+            break;
+          }
+          if (parts[d.location] === undefined) {
+            parts[d.location] = i;
+          }
+          else if (d.equipped && d.value > parts[d.location].data.value) {
+            parts[d.location] = i;
+          }
           break;
         default:
           break;
@@ -223,9 +153,25 @@ export class twilightActor extends Actor {
     actorData.armorValue = parts;
 
     actorData.weight = { 'carried': carryWeight, 'packed': packWeight, 'max': data.attributes.str.base_die };
-    console.log(actorData.weight);
 
     data.hits.max = Math.ceil((data.attributes.str.base_die + data.attributes.agi.base_die) / 4);
+  }
+
+  /**
+   * Prepare NPC type specific data
+   */
+  _prepareNpcData(actorData) {
+    this._prepareHumanData(actorData);
+
+
+  }
+
+  /**
+   * Prepare Character type specific data
+   */
+  _prepareCharacterData(actorData) {
+    this._prepareHumanData(actorData);
+    const data = actorData.data;
     data.stress.max = Math.ceil((data.attributes.int.base_die + data.attributes.emp.base_die) / 4);
 
 
@@ -276,7 +222,6 @@ export class twilightActor extends Actor {
             dice.sort(function (a, b) {
               return a.localeCompare(b);
             });
-            console.log(mod);
             for (let i = 0; i < dice.length; i++) {
               loop1:
               while (mod > 0) {
