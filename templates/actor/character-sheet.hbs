@@ -1,94 +1,4 @@
-
-
 <form class="{{cssClass}} flexcol" autocomplete="off">
-  <head>
-    <style>
-      .sheet-header {
-      max-height:100px;
-      }
-      .grid-item{
-      padding:3px;
-      }
-      .bio-grid{
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 10px;
-      grid-auto-rows: minmax(50px, auto);
-      grid-auto-flow: dense;
-      }
-      .bio-grid .subgrid{
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 0px;
-      grid-auto-rows: minmax(25px, auto);
-      grid-auto-flow: dense;
-      }
-      .bio-grid .grid-item{
-      border: 1px solid black;
-      }
-      .bio-grid .subgrid .grid-item{
-      border: 1px solid grey;
-      }
-      .stat-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 1px;
-      grid-auto-rows: minmax(25px, auto);
-      background-color: black;
-      border: 1px solid black;
-      }
-      .stat-grid .grid-item{
-        background: url(../ui/parchment.jpg) repeat;
-      }
-      .stat-grid .armor-subgrid{
-      display: grid;
-      grid-template-columns: 2fr 1fr;
-      gap: 3px;
-      grid-auto-rows: minmax(25px, auto);
-      }
-      .stat-grid .stats-subgrid{
-      display: grid;
-      grid-template-columns: 2fr 1fr;
-      grid-auto-rows: minmax(25px, auto);
-      }
-      .stat-grid .morale-display{
-      grid-column-end:span 2;
-      }
-      .stat-grid.stats-subgrid.grid-item input[type="text"], input[type="number"], input[type="password"], input[type="date"], input[type="time"]{
-      border: 1px solid #7a7971;
-      }
-      .health-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 3px;
-      grid-auto-rows: minmax(25px, auto);
-      }
-      .health-grid ol {
-      border: 1px solid black;
-      }
-      
-      .weapon-grid {
-        display: grid;
-        grid-template-columns: 4fr repeat(12, 1fr);
-        gap: 1px;
-        grid-auto-rows: minmax(25px, auto);
-        border: 1px solid black;
-        background-color: black;
-        overflow-x:scroll;
-      }
-      .weapon-grid .grid-item{
-        background: url(../ui/parchment.jpg) repeat;
-      }
-      .header_row{
-        margin:-3px;
-        margin-bottom:3px;
-        padding:0px;
-        background: rgba(0, 0, 0, 0.1);
-        text-align: center;
-        align-content: center;
-      }
-    </style>
-  </head>
   {{!-- Sheet Header --}}
   <header class="sheet-header">
     <img class="profile-img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}" height="100" width="100"/>
@@ -162,6 +72,10 @@
           <input class="grid-item" name="data.rads.temp" type="number" value="{{data.rads.temp}}"/>
           <label class="grid-item" for="data.rads.permanent">Permanant</label>
           <input class="grid-item" name="data.rads.permanent" type="number" value="{{data.rads.permanent}}"/>
+        </div>
+        
+        <div class="grid-item">
+          
         </div>
         
       </div>

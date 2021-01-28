@@ -17,7 +17,6 @@
   <label class="grid-item" for="data.container">Container</label>
   <select class="grid-item" style="grid-column-end:span 1;" name="data.container">
     {{#select data.container}}
-    <option value="equipped">Equipped</option>
     <option value="carried">Carried</option>
     <option value="packed">Backpack</option>
     <option value="none">None</option>
@@ -25,4 +24,12 @@
   </select>
 </div>
 
+<div class="grid-item flexcol" >
+  <label for="data.equipped">Equipped</label>
+  {{#if (eq data.container "carried")}}
+    <input name="data.equipped" type="checkbox" {{checked data.equipped}}/>
+  {{else}}
+    <span>not carried</span>
+  {{/if}}
+</div>
 

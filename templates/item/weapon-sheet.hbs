@@ -1,21 +1,4 @@
 <form class="{{cssClass}}" autocomplete="off">
-    <head>
-      <style>
-        .stat-grid{
-          display: grid;
-          grid-template-columns: repeat( auto-fit, minmax(100px, 1fr) );
-          gap: 1px;
-          grid-auto-rows: minmax(50px, auto);
-          grid-auto-flow: dense;
-          border: 1px solid black;
-          background-color: black;
-        }
-        .stat-grid .grid-item{
-        background: url(../ui/parchment.jpg) repeat;
-        }
-      </style>
-    </head>
-    
     <header class="sheet-header">
         <img class="profile-img" src="{{item.img}}" data-edit="img" title="{{item.name}}"/>
         <div class="header-fields">

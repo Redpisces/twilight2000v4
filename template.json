@@ -11,7 +11,7 @@
         },
         "skills":{
           "heavy_weapons":{"rating":"F","linked_atr":"str"},
-          "melee":{"rating":"F","linked_atr":"str"},
+          "close_combat":{"rating":"F","linked_atr":"str"},
           "stamina":{"rating":"F","linked_atr":"str"},
           
           "driving":{"rating":"F","linked_atr":"agi"},
@@ -83,7 +83,8 @@
         "quantity": 1,
         "weight": 0,
         "price":0,
-        "container":"carried"
+        "container":"carried",
+        "equipped":false
       }
     },
     "gear": {
