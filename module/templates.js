@@ -4,37 +4,37 @@
  * Pre-loaded templates are compiled and cached for fast access when rendering.
  * @return {Promise}
  */
-export const preloadHandlebarsTemplates = async function() {
-	return loadTemplates([
-		// Shared Partials
-		// 'templates/dice/roll.html',
+export const preloadHandlebarsTemplates = async function () {
+  return loadTemplates([
+    // Shared Partials
+    // 'templates/dice/roll.html',
 
-		// Actor Sheet Partials
-		'systems/twilight2000v4/templates/actor/part/attribute-slot.hbs',
-		
-		'systems/twilight2000v4/templates/actor/part/gear-list.hbs',
-		'systems/twilight2000v4/templates/actor/part/gear-slot.hbs',
-		
-		'systems/twilight2000v4/templates/actor/part/weapon-list.hbs',
-		'systems/twilight2000v4/templates/actor/part/weapon-slot.hbs',
-		
-		'systems/twilight2000v4/templates/actor/part/armor-list.hbs',
-		'systems/twilight2000v4/templates/actor/part/armor-slot.hbs',
-		
-		'systems/twilight2000v4/templates/actor/part/skill-slot.hbs',
-    
-    
+    // Actor Sheet Partials
+    'systems/twilight2000v4/templates/actor/part/attribute-slot.hbs',
+
+    'systems/twilight2000v4/templates/actor/part/gear-list.hbs',
+    'systems/twilight2000v4/templates/actor/part/gear-slot.hbs',
+
+    'systems/twilight2000v4/templates/actor/part/weapon-list.hbs',
+    'systems/twilight2000v4/templates/actor/part/weapon-slot.hbs',
+
+    'systems/twilight2000v4/templates/actor/part/armor-list.hbs',
+    'systems/twilight2000v4/templates/actor/part/armor-slot.hbs',
+
+    'systems/twilight2000v4/templates/actor/part/skill-slot.hbs',
+
+
     'systems/twilight2000v4/templates/item/blocks/gear-block.hbs',
     'systems/twilight2000v4/templates/actor/part/armor-display.hbs',
     'systems/twilight2000v4/templates/actor/part/morale-display.hbs',
     'systems/twilight2000v4/templates/actor/part/resource-display.hbs'
-		
-	]);
+
+  ]);
 }
 
-export function registerHandlebars(){
-	// If you need to add Handlebars helpers, here are a few useful examples:
-  Handlebars.registerHelper('concat', function() {
+export function registerHandlebars() {
+  // If you need to add Handlebars helpers, here are a few useful examples:
+  Handlebars.registerHelper('concat', function () {
     var outStr = '';
     for (var arg in arguments) {
       if (typeof arguments[arg] != 'object') {
@@ -44,22 +44,22 @@ export function registerHandlebars(){
     return outStr;
   });
 
-  Handlebars.registerHelper('toLowerCase', function(str) {
+  Handlebars.registerHelper('toLowerCase', function (str) {
     return str.toLowerCase();
   });
-  
-  Handlebars.registerHelper("math", function(lvalue, operator, rvalue, options) {
+
+  Handlebars.registerHelper("math", function (lvalue, operator, rvalue, options) {
     lvalue = parseFloat(lvalue);
     rvalue = parseFloat(rvalue);
-        
+
     return {
-        "+": lvalue + rvalue,
-        "-": lvalue - rvalue,
-        "*": lvalue * rvalue,
-        "/": lvalue / rvalue,
-        "%": lvalue % rvalue
+      "+": lvalue + rvalue,
+      "-": lvalue - rvalue,
+      "*": lvalue * rvalue,
+      "/": lvalue / rvalue,
+      "%": lvalue % rvalue
     }[operator];
   });
-  
+
 }
-		
+

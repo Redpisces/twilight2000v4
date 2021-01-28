@@ -13,9 +13,9 @@ export class twilightItem extends Item {
     const itemData = this.data;
     const actorData = this.actor ? this.actor.data : {};
     const data = itemData.data;
-    
-    if (data.container === undefined){
-      data.container="carried";
+
+    if (data.container === undefined) {
+      data.container = "carried";
     }
   }
 }

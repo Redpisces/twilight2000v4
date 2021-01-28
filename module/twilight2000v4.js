@@ -4,7 +4,7 @@ import { twilightActorSheet } from "./actor/actor-sheet.js";
 import { twilightItem } from "./item/item.js";
 import { twilightItemSheet } from "./item/item-sheet.js";
 import { preloadHandlebarsTemplates, registerHandlebars } from './templates.js';
-Hooks.once('init', async function() {
+Hooks.once('init', async function () {
 
   game.twilight2000v4 = {
     twilightActor,
@@ -29,9 +29,9 @@ Hooks.once('init', async function() {
   Actors.registerSheet("twilight2000v4", twilightActorSheet, { makeDefault: true });
   Items.unregisterSheet("core", ItemSheet);
   Items.registerSheet("twilight2000v4", twilightItemSheet, { makeDefault: true });
-	
+
   registerHandlebars();
   preloadHandlebarsTemplates();
 
-  
+
 });

@@ -305,7 +305,11 @@
   grid-auto-rows: minmax(25px, auto);
 }
 
-.twilight2000v4 .stat-grid .stats-subgrid .grid-item input[type="text"], .twilight2000v4 .stat-grid .stats-subgrid input[type="number"], .twilight2000v4 .stat-grid .stats-subgrid input[type="password"], .twilight2000v4 .stat-grid .stats-subgrid input[type="date"], .twilight2000v4 .stat-grid .stats-subgrid input[type="time"] {
+.twilight2000v4 .stat-grid .stats-subgrid .grid-item input[type="text"],
+.twilight2000v4 .stat-grid .stats-subgrid input[type="number"],
+.twilight2000v4 .stat-grid .stats-subgrid input[type="password"],
+.twilight2000v4 .stat-grid .stats-subgrid input[type="date"],
+.twilight2000v4 .stat-grid .stats-subgrid input[type="time"] {
   border: 1px solid #7a7971;
 }
 

@@ -16,28 +16,28 @@ export class twilightActorSheet extends ActorSheet {
 
   get template() {
     const path = "systems/twilight2000v4/templates/actor";
-    
-     return `${path}/${this.actor.data.type}-sheet.hbs`;
+
+    return `${path}/${this.actor.data.type}-sheet.hbs`;
   }
-  
+
   /* -------------------------------------------- */
 
   /** @override */
   getData() {
     const data = super.getData();
     data.dtypes = ["String", "Number", "Boolean"];
-    
-	if (this.actor.data.type=== 'character' || this.actor.data.type=== 'npc'){
-		for (let [akey,avalue] of Object.entries(data.data.attributes)) {
-		  avalue.skills={}
-		  for (let [skey,svalue] of Object.entries(data.data.skills)) {
-			if (svalue.linked_atr == akey){
-			  avalue.skills[skey]=svalue;
-			}
-		  }
-		}
-	}
-    
+
+    if (this.actor.data.type === 'character' || this.actor.data.type === 'npc') {
+      for (let [akey, avalue] of Object.entries(data.data.attributes)) {
+        avalue.skills = {}
+        for (let [skey, svalue] of Object.entries(data.data.skills)) {
+          if (svalue.linked_atr == akey) {
+            avalue.skills[skey] = svalue;
+          }
+        }
+      }
+    }
+
     return data;
   }
 

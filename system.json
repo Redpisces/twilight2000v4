@@ -7,8 +7,12 @@
   "compatibleCoreVersion": "0.7.9",
   "templateVersion": 2,
   "author": "John Doe",
-  "esmodules": ["module/twilight2000v4.js"],
-  "styles": ["css/twilight2000v4.css"],
+  "esmodules": [
+    "module/twilight2000v4.js"
+  ],
+  "styles": [
+    "css/twilight2000v4.css"
+  ],
   "scripts": [],
   "packs": [],
   "languages": [

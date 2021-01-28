@@ -1,166 +1,175 @@
 <form class="{{cssClass}}" autocomplete="off">
-    <header class="sheet-header">
-        <img class="profile-img" src="{{item.img}}" data-edit="img" title="{{item.name}}"/>
-        <div class="header-fields">
-            <h1 class="charname"><input name="name" type="text" value="{{item.name}}" placeholder="Name"/></h1>
+  <header class="sheet-header">
+    <img class="profile-img" src="{{item.img}}" data-edit="img" title="{{item.name}}" />
+    <div class="header-fields">
+      <h1 class="charname"><input name="name" type="text" value="{{item.name}}" placeholder="Name" /></h1>
+    </div>
+  </header>
+
+  {{!-- Sheet Tab Navigation --}}
+  <nav class="sheet-tabs tabs" data-group="primary">
+    <a class="item" data-tab="description">Description</a>
+    <a class="item" data-tab="attributes">Attributes</a>
+  </nav>
+
+  {{!-- Sheet Body --}}
+  <section class="sheet-body">
+
+    {{!-- Description Tab --}}
+    <div class="tab" data-group="primary" data-tab="description">
+      {{editor content=data.description target="data.description" button=true owner=owner editable=editable}}
+    </div>
+
+    {{!-- Attributes Tab --}}
+    <div class="tab attributes" data-group="primary" data-tab="attributes">
+      {{#if (eq data.version "1")}}
+      <div class="grid-container stat-grid">
+        {{#each data.attributes as |item id|}}
+        <div class="grid-item flexcol">
+          <label class="grid-item" for="data.attributes.{{id}}">{{id}}</label>
+          <input class="grid-item" style="grid-column-end:span 1;" name="data.attributes.{{id}}" type="text"
+            value="{{item}}" />
         </div>
-    </header>
+        {{/each}}
+      </div>
+      {{/if}}
 
-    {{!-- Sheet Tab Navigation --}}
-    <nav class="sheet-tabs tabs" data-group="primary">
-        <a class="item" data-tab="description">Description</a>
-        <a class="item" data-tab="attributes">Attributes</a>
-    </nav>
-
-    {{!-- Sheet Body --}}
-    <section class="sheet-body">
-
-        {{!-- Description Tab --}}
-        <div class="tab" data-group="primary" data-tab="description">
-            {{editor content=data.description target="data.description" button=true owner=owner editable=editable}}
+      {{#if (gte data.version "2")}}
+      <div class="grid-container stat-grid">
+        <div class="grid-item flexcol">
+          <label class="grid-item" for="data.attributes.type">Type</label>
+          <select name="data.attributes.type">
+            {{#select data.attributes.type}}
+            <option value="melee">Melee</option>
+            <option value="bow_thrown">Bow&#47;Thrown</option>
+            <option value="revolver">Revolver</option>
+            <option value="pistol">Pistol</option>
+            <option value="hunting_rifle">Hunting Rifle</option>
+            <option value="shotgun">Shotgun</option>
+            <option value="assault_rifle">Assault Rifle</option>
+            <option value="sniper_rifle">Sniper Rifle</option>
+            <option value="gl">GL</option>
+            <option value="lmg">LMG</option>
+            <option value="gpmg">GPMG</option>
+            <option value="hmg">HMG</option>
+            <option value="atrl">ATRL</option>
+            <option value="atgm">ATGM</option>
+            <option value="battle_rifle">Battle Rifle</option>
+            <option value="smg">SMG</option>
+            <option value="grenade">Hand Grenade</option>
+            <option value="cannon">Cannon</option>
+            <option value="mortar">Mortar</option>
+            <option value="howitzer">Howitzer</option>
+            <option value="mine">Mine</option>
+            <option value="-">-</option>
+            {{/select}}
+          </select>
+        </div>
+        {{#unless (eq data.attributes.type "melee")}}
+        {{#unless (eq data.attributes.type "bow_thrown")}}
+        {{#unless (eq data.attributes.type "grenade")}}
+        <div class="grid-item flexcol">
+          <label class="grid-item" for="data.attributes.ammo">Ammo</label>
+          <input class="grid-item" style="grid-column-end:span 1;" name="data.attributes.ammo" type="text"
+            value="{{data.attributes.ammo}}" />
         </div>
 
-        {{!-- Attributes Tab --}}
-        <div class="tab attributes" data-group="primary" data-tab="attributes">
-        {{#if (eq data.version "1")}}
-              <div class="grid-container stat-grid">
-                {{#each data.attributes as |item id|}}
-                <div class="grid-item flexcol" >
-                  <label class="grid-item" for="data.attributes.{{id}}">{{id}}</label>
-                  <input class="grid-item" style="grid-column-end:span 1;" name="data.attributes.{{id}}" type="text" value="{{item}}"/>
-                </div>
-                {{/each}}
-              </div>
-        {{/if}}
-			
-        {{#if (gte data.version "2")}}
-          <div class="grid-container stat-grid">
-            <div class="grid-item flexcol" >
-              <label class="grid-item" for="data.attributes.type">Type</label>
-              <select name="data.attributes.type">
-                  {{#select data.attributes.type}}
-                    <option value="melee">Melee</option>
-                    <option value="bow_thrown">Bow&#47;Thrown</option>
-                    <option value="revolver">Revolver</option>
-                    <option value="pistol">Pistol</option>
-                    <option value="hunting_rifle">Hunting Rifle</option>
-                    <option value="shotgun">Shotgun</option>
-                    <option value="assault_rifle">Assault Rifle</option>
-                    <option value="sniper_rifle">Sniper Rifle</option>
-                    <option value="gl">GL</option>
-                    <option value="lmg">LMG</option>
-                    <option value="gpmg">GPMG</option>
-                    <option value="hmg">HMG</option>
-                    <option value="atrl">ATRL</option>
-                    <option value="atgm">ATGM</option>
-                    <option value="battle_rifle">Battle Rifle</option>
-                    <option value="smg">SMG</option>
-                    <option value="grenade">Hand Grenade</option>
-                    <option value="cannon">Cannon</option>
-                    <option value="mortar">Mortar</option>
-                    <option value="howitzer">Howitzer</option>
-                    <option value="mine">Mine</option>
-                    <option value="-">-</option>
-                    {{/select}}
-                </select>
-            </div>
-            {{#unless (eq data.attributes.type "melee")}}
-            {{#unless (eq data.attributes.type "bow_thrown")}}
-            {{#unless (eq data.attributes.type "grenade")}}
-            <div class="grid-item flexcol" >
-              <label class="grid-item" for="data.attributes.ammo">Ammo</label>
-              <input class="grid-item" style="grid-column-end:span 1;" name="data.attributes.ammo" type="text" value="{{data.attributes.ammo}}"/>
-            </div>
-
-            <div class="grid-item flexcol" >
-              <label class="grid-item" >Reliability</label>
-              <div class="flexrow flex-center">
-                <select name="data.attributes.rel.value">
-                  {{#select data.attributes.rel.value}}
-                    <option value="A">A</option>
-                    <option value="B">B</option>
-                    <option value="C">C</option>
-                    <option value="D">D</option>
-                    <option value="F">F</option>
-                    <option value="-">-</option>
-                    {{/select}}
-                </select>
-                <span class="sep"> / </span> 
-                <select name="data.attributes.rel.max">
-                  {{#select data.attributes.rel.max}}
-                    <option value="A">A</option>
-                    <option value="B">B</option>
-                    <option value="C">C</option>
-                    <option value="D">D</option>
-                    <option value="F">F</option>
-                    <option value="-">-</option>
-                    {{/select}}
-                </select>
-              </div>
-            </div>
-
-            <div class="grid-item flexcol" >
-              <label class="grid-item" for="data.attributes.rof">ROF</label>
-              <input class="grid-item" style="grid-column-end:span 1;" name="data.attributes.rof" type="number" value="{{data.attributes.rof}}"/>
-            </div>
-            {{/unless}}
-            {{/unless}}
-            {{/unless}}
-
-            <div class="grid-item flexcol" >
-              <label class="grid-item" for="data.attributes.damage">Damage</label>
-              <input class="grid-item" style="grid-column-end:span 1;" name="data.attributes.damage" type="number" value="{{data.attributes.damage}}"/>
-            </div>
-            
-            <div class="grid-item flexcol" >
-              <label class="grid-item" for="data.attributes.crit">Crit</label>
-              <input class="grid-item" style="grid-column-end:span 1;" name="data.attributes.crit" type="number" value="{{data.attributes.crit}}"/>
-            </div>
-            
-            {{#unless (eq data.attributes.type "melee")}}
-            {{#unless (eq data.attributes.type "bow_thrown")}}
-            <div class="grid-item flexcol" >
-              <label class="grid-item" for="data.attributes.blast">Blast</label>
-              <select name="data.attributes.blast">
-                  {{#select data.attributes.blast}}
-                    <option value="A">A</option>
-                    <option value="B">B</option>
-                    <option value="C">C</option>
-                    <option value="D">D</option>
-                    <option value="-">-</option>
-                    {{/select}}
-                </select>
-            </div>
-            {{/unless}}
-            
-            <div class="grid-item flexcol" >
-              <label class="grid-item" for="data.attributes.range">Range</label>
-              <input class="grid-item" style="grid-column-end:span 1;" name="data.attributes.range" type="number" value="{{data.attributes.range}}"/>
-            </div>
-            
-            {{#unless (eq data.attributes.type "bow_thrown")}}
-            {{#unless (eq data.attributes.type "grenade")}}
-            <div class="grid-item flexcol" >
-              <label class="grid-item">Magazine</label>
-              <div class="flexrow flex-center">
-                <input class="grid-item" style="grid-column-end:span 1;" name="data.attributes.mag.value" type="number" value="{{data.attributes.mag.value}}"/>
-                <span class="sep"> / </span> 
-                <input class="grid-item" style="grid-column-end:span 1;" name="data.attributes.mag.max" type="number" value="{{data.attributes.mag.max}}"/>
-              </div>
-            </div>
-            {{/unless}}
-            {{/unless}}
-            {{/unless}}
-            
-            <div class="grid-item flexcol" >
-              <label class="grid-item" for="data.attributes.armor">Armor Mod</label>
-              <input class="grid-item" style="grid-column-end:span 1;" name="data.attributes.armor" type="number" value="{{data.attributes.armor}}"/>
-            </div>
-            
-            {{> "systems/twilight2000v4/templates/item/blocks/gear-block.hbs" this}}
-
+        <div class="grid-item flexcol">
+          <label class="grid-item">Reliability</label>
+          <div class="flexrow flex-center">
+            <select name="data.attributes.rel.value">
+              {{#select data.attributes.rel.value}}
+              <option value="A">A</option>
+              <option value="B">B</option>
+              <option value="C">C</option>
+              <option value="D">D</option>
+              <option value="F">F</option>
+              <option value="-">-</option>
+              {{/select}}
+            </select>
+            <span class="sep"> / </span>
+            <select name="data.attributes.rel.max">
+              {{#select data.attributes.rel.max}}
+              <option value="A">A</option>
+              <option value="B">B</option>
+              <option value="C">C</option>
+              <option value="D">D</option>
+              <option value="F">F</option>
+              <option value="-">-</option>
+              {{/select}}
+            </select>
           </div>
-        {{/if}}
         </div>
-    </section>
+
+        <div class="grid-item flexcol">
+          <label class="grid-item" for="data.attributes.rof">ROF</label>
+          <input class="grid-item" style="grid-column-end:span 1;" name="data.attributes.rof" type="number"
+            value="{{data.attributes.rof}}" />
+        </div>
+        {{/unless}}
+        {{/unless}}
+        {{/unless}}
+
+        <div class="grid-item flexcol">
+          <label class="grid-item" for="data.attributes.damage">Damage</label>
+          <input class="grid-item" style="grid-column-end:span 1;" name="data.attributes.damage" type="number"
+            value="{{data.attributes.damage}}" />
+        </div>
+
+        <div class="grid-item flexcol">
+          <label class="grid-item" for="data.attributes.crit">Crit</label>
+          <input class="grid-item" style="grid-column-end:span 1;" name="data.attributes.crit" type="number"
+            value="{{data.attributes.crit}}" />
+        </div>
+
+        {{#unless (eq data.attributes.type "melee")}}
+        {{#unless (eq data.attributes.type "bow_thrown")}}
+        <div class="grid-item flexcol">
+          <label class="grid-item" for="data.attributes.blast">Blast</label>
+          <select name="data.attributes.blast">
+            {{#select data.attributes.blast}}
+            <option value="A">A</option>
+            <option value="B">B</option>
+            <option value="C">C</option>
+            <option value="D">D</option>
+            <option value="-">-</option>
+            {{/select}}
+          </select>
+        </div>
+        {{/unless}}
+
+        <div class="grid-item flexcol">
+          <label class="grid-item" for="data.attributes.range">Range</label>
+          <input class="grid-item" style="grid-column-end:span 1;" name="data.attributes.range" type="number"
+            value="{{data.attributes.range}}" />
+        </div>
+
+        {{#unless (eq data.attributes.type "bow_thrown")}}
+        {{#unless (eq data.attributes.type "grenade")}}
+        <div class="grid-item flexcol">
+          <label class="grid-item">Magazine</label>
+          <div class="flexrow flex-center">
+            <input class="grid-item" style="grid-column-end:span 1;" name="data.attributes.mag.value" type="number"
+              value="{{data.attributes.mag.value}}" />
+            <span class="sep"> / </span>
+            <input class="grid-item" style="grid-column-end:span 1;" name="data.attributes.mag.max" type="number"
+              value="{{data.attributes.mag.max}}" />
+          </div>
+        </div>
+        {{/unless}}
+        {{/unless}}
+        {{/unless}}
+
+        <div class="grid-item flexcol">
+          <label class="grid-item" for="data.attributes.armor">Armor Mod</label>
+          <input class="grid-item" style="grid-column-end:span 1;" name="data.attributes.armor" type="number"
+            value="{{data.attributes.armor}}" />
+        </div>
+
+        {{> "systems/twilight2000v4/templates/item/blocks/gear-block.hbs" this}}
+
+      </div>
+      {{/if}}
+    </div>
+  </section>
 </form>
