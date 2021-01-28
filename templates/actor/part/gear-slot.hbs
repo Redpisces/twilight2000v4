@@ -1,10 +1,13 @@
 <li class="item flexrow" data-item-id="{{ this._id}}">
   <div class="item-image"><img src="{{this.img}}" title="{{this.name}}" width="24" height="24"/></div>
-  <h4 class="item-name" style="flex-grow: 4;">{{this.name}}</h4>
+  <h4 class="item-name" style="flex-grow: 4;"><input class="embedded-item-attribute" name={{concat this._id ".name" }} type="text"
+    value="{{this.name}}" /></h4>
   <input class="embedded-item-attribute" size="2" name={{concat this._id ".data.quantity" }} type="number"
     value="{{this.data.quantity}}" />
   
-  <span> {{this.data.weight}}</span>
+  <input class="embedded-item-attribute" size="2" name={{concat this._id ".data.weight" }} type="number"
+    value="{{this.data.weight}}" />
+
   <span> {{math this.data.weight "*" this.data.quantity}}</span>
   <div class="item-controls">
 	  <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
