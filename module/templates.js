@@ -5,6 +5,9 @@
  * @return {Promise}
  */
 export const preloadHandlebarsTemplates = async function () {
+  let templates=[];
+
+  
   return loadTemplates([
     // Shared Partials
     // 'templates/dice/roll.html',

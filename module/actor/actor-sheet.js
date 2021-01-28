@@ -25,8 +25,14 @@ export class twilightActorSheet extends ActorSheet {
   /** @override */
   getData() {
     const data = super.getData();
-    data.dtypes = ["String", "Number", "Boolean"];
 
+    if (this.actor.data.type === 'npc'){
+      console.log(this);
+      this._tabs[0].active='stats';
+    }
+
+    data.dtypes = ["String", "Number", "Boolean"];
+    
     if (this.actor.data.type === 'character' || this.actor.data.type === 'npc') {
       for (let [akey, avalue] of Object.entries(data.data.attributes)) {
         avalue.skills = {}
