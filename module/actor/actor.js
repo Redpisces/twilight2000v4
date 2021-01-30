@@ -103,7 +103,7 @@ export class twilightActor extends Actor {
       let item = i.data;
       i.img = i.img || DEFAULT_TOKEN;
 
-      
+
       switch (i.type) {
         case 'gear':
           countWeight(i.data);
@@ -119,11 +119,11 @@ export class twilightActor extends Actor {
           diseases.push(i);
           break;
         case 'weapon':
-          
-          if (i.data.equipped.value && actorData.primaryWeapon === undefined){
-            actorData.primaryWeapon=i;
+
+          if (i.data.equipped.value && actorData.primaryWeapon === undefined) {
+            actorData.primaryWeapon = i;
           }
-          
+
           countWeight(i.data);
           weapons.push(i);
           break;
@@ -131,7 +131,7 @@ export class twilightActor extends Actor {
           countWeight(i.data);
           let d = i.data;
           armor.push(i);
-          if (!d.equipped.value){
+          if (!d.equipped.value) {
             break;
           }
           if (parts[d.location.value] === undefined) {
@@ -183,7 +183,7 @@ export class twilightActor extends Actor {
   static skillroll(ranks = "", ammo = "", dialog = true) {
     //Double Success counter by Crymic, Modified by Redpisces for Twilight 2000 v4
     const dieTypes = { "A": 12, "B": 10, "C": 8, "D": 6, "F": 0 };
-
+    let capped = "";
     let confirmed = false;
     // What number is starting number needed for a single success
     const singleSuccess = 6;
@@ -271,7 +271,12 @@ export class twilightActor extends Actor {
               }
             }
             let formula = "{";
-
+            if (dice.length>100){
+              capped+="CAPPED TO 100 SKILL DICE"
+            }
+            while(dice.length>100){
+              dice.pop();
+            }
             while (dice.length > 1) {
               formula += `1d${dieTypes[dice.pop()]},`;
             }
@@ -304,6 +309,11 @@ export class twilightActor extends Actor {
           {
             let dice = parseInt(html.find('#ammo').val());
             if (dice) {
+              if (dice > 100) 
+              {
+                dice = 100
+                capped += "CAPPED TO 100 AMMO DICE"
+              }
               let roll = new Roll(`${dice}d6cs>=${singleSuccess}`).roll();
               let bonus = "";
               let get_dice = "";
@@ -327,6 +337,9 @@ export class twilightActor extends Actor {
           the_content += `
               <div class="chat-card item-card"><div class="card-buttons"><div class="flexrow 1"><div class="dice-roll"><div class="dice-result"><h4 class="dice-total">${fails} Total Ones</h4></div></div></div></div></div></div>`
           ChatMessage.create({ user: game.user._id, content: the_content, type: CONST.CHAT_MESSAGE_TYPES.OOC });
+          if (capped !== ""){
+            ChatMessage.create({ user: game.user._id, content: `<div>${capped}</div>`, type: CONST.CHAT_MESSAGE_TYPES.OOC });
+          }
         }
 
 
