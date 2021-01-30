@@ -29,11 +29,10 @@ export class twilightActor extends Actor {
 
     const gear = [];
     const weapons = [];
-
     let cargoWeight = 0.0;
 
     function countWeight(itemData) {
-      if (itemData.container != 'none') {
+      if (itemData.container.value != 'none') {
         cargoWeight += itemData.weight * itemData.quantity;
       }
     }
@@ -90,11 +89,11 @@ export class twilightActor extends Actor {
     let packWeight = 0.0;
 
     function countWeight(itemData) {
-      if (itemData.container == 'carried') {
-        carryWeight += itemData.weight * itemData.quantity;
+      if (itemData.container.value == 'carried') {
+        carryWeight += itemData.weight.value * itemData.quantity.value;
       }
-      else if (itemData.container == 'packed') {
-        packWeight += itemData.weight * itemData.quantity;
+      else if (itemData.container.value == 'packed') {
+        packWeight += itemData.weight.value * itemData.quantity.value;
       }
     }
 
@@ -102,6 +101,7 @@ export class twilightActor extends Actor {
       let item = i.data;
       i.img = i.img || DEFAULT_TOKEN;
 
+      
       switch (i.type) {
         case 'gear':
           countWeight(i.data);
@@ -118,7 +118,7 @@ export class twilightActor extends Actor {
           break;
         case 'weapon':
           
-          if (i.data.equipped && actorData.primaryWeapon === undefined){
+          if (i.data.equipped.value && actorData.primaryWeapon === undefined){
             actorData.primaryWeapon=i;
           }
           
@@ -129,14 +129,14 @@ export class twilightActor extends Actor {
           countWeight(i.data);
           let d = i.data;
           armor.push(i);
-          if (!d.equipped){
+          if (!d.equipped.value){
             break;
           }
-          if (parts[d.location] === undefined) {
-            parts[d.location] = i;
+          if (parts[d.location.value] === undefined) {
+            parts[d.location.value] = i;
           }
-          else if (d.equipped && d.value > parts[d.location].data.value) {
-            parts[d.location] = i;
+          else if (d.equipped.value && d.value.value > parts[d.location.value].data.value.value) {
+            parts[d.location.value] = i;
           }
           break;
         default:

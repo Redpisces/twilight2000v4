@@ -8,8 +8,8 @@
   <div class="flexrow">
     {{#each this.armorValue as |value id|}}
     <span class="item" data-item-id="{{ value._id}}">
-      <input class="grid-item embedded-item-attribute" name={{concat value._id ".data.value" }}
-        type="number" size="2" value="{{value.data.value}}" />
+      <input class="grid-item embedded-item-attribute" name={{concat value._id ".data.value.value" }}
+        type="number" size="2" value="{{value.data.value.value}}" />
     </span>
     {{/each}}
   </div>

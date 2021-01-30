@@ -1,25 +1,22 @@
 <tr class="item" data-item-id="{{ this._id}}">
   <td class="item-image"><img src="{{this.img}}" title="{{this.name}}" height="24" /></td>
   <td class="item-name" style="flex-grow: 2;">{{this.name}}</td>
-  {{#if (lt data.version "2")}}
-  <td>OLD WEAPON</td>
-  {{/if}}
-  {{#if (gte data.version "2")}}
-  <td>{{this.data.attributes.rof}}</td>
-  <td> {{this.data.attributes.damage}}</td>
-  <td> {{this.data.attributes.crit}}</td>
-  <td> {{this.data.attributes.armor}}</td>
-  <td> {{this.data.attributes.range}}</td>
+  
+  <td>{{this.data.rof.value}}</td>
+  <td> {{this.data.damage.value}}</td>
+  <td> {{this.data.crit.value}}</td>
+  <td> {{this.data.armor.value}}</td>
+  <td> {{this.data.range.value}}</td>
   <td class="flexrow" style="flex-grow: 1;">
-    <input class="embedded-item-attribute" size="3" name={{concat this._id ".data.attributes.mag.value" }} type="number"
-      value="{{this.data.attributes.mag.value}}" />
+    <input class="embedded-item-attribute" size="3" name={{concat this._id ".data.mag.value" }} type="number"
+      value="{{this.data.mag.value}}" />
     <span>/</span>
-    <span>{{this.data.attributes.mag.max}}</span>
+    <span>{{this.data.mag.max}}</span>
   </td>
-  {{log this.data.attributes.rel.value}}
+  {{log this.data.rel.value}}
   <td>
-    <select class="embedded-item-attribute" name={{concat this._id ".data.attributes.rel.value" }}>
-      {{#select this.data.attributes.rel.value}}
+    <select class="embedded-item-attribute" name={{concat this._id ".data.rel.value" }}>
+      {{#select this.data.rel.value}}
       <option value="A">A</option>
       <option value="B">B</option>
       <option value="C">C</option>
@@ -29,9 +26,9 @@
       {{/select}}
     </select>
   </td>
-  <td> {{this.data.attributes.blast}}</td>
-  <td> {{math this.data.weight "*" this.data.quantity}}</td>
-  {{/if}}
+  <td> {{this.data.blast.value}}</td>
+  <td> {{math this.data.weight.value "*" this.data.quantity.value}}</td>
+  
   <td>
     <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
     <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>

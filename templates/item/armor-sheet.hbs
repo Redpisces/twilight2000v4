@@ -17,7 +17,7 @@
 
     {{!-- Description Tab --}}
     <div class="tab" data-group="primary" data-tab="description">
-      {{editor content=data.description target="data.description" button=true owner=owner editable=editable}}
+      {{editor content=data.description.value target="data.description.value" button=true owner=owner editable=editable}}
     </div>
 
     {{!-- Attributes Tab --}}
@@ -26,20 +26,20 @@
       <div class="grid-container stat-grid">
 
         <div class="grid-item flexcol">
-          <label class="grid-item" for="data.value">Value</label>
-          <input class="grid-item" style="grid-column-end:span 1;" name="data.value" type="number"
-            value="{{data.value}}" />
+          <label class="grid-item" for="data.value.value">Value</label>
+          <input class="grid-item" style="grid-column-end:span 1;" name="data.value.value" type="number"
+            value="{{data.value.value}}" />
         </div>
 
         <div class="grid-item flexcol">
-          <label class="grid-item" for="data.max">Max</label>
-          <input class="grid-item" style="grid-column-end:span 1;" name="data.max" type="number" value="{{data.max}}" />
+          <label class="grid-item" for="data.max.value">Max</label>
+          <input class="grid-item" style="grid-column-end:span 1;" name="data.max.value" type="number" value="{{data.max.value}}" />
         </div>
 
         <div class="grid-item flexcol">
-          <label class="grid-item" for="data.location">Blast</label>
-          <select name="data.location">
-            {{#select data.location}}
+          <label class="grid-item" for="data.location.value">Blast</label>
+          <select name="data.location.value">
+            {{#select data.location.value}}
             <option value="head">Head</option>
             <option value="torso">Torso</option>
             <option value="arms">Arms</option>
