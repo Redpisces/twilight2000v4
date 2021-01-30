@@ -25,7 +25,7 @@ export class twilightActorSheet extends ActorSheet {
   /** @override */
   getData() {
     const data = super.getData();
-
+        
     if (this.actor.data.type === 'npc'){
       this._tabs[0].active='stats';
     }

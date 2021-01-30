@@ -13,15 +13,6 @@ export class twilightItem extends Item {
     const itemData = this.data;
     const actorData = this.actor ? this.actor.data : {};
     const data = itemData.data;
-    itemData.type;
-    if (itemData.type in ['weapon','gear','armor']){
-      if (data.container === undefined) {
-        data.container= {'value':'carried'};
-      }
-
-      if (data.equipped === undefined) {
-        data.equipped = { 'value': false };
-      }
-    }
+    return data;
   }
 }

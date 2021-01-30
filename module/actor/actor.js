@@ -19,6 +19,8 @@ export class twilightActor extends Actor {
     if (actorData.type === 'character') this._prepareCharacterData(actorData);
     if (actorData.type === 'npc') this._prepareNpcData(actorData);
     if (actorData.type === 'vehicle') this._prepareVehicleData(actorData);
+
+    return data;
   }
   /**
      * Prepare Vehicle type specific data

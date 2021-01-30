@@ -58,93 +58,102 @@
         </div>
 
         {{#unless data.ammo.hidden}}
-        <div class="grid-item flexcol">
-          <label class="grid-item" for="data.ammo.value">Ammo</label>
-          <input class="grid-item" style="grid-column-end:span 1;" name="data.ammo.value" type="text"
-            value="{{data.ammo.value}}" />
-        </div>
+          <div class="grid-item flexcol">
+            <label class="grid-item" for="data.ammo.value">Ammo</label>
+            <input class="grid-item" style="grid-column-end:span 1;" name="data.ammo.value" type="text"
+              value="{{data.ammo.value}}" />
+          </div>
         {{/unless}}
-
-        <div class="grid-item flexcol">
-          <label class="grid-item">Reliability</label>
-          <div class="flexrow flex-center">
-            <select name="data.rel.value">
-              {{#select data.rel.value}}
+        {{#unless data.rel.hidden}}
+          <div class="grid-item flexcol">
+            <label class="grid-item">Reliability</label>
+            <div class="flexrow flex-center">
+              <select name="data.rel.value">
+                {{#select data.rel.value}}
+                <option value="A">A</option>
+                <option value="B">B</option>
+                <option value="C">C</option>
+                <option value="D">D</option>
+                <option value="F">F</option>
+                <option value="-">-</option>
+                {{/select}}
+              </select>
+              <span class="sep"> / </span>
+              <select name="data.rel.max">
+                {{#select data.rel.max}}
+                <option value="A">A</option>
+                <option value="B">B</option>
+                <option value="C">C</option>
+                <option value="D">D</option>
+                <option value="F">F</option>
+                <option value="-">-</option>
+                {{/select}}
+              </select>
+            </div>
+          </div>
+        {{/unless}}
+        {{#unless data.rof.hidden}}
+          <div class="grid-item flexcol">
+            <label class="grid-item" for="data.rof.value">ROF</label>
+            <input class="grid-item" style="grid-column-end:span 1;" name="data.rof.value" type="number"
+              value="{{data.rof.value}}" />
+          </div>
+        {{/unless}}
+        {{#unless data.damage.hidden}}
+          <div class="grid-item flexcol">
+            <label class="grid-item" for="data.damage.value">Damage</label>
+            <input class="grid-item" style="grid-column-end:span 1;" name="data.damage.value" type="number"
+              value="{{data.damage.value}}" />
+          </div>
+        {{/unless}}
+        {{#unless data.crit.hidden}}
+          <div class="grid-item flexcol">
+            <label class="grid-item" for="data.crit.value">Crit</label>
+            <input class="grid-item" style="grid-column-end:span 1;" name="data.crit.value" type="number"
+              value="{{data.crit.value}}" />
+          </div>
+        {{/unless}}
+        {{#unless data.blast.hidden}}
+          <div class="grid-item flexcol">
+            <label class="grid-item" for="data.blast.value">Blast</label>
+            <select name="data.blast.value">
+              {{#select data.blast.value}}
               <option value="A">A</option>
               <option value="B">B</option>
               <option value="C">C</option>
               <option value="D">D</option>
-              <option value="F">F</option>
-              <option value="-">-</option>
-              {{/select}}
-            </select>
-            <span class="sep"> / </span>
-            <select name="data.rel.max">
-              {{#select data.rel.max}}
-              <option value="A">A</option>
-              <option value="B">B</option>
-              <option value="C">C</option>
-              <option value="D">D</option>
-              <option value="F">F</option>
               <option value="-">-</option>
               {{/select}}
             </select>
           </div>
-        </div>
-
-        <div class="grid-item flexcol">
-          <label class="grid-item" for="data.rof.value">ROF</label>
-          <input class="grid-item" style="grid-column-end:span 1;" name="data.rof.value" type="number"
-            value="{{data.rof.value}}" />
-        </div>
-
-        <div class="grid-item flexcol">
-          <label class="grid-item" for="data.damage.value">Damage</label>
-          <input class="grid-item" style="grid-column-end:span 1;" name="data.damage.value" type="number"
-            value="{{data.damage.value}}" />
-        </div>
-
-        <div class="grid-item flexcol">
-          <label class="grid-item" for="data.crit.value">Crit</label>
-          <input class="grid-item" style="grid-column-end:span 1;" name="data.crit.value" type="number"
-            value="{{data.crit.value}}" />
-        </div>
-
-        <div class="grid-item flexcol">
-          <label class="grid-item" for="data.blast.value">Blast</label>
-          <select name="data.blast.value">
-            {{#select data.blast.value}}
-            <option value="A">A</option>
-            <option value="B">B</option>
-            <option value="C">C</option>
-            <option value="D">D</option>
-            <option value="-">-</option>
-            {{/select}}
-          </select>
-        </div>
-
-        <div class="grid-item flexcol">
-          <label class="grid-item" for="data.range.value">Range</label>
-          <input class="grid-item" style="grid-column-end:span 1;" name="data.range.value" type="number"
-            value="{{data.range.value}}" />
-        </div>
-
-        <div class="grid-item flexcol">
-          <label class="grid-item">Magazine</label>
-          <div class="flexrow flex-center">
-            <input class="grid-item" style="grid-column-end:span 1;" name="data.mag.value" type="number"
-              value="{{data.mag.value}}" />
-            <span class="sep"> / </span>
-            <input class="grid-item" style="grid-column-end:span 1;" name="data.mag.max" type="number"
-              value="{{data.mag.max}}" />
+        {{/unless}}
+        {{#unless data.range.hidden}}
+          <div class="grid-item flexcol">
+            <label class="grid-item" for="data.range.value">Range</label>
+            <input class="grid-item" style="grid-column-end:span 1;" name="data.range.value" type="number"
+              value="{{data.range.value}}" />
           </div>
-        </div>
-
-        <div class="grid-item flexcol">
-          <label class="grid-item" for="data.armor.value">Armor Mod</label>
-          <input class="grid-item" style="grid-column-end:span 1;" name="data.armor.value" type="number"
-            value="{{data.armor.value}}" />
-        </div>
+        {{/unless}}
+        {{#unless data.mag.hidden}}
+          <div class="grid-item flexcol">
+            <label class="grid-item">Magazine</label>
+            <div class="flexrow flex-center">
+              <input class="grid-item" style="grid-column-end:span 1;" name="data.mag.value" type="number"
+                value="{{data.mag.value}}" />
+              <span class="sep"> / </span>
+              <input class="grid-item" style="grid-column-end:span 1;" name="data.mag.max" type="number"
+                value="{{data.mag.max}}" />
+            </div>
+          </div>
+        {{/unless}}
+        {{#unless data.armor.hidden}}
+          <div class="grid-item flexcol">
+            <label class="grid-item" for="data.armor.value">Armor Mod</label>
+            <input class="grid-item" style="grid-column-end:span 1;" name="data.armor.value" type="number"
+              value="{{data.armor.value}}" />
+          </div>
+        {{/unless}}
+        
 
         {{> "systems/twilight2000v4/templates/item/blocks/gear-block.hbs" this}}
 

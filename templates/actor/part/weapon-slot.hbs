@@ -1,8 +1,9 @@
 <tr class="item" data-item-id="{{ this._id}}">
   <td class="item-image"><img src="{{this.img}}" title="{{this.name}}" height="24" /></td>
   <td class="item-name" style="flex-grow: 2;">{{this.name}}</td>
-  
+
   <td>{{this.data.rof.value}}</td>
+
   <td> {{this.data.damage.value}}</td>
   <td> {{this.data.crit.value}}</td>
   <td> {{this.data.armor.value}}</td>
@@ -13,7 +14,6 @@
     <span>/</span>
     <span>{{this.data.mag.max}}</span>
   </td>
-  {{log this.data.rel.value}}
   <td>
     <select class="embedded-item-attribute" name={{concat this._id ".data.rel.value" }}>
       {{#select this.data.rel.value}}
@@ -28,7 +28,7 @@
   </td>
   <td> {{this.data.blast.value}}</td>
   <td> {{math this.data.weight.value "*" this.data.quantity.value}}</td>
-  
+
   <td>
     <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
     <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>

@@ -1,3 +1,4 @@
+import { getItemHiddenFields } from "../util.js";
 /**
  * Extend the basic ItemSheet with some very simple modifications
  * @extends {ItemSheet}
@@ -30,6 +31,7 @@ export class twilightItemSheet extends ItemSheet {
   /** @override */
   getData() {
     const data = super.getData();
+    getItemHiddenFields(this.item);
     return data;
   }
 
