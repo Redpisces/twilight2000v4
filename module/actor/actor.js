@@ -19,7 +19,7 @@ export class twilightActor extends Actor {
     // things organized.
     if (actorData.type === 'character') this._prepareCharacterData(actorData);
     if (actorData.type === 'npc') this._prepareNpcData(actorData);
-    if (actorData.type === 'vehicle' || actorData.type ==="place") this._prepareVehicleData(actorData);
+    if (actorData.type === 'vehicle' || actorData.type === "place") this._prepareVehicleData(actorData);
 
     return data;
   }
@@ -39,15 +39,15 @@ export class twilightActor extends Actor {
         cargoWeight += itemData.weight.value * itemData.quantity.value;
       }
     }
-    let items = actorData.items.sort(function(a,b){
-      if (a.name < b.name) {return -1;}
+    let items = actorData.items.sort(function (a, b) {
+      if (a.name < b.name) { return -1; }
       if (a.name > b.name) { return 1; }
       return 0;
     })
     for (let i of items) {
       let item = getItemHiddenFields(i);
       item.img = item.img || DEFAULT_TOKEN;
-      if (item.type==='weapon' && item.data.equipped.value){
+      if (item.type === 'weapon' && item.data.equipped.value) {
         countWeight(item.data);
         weapons.push(item);
       } else {
@@ -192,7 +192,7 @@ export class twilightActor extends Actor {
     const singleSuccess = 6;
     // What number is starting number needed for a double success, set to 0 to disable
     const doubleSuccess = 10;
-    let roll_it = `<form autocomplete="off"><p>Enter Ranks [A,B,C,D,F]+-(mod) and number of ammo dice</p><div class="form-group"><label for="num">Ranks:</label><input id="num" type="num" value="${ranks}"/><img style="border:none;height:24px;" src="rank-3.svg"/></div><div class="form-group"><label for="ammo">Ammo:</label><input id="ammo" type="num" value="${ammo}"/><img style="border:none;height:24px;" src="systems/twilight2000v4/icons/bullets.svg"/></div></form>`;
+    let roll_it = `<form autocomplete="off"><p>Enter Ranks [A,B,C,D,F]+-(mod) and number of ammo dice</p><div class="form-group"><label for="num">Ranks:</label><input id="num" type="num" value="${ranks}"/><img style="border:none;height:24px;" src="systems/twilight2000v4/icons/rank-3.svg"/></div><div class="form-group"><label for="ammo">Ammo:</label><input id="ammo" type="num" value="${ammo}"/><img style="border:none;height:24px;" src="systems/twilight2000v4/icons/bullets.svg"/></div></form>`;
     new Dialog({
       title: `Die  Roller`,
       content: roll_it,
@@ -274,10 +274,10 @@ export class twilightActor extends Actor {
               }
             }
             let formula = "{";
-            if (dice.length>100){
-              capped+="CAPPED TO 100 SKILL DICE"
+            if (dice.length > 100) {
+              capped += "CAPPED TO 100 SKILL DICE"
             }
-            while(dice.length>100){
+            while (dice.length > 100) {
               dice.pop();
             }
             while (dice.length > 1) {
@@ -312,8 +312,7 @@ export class twilightActor extends Actor {
           {
             let dice = parseInt(html.find('#ammo').val());
             if (dice) {
-              if (dice > 100) 
-              {
+              if (dice > 100) {
                 dice = 100
                 capped += "CAPPED TO 100 AMMO DICE"
               }
@@ -340,7 +339,7 @@ export class twilightActor extends Actor {
           the_content += `
               <div class="chat-card item-card"><div class="card-buttons"><div class="flexrow 1"><div class="dice-roll"><div class="dice-result"><h4 class="dice-total">${fails} Total Ones</h4></div></div></div></div></div></div>`
           ChatMessage.create({ user: game.user._id, content: the_content, type: CONST.CHAT_MESSAGE_TYPES.OOC });
-          if (capped !== ""){
+          if (capped !== "") {
             ChatMessage.create({ user: game.user._id, content: `<div>${capped}</div>`, type: CONST.CHAT_MESSAGE_TYPES.OOC });
           }
         }
