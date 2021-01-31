@@ -19,7 +19,7 @@ export class twilightActor extends Actor {
     // things organized.
     if (actorData.type === 'character') this._prepareCharacterData(actorData);
     if (actorData.type === 'npc') this._prepareNpcData(actorData);
-    if (actorData.type === 'vehicle') this._prepareVehicleData(actorData);
+    if (actorData.type === 'vehicle' || actorData.type ==="place") this._prepareVehicleData(actorData);
 
     return data;
   }
@@ -36,26 +36,25 @@ export class twilightActor extends Actor {
 
     function countWeight(itemData) {
       if (itemData.container.value != 'none') {
-        cargoWeight += itemData.weight * itemData.quantity;
+        cargoWeight += itemData.weight.value * itemData.quantity.value;
       }
     }
-
-    for (let i of actorData.items) {
+    let items = actorData.items.sort(function(a,b){
+      if (a.name < b.name) {return -1;}
+      if (a.name > b.name) { return 1; }
+      return 0;
+    })
+    for (let i of items) {
       let item = getItemHiddenFields(i);
       item.img = item.img || DEFAULT_TOKEN;
-
-      switch (item.type) {
-        case 'gear':
-          countWeight(item.data);
-          gear.push(item);
-          break;
-        case 'weapon':
-          countWeight(item.data);
-          weapons.push(item);
-          break;
-        default:
-          break;
+      if (item.type==='weapon' && item.data.equipped.value){
+        countWeight(item.data);
+        weapons.push(item);
+      } else {
+        countWeight(item.data);
+        gear.push(item);
       }
+
     }
     actorData.gear = gear;
     actorData.weapons = weapons;
@@ -98,8 +97,12 @@ export class twilightActor extends Actor {
         packWeight += itemData.weight.value * itemData.quantity.value;
       }
     }
-
-    for (let i of actorData.items) {
+    let items = actorData.items.sort(function (a, b) {
+      if (a.name < b.name) { return -1; }
+      if (a.name > b.name) { return 1; }
+      return 0;
+    })
+    for (let i of items) {
       let item = getItemHiddenFields(i);
       item.img = item.img || DEFAULT_TOKEN;
 

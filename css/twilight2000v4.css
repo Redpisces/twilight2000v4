@@ -186,6 +186,14 @@
   padding: 0 8px;
 }
 
+.twilight2000v4 .profile-img {
+  background-color: black;
+}
+
+.twilight2000v4 .items-list .item img {
+  background-color: black;
+}
+
 .twilight2000v4 .resource-label {
   font-weight: bold;
   text-transform: uppercase;

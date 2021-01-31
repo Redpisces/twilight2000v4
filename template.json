@@ -3,7 +3,8 @@
     "types": [
       "character",
       "npc",
-      "vehicle"
+      "vehicle",
+      "place"
     ],
     "templates": {
       "base": {
@@ -185,13 +186,34 @@
       "fuel": {
         "type": "",
         "value": 0,
-        "cap": 0,
+        "max": 0,
         "cons": 0
       },
       "crew": "",
       "cargo_cap": 0,
       "weapon_mounts": "",
       "price": 0
+    },
+    "place":{
+      "version":1,
+      "templates": [
+        "base"
+      ],
+      "full_name": "",
+      "type": "",
+      "map":"",
+      "fuel":{
+        "prod":0,
+        "value":0,
+        "cons":0,
+        "max":0
+      },
+      "food": {
+        "prod": 0,
+        "value": 0,
+        "cons": 0,
+        "max": 0
+      }
     }
   },
   "Item": {
