@@ -30,7 +30,8 @@ export const preloadHandlebarsTemplates = async function () {
     'systems/twilight2000v4/templates/item/blocks/gear-block.hbs',
     'systems/twilight2000v4/templates/actor/part/armor-display.hbs',
     'systems/twilight2000v4/templates/actor/part/morale-display.hbs',
-    'systems/twilight2000v4/templates/actor/part/resource-display.hbs'
+    'systems/twilight2000v4/templates/actor/part/resource-display.hbs',
+    'systems/twilight2000v4/templates/actor/part/gear-controls.hbs'
 
   ]);
 }

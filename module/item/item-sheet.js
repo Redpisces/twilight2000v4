@@ -1,4 +1,3 @@
-import { getItemHiddenFields } from "../util.js";
 /**
  * Extend the basic ItemSheet with some very simple modifications
  * @extends {ItemSheet}
@@ -22,7 +21,6 @@ export class twilightItemSheet extends ItemSheet {
     //return `${path}/item-sheet.html`;
     // Alternatively, you could use the following return statement to do a
     // unique item sheet by type, like `weapon-sheet.html`.
-
     return `${path}/${this.item.data.type}-sheet.hbs`;
   }
 
@@ -31,7 +29,6 @@ export class twilightItemSheet extends ItemSheet {
   /** @override */
   getData() {
     const data = super.getData();
-    getItemHiddenFields(this.item);
     return data;
   }
 

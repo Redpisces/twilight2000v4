@@ -1,3 +1,4 @@
+import { getItemHiddenFields } from "../util.js";
 /**
  * Extend the basic Item with some very simple modifications.
  * @extends {Item}
@@ -13,6 +14,7 @@ export class twilightItem extends Item {
     const itemData = this.data;
     const actorData = this.actor ? this.actor.data : {};
     const data = itemData.data;
+    getItemHiddenFields(itemData);
     return data;
   }
 }

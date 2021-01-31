@@ -64,16 +64,17 @@ export class twilightActorSheet extends ActorSheet {
     });
 
     // Delete Inventory Item
-    html.find('.item-delete').click(ev => {
-      const li = $(ev.currentTarget).parents(".item");
-      this.actor.deleteOwnedItem(li.data("itemId"));
-      li.slideUp(200, () => this.render(false));
-    });
+    html.find('.item-delete').click(this._onItemDelete.bind(this));
 
     // Rollable abilities.
     html.find('.rollable').click(this._onRoll.bind(this));
 
     html.find('.embedded-item-attribute').change(this._onEmbededChange.bind(this));
+
+    // Update Inventory Item
+    html.find('.item-equip').click(this._onEquipClick.bind(this));
+    html.find('.item-container').click(this._onContainerClick.bind(this));
+
   }
 
   /* -------------------------------------------- */
@@ -103,6 +104,31 @@ export class twilightActorSheet extends ActorSheet {
 
     // Finally, create the item!
     return this.actor.createOwnedItem(itemData);
+  }
+  _onItemDelete(event){
+    const li = $(event.currentTarget).parents(".item");
+    const name = this.actor.getEmbeddedEntity("OwnedItem", li.data("itemId")).name;
+    let d = new Dialog({
+      title: "Delete Item",
+      content: `<p>Delete item ${name} (${li.data("itemId")})</p>`,
+      buttons: {
+        one: {
+          icon: '<i class="fas fa-check"></i>',
+          label: "Confirm",
+          callback: () => {
+            this.actor.deleteOwnedItem(li.data("itemId"));
+            li.slideUp(200, () => this.render(false));
+          }
+        },
+        two: {
+          icon: '<i class="fas fa-times"></i>',
+          label: "Cancel",
+          callback: () => {}
+        }
+      },
+      default: "two",
+    });
+    d.render(true);
   }
 
   /**
@@ -134,5 +160,37 @@ export class twilightActorSheet extends ActorSheet {
     let update={_id:item._id,[name]:value};
     const updated = await actor.updateEmbeddedEntity("OwnedItem",update);
     
+  }
+
+  async _onEquipClick(event){
+    const li = $(event.currentTarget).parents(".item");
+    const item = this.actor.getOwnedItem(li.data("itemId"));
+    const actor = this.actor;
+    let name = 'data.equipped.value';
+    let value = (item.data.data.equipped.value) ? false : true; 
+
+    let update = { _id: item._id, [name]: value };
+    const updated = await actor.updateEmbeddedEntity("OwnedItem", update);
+  }
+  async _onContainerClick(event){
+    const li = $(event.currentTarget).parents(".item");
+    const item = this.actor.getOwnedItem(li.data("itemId"));
+    const actor = this.actor;
+    let name = 'data.container.value';
+    let value;
+    switch (item.data.data.container.value){
+      case 'carried':
+        value='packed';
+        break;
+      case 'packed':
+        value = 'none';
+        break;
+      default:
+        value='carried'
+        break;
+    }
+
+    let update = { _id: item._id, [name]: value };
+    const updated = await actor.updateEmbeddedEntity("OwnedItem", update);
   }
 }

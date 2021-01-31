@@ -2,11 +2,9 @@
   <td class="item-image"><img src="{{this.img}}" title="{{this.name}}" width="24" height="24"/></td>
   <td class="item-name" style="flex-grow: 2;">{{this.name}}</td>
   <td> {{this.data.location.value}}</td>
-  <td> {{this.data.value.value}}</td>
+  <td><input class="embedded-item-attribute" size="2" name={{concat this._id ".data.value.value" }} type="number"
+    value="{{this.data.value.value}}" /></td>
   <td> {{this.data.max.value}}</td>
   <td> {{math this.data.weight.value "*" this.data.quantity.value}}</td>
-  <td>
-    <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
-    <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
-  </td>
+  {{> "systems/twilight2000v4/templates/actor/part/gear-controls.hbs" this}}
 </tr>

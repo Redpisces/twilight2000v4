@@ -1,3 +1,4 @@
+import { getItemHiddenFields } from "../util.js";
 /**
  * Extend the base Actor entity by defining a custom roll data structure which is ideal for the Simple system.
  * @extends {Actor}
@@ -40,17 +41,17 @@ export class twilightActor extends Actor {
     }
 
     for (let i of actorData.items) {
-      let item = i.data;
-      i.img = i.img || DEFAULT_TOKEN;
+      let item = getItemHiddenFields(i);
+      item.img = item.img || DEFAULT_TOKEN;
 
-      switch (i.type) {
+      switch (item.type) {
         case 'gear':
-          countWeight(i.data);
-          gear.push(i);
+          countWeight(item.data);
+          gear.push(item);
           break;
         case 'weapon':
-          countWeight(i.data);
-          weapons.push(i);
+          countWeight(item.data);
+          weapons.push(item);
           break;
         default:
           break;
@@ -67,7 +68,6 @@ export class twilightActor extends Actor {
   */
   _prepareHumanData(actorData) {
     const data = actorData.data;
-
     const rankValues = { "A": 12, "B": 10, "C": 8, "D": 6, "F": 0, "-": 0 };
     for (let [key, attribute] of Object.entries(data.attributes)) {
       attribute.base_die = rankValues[attribute.rating];
@@ -100,45 +100,45 @@ export class twilightActor extends Actor {
     }
 
     for (let i of actorData.items) {
-      let item = i.data;
-      i.img = i.img || DEFAULT_TOKEN;
+      let item = getItemHiddenFields(i);
+      item.img = item.img || DEFAULT_TOKEN;
 
 
-      switch (i.type) {
+      switch (item.type) {
         case 'gear':
-          countWeight(i.data);
-          gear.push(i);
+          countWeight(item.data);
+          gear.push(item);
           break;
         case 'specialty':
-          specialties.push(i);
+          specialties.push(item);
           break;
         case 'injury':
-          injuries.push(i);
+          injuries.push(item);
           break;
         case 'disease':
-          diseases.push(i);
+          diseases.push(item);
           break;
         case 'weapon':
 
-          if (i.data.equipped.value && actorData.primaryWeapon === undefined) {
-            actorData.primaryWeapon = i;
+          if (item.data.equipped.value && actorData.primaryWeapon === undefined) {
+            actorData.primaryWeapon = item;
           }
 
-          countWeight(i.data);
-          weapons.push(i);
+          countWeight(item.data);
+          weapons.push(item);
           break;
         case 'armor':
-          countWeight(i.data);
-          let d = i.data;
-          armor.push(i);
+          countWeight(item.data);
+          let d = item.data;
+          armor.push(item);
           if (!d.equipped.value) {
             break;
           }
           if (parts[d.location.value] === undefined) {
-            parts[d.location.value] = i;
+            parts[d.location.value] = item;
           }
           else if (d.equipped.value && d.value.value > parts[d.location.value].data.value.value) {
-            parts[d.location.value] = i;
+            parts[d.location.value] = item;
           }
           break;
         default:
@@ -189,7 +189,7 @@ export class twilightActor extends Actor {
     const singleSuccess = 6;
     // What number is starting number needed for a double success, set to 0 to disable
     const doubleSuccess = 10;
-    let roll_it = `<form autocomplete="off"><p>Enter Ranks [A,B,C,D,F]+-(mod) and number of ammo dice</p><div class="form-group"><label for="num">Ranks:</label><input id="num" type="num" value="${ranks}"/><img style="border:none;height:24px;" src="systems/twilight2000v4/icons/rank-3.svg"/></div><div class="form-group"><label for="ammo">Ammo:</label><input id="ammo" type="num" value="${ammo}"/><img style="border:none;height:24px;" src="systems/twilight2000v4/icons/bullets.svg"/></div></form>`;
+    let roll_it = `<form autocomplete="off"><p>Enter Ranks [A,B,C,D,F]+-(mod) and number of ammo dice</p><div class="form-group"><label for="num">Ranks:</label><input id="num" type="num" value="${ranks}"/><img style="border:none;height:24px;" src="rank-3.svg"/></div><div class="form-group"><label for="ammo">Ammo:</label><input id="ammo" type="num" value="${ammo}"/><img style="border:none;height:24px;" src="systems/twilight2000v4/icons/bullets.svg"/></div></form>`;
     new Dialog({
       title: `Die  Roller`,
       content: roll_it,

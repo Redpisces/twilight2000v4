@@ -1,9 +1,8 @@
-export function getItemHiddenFields(item){
-  const itemData = item.data;
-  const actorData = item.actor ? item.actor.data : {};
-  const data = itemData.data;
+export function getItemHiddenFields(i){
+  let item=i;
+  const data = item.data;
 
-  if (itemData.type === "weapon") {
+  if (item.type === "weapon") {
     function hideFields(fields) {
       for (let f of fields) {
         data[f].hidden = true;
@@ -23,7 +22,6 @@ export function getItemHiddenFields(item){
 
         break;
     }
-
-    return item;
   }
+  return item;
 }

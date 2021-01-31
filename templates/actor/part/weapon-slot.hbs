@@ -2,18 +2,57 @@
   <td class="item-image"><img src="{{this.img}}" title="{{this.name}}" height="24" /></td>
   <td class="item-name" style="flex-grow: 2;">{{this.name}}</td>
 
+  {{#if this.data.rof.hidden}}
+  <td>-</td>
+  {{else}}
   <td>{{this.data.rof.value}}</td>
+  {{/if}}
 
-  <td> {{this.data.damage.value}}</td>
-  <td> {{this.data.crit.value}}</td>
-  <td> {{this.data.armor.value}}</td>
-  <td> {{this.data.range.value}}</td>
+  {{#if this.data.damage.hidden}}
+  <td>-</td>
+  {{else}}
+  <td>{{this.data.damage.value}}</td>
+  {{/if}}
+
+  {{#if this.data.crit.hidden}}
+  <td>-</td>
+  {{else}}
+  <td>{{this.data.crit.value}}</td>
+  {{/if}}
+
+  {{#if this.data.armor.hidden}}
+  <td>-</td>
+  {{else}}
+  <td>{{this.data.armor.value}}</td>
+  {{/if}}
+
+  {{#if this.data.range.hidden}}
+  <td>-</td>
+  {{else}}
+  <td>{{this.data.range.value}}</td>
+  {{/if}}
+
+  {{#if this.data.mag.hidden}}
+  {{#if (eq this.data.type.value "grenade")}}
+  <td class="flexrow" style="flex-grow: 1;">
+    <input class="embedded-item-attribute" size="3" name={{concat this._id ".data.quantity.value" }} type="number"
+      value="{{this.data.quantity.value}}" />
+  </td>
+  {{else}}
+  <td>-</td>
+  {{/if}}
+  {{else}}
   <td class="flexrow" style="flex-grow: 1;">
     <input class="embedded-item-attribute" size="3" name={{concat this._id ".data.mag.value" }} type="number"
       value="{{this.data.mag.value}}" />
     <span>/</span>
     <span>{{this.data.mag.max}}</span>
   </td>
+  {{/if}}
+
+  {{#if this.data.rel.hidden}}
+  <td>-</td>
+  {{else}}
   <td>
     <select class="embedded-item-attribute" name={{concat this._id ".data.rel.value" }}>
       {{#select this.data.rel.value}}
@@ -26,11 +65,19 @@
       {{/select}}
     </select>
   </td>
-  <td> {{this.data.blast.value}}</td>
-  <td> {{math this.data.weight.value "*" this.data.quantity.value}}</td>
+  {{/if}}
 
-  <td>
-    <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
-    <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
-  </td>
+  {{#if this.data.blast.hidden}}
+  <td>-</td>
+  {{else}}
+  <td>{{this.data.blast.value}}</td>
+  {{/if}}
+
+  {{#if this.data.weight.hidden}}
+  <td>-</td>
+  {{else}}
+  <td> {{math this.data.weight.value "*" this.data.quantity.value}}</td>
+  {{/if}}
+
+  {{> "systems/twilight2000v4/templates/actor/part/gear-controls.hbs" this}}
 </tr>
