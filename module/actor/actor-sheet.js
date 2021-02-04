@@ -1,3 +1,9 @@
+const SKILL_ATTRIBUTES = {
+  'str':['heavy_weapons', 'close_combat', 'stamina'],
+  'agi':['driving' , 'mobility', 'ranged_combat'],
+  'int':['recon', 'survival', 'tech'],
+  'emp':['command', 'persuasion', 'mecical_aid']
+};
 /**
  * Extend the basic ActorSheet with some very simple modifications
  * @extends {ActorSheet}
@@ -33,12 +39,10 @@ export class twilightActorSheet extends ActorSheet {
     data.dtypes = ["String", "Number", "Boolean"];
     
     if (this.actor.data.type === 'character' || this.actor.data.type === 'npc') {
-      for (let [akey, avalue] of Object.entries(data.data.attributes)) {
-        avalue.skills = {}
-        for (let [skey, svalue] of Object.entries(data.data.skills)) {
-          if (svalue.linked_atr == akey) {
-            avalue.skills[skey] = svalue;
-          }
+      for (let [key, value] of Object.entries(data.data.attributes)) {
+        value.skills={};
+        for (let skill of SKILL_ATTRIBUTES[key]){
+          value.skills[skill] = data.data.skills[skill];
         }
       }
     }

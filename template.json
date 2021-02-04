@@ -27,52 +27,40 @@
         },
         "skills": {
           "heavy_weapons": {
-            "rating": "F",
-            "linked_atr": "str"
+            "rating": "F"
           },
           "close_combat": {
-            "rating": "F",
-            "linked_atr": "str"
+            "rating": "F"
           },
           "stamina": {
-            "rating": "F",
-            "linked_atr": "str"
+            "rating": "F"
           },
           "driving": {
-            "rating": "F",
-            "linked_atr": "agi"
+            "rating": "F"
           },
           "mobility": {
-            "rating": "F",
-            "linked_atr": "agi"
+            "rating": "F"
           },
           "ranged_combat": {
-            "rating": "F",
-            "linked_atr": "agi"
+            "rating": "F"
           },
           "recon": {
-            "rating": "F",
-            "linked_atr": "int"
+            "rating": "F"
           },
           "survival": {
-            "rating": "F",
-            "linked_atr": "int"
+            "rating": "F"
           },
           "tech": {
-            "rating": "F",
-            "linked_atr": "int"
+            "rating": "F"
           },
           "command": {
-            "rating": "F",
-            "linked_atr": "emp"
+            "rating": "F"
           },
           "persuasion": {
-            "rating": "F",
-            "linked_atr": "emp"
+            "rating": "F"
           },
           "mecical_aid": {
-            "rating": "F",
-            "linked_atr": "emp"
+            "rating": "F"
           }
         },
         "cuf": {
@@ -194,19 +182,19 @@
       "weapon_mounts": "",
       "price": 0
     },
-    "place":{
-      "version":1,
+    "place": {
+      "version": 1,
       "templates": [
         "base"
       ],
       "full_name": "",
       "type": "",
-      "map":"",
-      "fuel":{
-        "prod":0,
-        "value":0,
-        "cons":0,
-        "max":0
+      "map": "",
+      "fuel": {
+        "prod": 0,
+        "value": 0,
+        "cons": 0,
+        "max": 0
       },
       "food": {
         "prod": 0,

@@ -31,11 +31,11 @@ export class twilightActor extends Actor {
     const data = actorData.data;
 
     this._prepareVehicleData(actorData);
-    
+
     data.water['tprod'] = data.water.prod - data.water.cons;
-    
+
     data.food['tprod'] = data.food.prod - data.food.cons;
-    
+
     data.fuel['tprod'] = data.fuel.prod - data.fuel.cons;
   }
   /**
