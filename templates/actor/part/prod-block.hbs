@@ -1,0 +1,30 @@
+<div class="grid-item flexcol" style="grid-row-end:span 2;">
+  <div class="flexrow flex-center">
+    <label>{{r_title}}</label>
+  </div>
+  <div class="flexrow flex-center">
+    <label>Stock</label>
+    <label></label>
+    <label>Max</label>
+  </div>
+  <div class="flexrow flex-center">
+    <input style="grid-column-end:span 1;" name="this.value" type="number" value="{{this.value}}" />
+    <span class="sep"> / </span>
+    <input style="grid-column-end:span 1;" name="this.max" type="number" value="{{this.max}}" />
+  </div>
+  <hr>
+  <div class="flexrow flex-center">
+    <label>G-Prod</label>
+    <label></label>
+    <label>Cons</label>
+    <label></label>
+    <label>T-Prod</label>
+  </div>
+  <div class="flexrow flex-center">
+    <input style="grid-column-end:span 1;" name="this.prod" type="number" value="{{this.prod}}" />
+    <span class="sep"> - </span>
+    <input style="grid-column-end:span 1;" name="this.cons" type="number" value="{{this.cons}}" />
+    <span class="sep"> = </span>
+    <span class="sep"> {{this.tprod}} </span>
+  </div>
+</div>
