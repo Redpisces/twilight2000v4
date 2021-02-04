@@ -89,6 +89,101 @@
           <input name="data.full_name" type="text" value="{{data.full_name}}" />
         </div>
 
+        <div class="grid-item flexcol" style="grid-row-end:span 2;">
+          <div class="flexrow flex-center">
+            <label>Food</label>
+          </div>
+          <div class="flexrow flex-center">
+            <label>Stock</label>
+            <label></label>
+            <label>Max</label>
+          </div>
+          <div class="flexrow flex-center">
+            <input style="grid-column-end:span 1;" name="data.food.value" type="number"
+              value="{{data.food.value}}" />
+            <span class="sep"> / </span>
+            <input style="grid-column-end:span 1;" name="data.food.max" type="number"
+              value="{{data.food.max}}" />
+          </div>
+          <hr>
+          <div class="flexrow flex-center">
+            <label>G-Prod</label>
+            <label></label>
+            <label>Cons</label>
+            <label></label>
+            <label>T-Prod</label>
+          </div>
+          <div class="flexrow flex-center">
+            <input style="grid-column-end:span 1;" name="data.food.prod" type="number" value="{{data.food.prod}}" />
+            <span class="sep"> - </span>
+            <input style="grid-column-end:span 1;" name="data.food.cons" type="number" value="{{data.food.cons}}" />
+            <span class="sep"> = </span>
+            <span class="sep"> {{data.food.tprod}} </span>
+          </div>
+        </div>
+
+        <div class="grid-item flexcol" style="grid-row-end:span 2;">
+          <div class="flexrow flex-center">
+            <label>Water</label>
+          </div>
+          <div class="flexrow flex-center">
+            <label>Stock</label>
+            <label></label>
+            <label>Max</label>
+          </div>
+          <div class="flexrow flex-center">
+            <input style="grid-column-end:span 1;" name="data.water.value" type="number" value="{{data.water.value}}" />
+            <span class="sep"> / </span>
+            <input style="grid-column-end:span 1;" name="data.water.max" type="number" value="{{data.water.max}}" />
+          </div>
+          <hr>
+          <div class="flexrow flex-center">
+            <label>G-Prod</label>
+            <label></label>
+            <label>Cons</label>
+            <label></label>
+            <label>T-Prod</label>
+          </div>
+          <div class="flexrow flex-center">
+            <input style="grid-column-end:span 1;" name="data.water.prod" type="number" value="{{data.water.prod}}" />
+            <span class="sep"> - </span>
+            <input style="grid-column-end:span 1;" name="data.water.cons" type="number" value="{{data.water.cons}}" />
+            <span class="sep"> = </span>
+            <span class="sep"> {{data.water.tprod}} </span>
+          </div>
+        </div>
+
+        <div class="grid-item flexcol" style="grid-row-end:span 2;">
+          <div class="flexrow flex-center">
+            <label>Fuel</label>
+          </div>
+          <div class="flexrow flex-center">
+            <label>Stock</label>
+            <label></label>
+            <label>Max</label>
+          </div>
+          <div class="flexrow flex-center">
+            <input style="grid-column-end:span 1;" name="data.fuel.value" type="number" value="{{data.fuel.value}}" />
+            <span class="sep"> / </span>
+            <input style="grid-column-end:span 1;" name="data.fuel.max" type="number" value="{{data.fuel.max}}" />
+          </div>
+          <hr>
+          <div class="flexrow flex-center">
+            <label>G-Prod</label>
+            <label></label>
+            <label>Cons</label>
+            <label></label>
+            <label>T-Prod</label>
+          </div>
+          <div class="flexrow flex-center">
+            <input style="grid-column-end:span 1;" name="data.fuel.prod" type="number" value="{{data.fuel.prod}}" />
+            <span class="sep"> - </span>
+            <input style="grid-column-end:span 1;" name="data.fuel.cons" type="number" value="{{data.fuel.cons}}" />
+            <span class="sep"> = </span>
+            <span class="sep"> {{data.fuel.tprod}} </span>
+          </div>
+        </div>
+
         <div class="grid-item sub-subgrid">
           <h4 class="item-name">Type</h4>
           <input name="data.type" type="text" value="{{data.type}}" />

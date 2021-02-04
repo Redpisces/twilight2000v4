@@ -19,6 +19,8 @@ Hooks.once('init', async function () {
     formula: "1d@cuf.base_die+1d@morale.base_die",
     decimals: 2
   };
+  
+  CONFIG.TinyMCE.browser_spellcheck = true;
 
   // Define custom Entity classes
   CONFIG.Actor.entityClass = twilightActor;

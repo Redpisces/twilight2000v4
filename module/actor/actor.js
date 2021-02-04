@@ -19,19 +19,33 @@ export class twilightActor extends Actor {
     // things organized.
     if (actorData.type === 'character') this._prepareCharacterData(actorData);
     if (actorData.type === 'npc') this._prepareNpcData(actorData);
-    if (actorData.type === 'vehicle' || actorData.type === "place") this._prepareVehicleData(actorData);
+    if (actorData.type === 'vehicle') this._prepareVehicleData(actorData);
+    if (actorData.type === 'place') this._preparePlaceData(actorData);
 
     return data;
   }
   /**
-     * Prepare Vehicle type specific data
-     */
-
-  _prepareVehicleData(actorData) {
+  * Prepare Place type specific data
+  */
+  _preparePlaceData(actorData) {
     const data = actorData.data;
 
+    this._prepareVehicleData(actorData);
+    
+    data.water['tprod'] = data.water.prod - data.water.cons;
+    
+    data.food['tprod'] = data.food.prod - data.food.cons;
+    
+    data.fuel['tprod'] = data.fuel.prod - data.fuel.cons;
+  }
+  /**
+  * Prepare Vehicle type specific data
+  */
+  _prepareVehicleData(actorData) {
+    const data = actorData.data;
     const gear = [];
     const weapons = [];
+
     let cargoWeight = 0.0;
 
     function countWeight(itemData) {

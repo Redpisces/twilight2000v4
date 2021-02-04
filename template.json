@@ -213,6 +213,12 @@
         "value": 0,
         "cons": 0,
         "max": 0
+      },
+      "water": {
+        "prod": 0,
+        "value": 0,
+        "cons": 0,
+        "max": 0
       }
     }
   },
