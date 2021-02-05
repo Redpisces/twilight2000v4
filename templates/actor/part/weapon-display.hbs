@@ -1,0 +1,13 @@
+<div class="grid-item flexcol item" style="grid-column-end:span 1;" data-item-id="{{ this._id}}">
+  {{#if this}}
+  <button class="weapon-roll" data-weapon="{{this._id}}" style="
+                    background-image: url({{this.img}});
+                    background-repeat: no-repeat;
+                    background-position: center center;
+                    background-size: contain;
+                    ">
+  </button>
+  {{else}}
+  <div>No Weapon Equipped</div>
+  {{/if}}
+</div>

@@ -154,6 +154,27 @@
           </div>
         {{/unless}}
         
+        {{#unless data.attribute.hidden}}
+        <div class="grid-item flexcol">
+          <label class="grid-item" for="data.attribute.value">Attribute</label>
+          <select name="data.attribute.value">
+            {{#select data.attribute.value}}
+            {{> 'systems/twilight2000v4/templates/item/blocks/attribute-select.hbs' this}}
+            {{/select}}
+          </select>
+        </div>
+        {{/unless}}
+
+        {{#unless data.skill.hidden}}
+        <div class="grid-item flexcol">
+          <label class="grid-item" for="data.skill.value">Skill</label>
+          <select name="data.skill.value">
+            {{#select data.skill.value}}
+            {{> 'systems/twilight2000v4/templates/item/blocks/skill-select.hbs' this}}
+            {{/select}}
+          </select>
+        </div>
+        {{/unless}}
 
         {{> "systems/twilight2000v4/templates/item/blocks/gear-block.hbs" this}}
 

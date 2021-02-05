@@ -28,19 +28,23 @@ export function getItemHiddenFields(i) {
   return item;
 }
 
-async function messageRollResult(html, actor, weapon) {
+async function messageRollResult(html, data={}) {
+
+  let weapon=data['weapon'];
+  let actor=data['actor'];
 
   let capped = "";
   const singleSuccess = 6;
   const doubleSuccess = 10;
 
   var the_content = "";
-
+  let title = "Number of Successes";
   var fails = 0;
   let sDice = 0;
   let weaponUpdate;
   if (weapon) {
     weaponUpdate = { '_id': weapon._id }
+    title=`Attacks with ${weapon.name}`;
   }
   //BEGIN RANKS
   {
@@ -144,7 +148,7 @@ async function messageRollResult(html, actor, weapon) {
     //let total = roll.total;
     let total = roll.total;
     if (bonus) total += bonus;
-    the_content = `<div class="chat-card item-card"><div class="card-buttons"><div class="flexrow 1"><div>Dice Roller - Number of Successes<div class="dice-roll"><div class="dice-result"><div class="dice-formula">${html.find('#num').val().toUpperCase()}</div><div class="dice-tooltip"><div class="dice"><ol class="dice-rolls">${get_dice}</ol></div></div><h4 class="dice-total">${total} Succeses</h4></div></div></div></div></div></div>`;
+    the_content = `<div class="chat-card item-card"><div class="card-buttons"><div class="flexrow 1"><div>Dice Roller - ${title}<div class="dice-roll"><div class="dice-result"><div class="dice-formula">${html.find('#num').val().toUpperCase()}</div><div class="dice-tooltip"><div class="dice"><ol class="dice-rolls">${get_dice}</ol></div></div><h4 class="dice-total">${total} Succeses</h4></div></div></div></div></div></div>`;
   }
   //END RANKS
   //BEGIN AMMO
@@ -170,7 +174,7 @@ async function messageRollResult(html, actor, weapon) {
       }
       let total = roll.total;
 
-      the_content += `<div class="chat-card item-card"><div class="card-buttons"><div class="flexrow 1"><div>Dice Roller - Number of Ammo Hits<div class="dice-roll"><div class="dice-result"><div class="dice-formula">${shots} shots fired</div><div class="dice-tooltip"><div class="dice"><ol class="dice-rolls">${get_dice}</ol></div></div><h4 class="dice-total">${total} Hits</h4></div></div></div></div></div></div>`;
+      the_content += `<div class="chat-card item-card"><div class="card-buttons"><div class="flexrow 1"><div>Dice Roller - Number of Ammo Hits<div class="dice-roll"><div class="dice-result"><div class="dice-formula">${shots} shots fired</div><div class="dice-tooltip"><div class="dice"><ol class="dice-rolls">${get_dice}</ol></div></div><h4 class="dice-total">${total} Extra Hits</h4></div></div></div></div></div></div>`;
 
       if (weapon) {
         if (shots > weapon.data.mag.value) {
@@ -225,18 +229,22 @@ async function messageRollResult(html, actor, weapon) {
     }
     await actor.updateEmbeddedEntity("OwnedItem", weaponUpdate);
   }
-  ChatMessage.create({ user: game.user._id, content: the_content, type: CONST.CHAT_MESSAGE_TYPES.OOC });
+
+  let msg = { user: game.user._id, content: the_content, type: CONST.CHAT_MESSAGE_TYPES.ROLL };
+  if (actor){
+    msg['speaker']={_id:actor._id,alias:actor.name};
+  }
+  ChatMessage.create(msg);
   if (capped !== "") {
-    ChatMessage.create({ user: game.user._id, content: `<div>${capped}</div>`, type: CONST.CHAT_MESSAGE_TYPES.OOC });
+    ChatMessage.create({ user: game.user._id, content: `<div>${capped}</div>`, type: CONST.CHAT_MESSAGE_TYPES.EMOTE });
   }
 
 }
 
-
-export function skillroll(ranks = "", ammo = "", actor, weapon, dialog = true) {
-  if (weapon) {
-    console.log(weapon);
-    if (weapon.data.rel.value === 'F') {
+//Data{actor,weapon,ranks,ammo}
+export function skillroll(data={}) {
+  if (data.weapon && data.weapon.data.type.value !== 'melee') {
+    if (data.weapon.data.rel.value === 'F') {
       new Dialog({
         title: `Error`,
         content: '<div>Weapon Broken</div>',
@@ -246,7 +254,7 @@ export function skillroll(ranks = "", ammo = "", actor, weapon, dialog = true) {
       }).render(true);
       return;
     }
-    if (weapon.data.mag.value === 0) {
+    if (data.weapon.data.mag.value === 0) {
       new Dialog({
         title: `Error`,
         content: '<div>Magazine Empty</div>',
@@ -257,14 +265,15 @@ export function skillroll(ranks = "", ammo = "", actor, weapon, dialog = true) {
       return;
     }
   }
-
+  let ranks = (data.ranks) ? data.ranks : "";
+  let ammo = (data.ammo) ? data.ammo : "";
 
   let roll_it = `<form autocomplete="off"><p>Enter Ranks [A,B,C,D,F]+-(mod) and number of ammo dice</p><div class="form-group"><label for="num">Ranks:</label><input id="num" type="num" value="${ranks}"/><img style="border:none;height:24px;" src="modules/game-icons-net/blacktransparent/rank-3.svg"/></div><div class="form-group"><label for="ammo">Ammo:</label><input id="ammo" type="num" value="${ammo}"/><img style="border:none;height:24px;" src="modules/game-icons-net/blacktransparent/heavy-bullets.svg"/></div></form>`;
   new Dialog({
     title: `Die  Roller`,
     content: roll_it,
     buttons: {
-      roll: { label: "Roll it!", callback: (html) => messageRollResult(html, actor, weapon) },
+      roll: { label: "Roll it!", callback: (html) => messageRollResult(html,data) },
       cancel: { label: "Cancel", callback: () => { } }
     }
   }).render(true);

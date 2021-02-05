@@ -149,7 +149,7 @@ export class twilightActorSheet extends ActorSheet {
     const dataset = element.dataset;
 
     if (dataset.roll) {
-      skillroll(dataset.roll);
+      skillroll({ actor: this.actor, ranks: dataset.roll });
     }
   }
 
@@ -207,12 +207,23 @@ export class twilightActorSheet extends ActorSheet {
     const dataset = element.dataset;
 
     const item = this.actor.data.items.find(i => i._id === dataset.weapon);
-    
+
     if (dataset.roll) {
-      skillroll(dataset.roll);
+      skillroll({ actor: this.actor, ranks: dataset.roll, weapon: item, ammo: 1 });
     }
-    else{
-      skillroll("", "1", this.actor, item);
+    else {
+      let val = "";
+      if (item.data.attribute && item.data.attribute.value !== 'none') {
+        val += this.actor.data.data.attributes[item.data.attribute.value].rating
+      }
+      if (item.data.skill && item.data.skill.value !== 'none') {
+        val += this.actor.data.data.skills[item.data.skill.value].rating
+      }
+      if (item.data.type.value==='melee'){
+        skillroll({ actor: this.actor, ranks: val, weapon: item});
+      } else {
+        skillroll({ actor: this.actor, ranks: val, weapon: item, ammo: 1 });
+      }
     }
   }
 }

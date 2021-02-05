@@ -78,19 +78,7 @@
 
         {{> "systems/twilight2000v4/templates/actor/part/armor-display.hbs" actor}}
 
-        <div class="grid-item flexcol item" style="grid-column-end:span 1;" data-item-id="{{ actor.primaryWeapon._id}}">
-          {{#if actor.primaryWeapon}}
-          <button class="item-edit" style="
-                    background-image: url({{actor.primaryWeapon.img}});
-                    background-repeat: no-repeat;
-                    background-position: center center;
-                    background-size: contain;
-                    ">
-          </button>
-          {{else}}
-          <div>No Weapon Equipped</div>
-          {{/if}}
-        </div>
+        {{> "systems/twilight2000v4/templates/actor/part/weapon-display.hbs" actor.primaryWeapon}}
 
       </div>
       <div class="grid-container health-grid">
