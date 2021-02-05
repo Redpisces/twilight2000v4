@@ -17,4 +17,6 @@ export class twilightItem extends Item {
     getItemHiddenFields(itemData);
     return data;
   }
+
 }
+

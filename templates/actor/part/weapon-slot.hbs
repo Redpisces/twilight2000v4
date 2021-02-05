@@ -1,6 +1,8 @@
 <tr class="item" data-item-id="{{ this._id}}">
   <td class="item-image"><img src="{{this.img}}" title="{{this.name}}" height="24" /></td>
-  <td class="item-name" style="flex-grow: 2;">{{this.name}}</td>
+  <td class="item-name" style="flex-grow: 2;">
+    <a class="weapon-roll" data-weapon="{{this._id}}">{{this.name}}</a>
+  </td>
 
   {{#if this.data.rof.hidden}}
   <td>-</td>

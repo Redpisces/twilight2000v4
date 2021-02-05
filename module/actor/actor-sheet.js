@@ -1,8 +1,9 @@
+import { skillroll } from "../util.js";
 const SKILL_ATTRIBUTES = {
-  'str':['heavy_weapons', 'close_combat', 'stamina'],
-  'agi':['driving' , 'mobility', 'ranged_combat'],
-  'int':['recon', 'survival', 'tech'],
-  'emp':['command', 'persuasion', 'mecical_aid']
+  'str': ['heavy_weapons', 'close_combat', 'stamina'],
+  'agi': ['driving', 'mobility', 'ranged_combat'],
+  'int': ['recon', 'survival', 'tech'],
+  'emp': ['command', 'persuasion', 'mecical_aid']
 };
 /**
  * Extend the basic ActorSheet with some very simple modifications
@@ -31,17 +32,17 @@ export class twilightActorSheet extends ActorSheet {
   /** @override */
   getData() {
     const data = super.getData();
-        
-    if (this.actor.data.type === 'npc'){
-      this._tabs[0].active='stats';
+
+    if (this.actor.data.type === 'npc') {
+      this._tabs[0].active = 'stats';
     }
 
     data.dtypes = ["String", "Number", "Boolean"];
-    
+
     if (this.actor.data.type === 'character' || this.actor.data.type === 'npc') {
       for (let [key, value] of Object.entries(data.data.attributes)) {
-        value.skills={};
-        for (let skill of SKILL_ATTRIBUTES[key]){
+        value.skills = {};
+        for (let skill of SKILL_ATTRIBUTES[key]) {
           value.skills[skill] = data.data.skills[skill];
         }
       }
@@ -79,6 +80,8 @@ export class twilightActorSheet extends ActorSheet {
     html.find('.item-equip').click(this._onEquipClick.bind(this));
     html.find('.item-container').click(this._onContainerClick.bind(this));
 
+    html.find('.weapon-roll').click(this._onWeaponRoll.bind(this));
+
   }
 
   /* -------------------------------------------- */
@@ -109,7 +112,7 @@ export class twilightActorSheet extends ActorSheet {
     // Finally, create the item!
     return this.actor.createOwnedItem(itemData);
   }
-  _onItemDelete(event){
+  _onItemDelete(event) {
     const li = $(event.currentTarget).parents(".item");
     const name = this.actor.getEmbeddedEntity("OwnedItem", li.data("itemId")).name;
     let d = new Dialog({
@@ -127,7 +130,7 @@ export class twilightActorSheet extends ActorSheet {
         two: {
           icon: '<i class="fas fa-times"></i>',
           label: "Cancel",
-          callback: () => {}
+          callback: () => { }
         }
       },
       default: "two",
@@ -146,55 +149,70 @@ export class twilightActorSheet extends ActorSheet {
     const dataset = element.dataset;
 
     if (dataset.roll) {
-      game.twilight2000v4.twilightActor.skillroll(dataset.roll);
+      skillroll(dataset.roll);
     }
   }
 
 
-  async _onEmbededChange(event){
+  async _onEmbededChange(event) {
     event.preventDefault();
     const element = event.currentTarget;
     const dataset = element.dataset;
 
     let path = event.target.name.split(/\.(.+)/)
-    let name=path[1];
-    let value=event.target.value;
-    let actor=this.actor;
+    let name = path[1];
+    let value = event.target.value;
+    let actor = this.actor;
     let item = actor.data.items.find(i => i._id === path[0]);
-    let update={_id:item._id,[name]:value};
-    const updated = await actor.updateEmbeddedEntity("OwnedItem",update);
-    
+    let update = { _id: item._id, [name]: value };
+    const updated = await actor.updateEmbeddedEntity("OwnedItem", update);
+
   }
 
-  async _onEquipClick(event){
+  async _onEquipClick(event) {
     const li = $(event.currentTarget).parents(".item");
     const item = this.actor.getOwnedItem(li.data("itemId"));
     const actor = this.actor;
     let name = 'data.equipped.value';
-    let value = (item.data.data.equipped.value) ? false : true; 
+    let value = (item.data.data.equipped.value) ? false : true;
 
     let update = { _id: item._id, [name]: value };
     const updated = await actor.updateEmbeddedEntity("OwnedItem", update);
   }
-  async _onContainerClick(event){
+  async _onContainerClick(event) {
     const li = $(event.currentTarget).parents(".item");
     const item = this.actor.getOwnedItem(li.data("itemId"));
     const actor = this.actor;
     let name = 'data.container.value';
     let value;
-    switch (item.data.data.container.value){
+    switch (item.data.data.container.value) {
       case 'carried':
-        value='packed';
+        value = 'packed';
         break;
       case 'packed':
         value = 'none';
         break;
       default:
-        value='carried'
+        value = 'carried'
         break;
     }
 
     let update = { _id: item._id, [name]: value };
     const updated = await actor.updateEmbeddedEntity("OwnedItem", update);
+  }
+
+  _onWeaponRoll(event) {
+    event.preventDefault();
+    const element = event.currentTarget;
+    const dataset = element.dataset;
+
+    const item = this.actor.data.items.find(i => i._id === dataset.weapon);
+    
+    if (dataset.roll) {
+      skillroll(dataset.roll);
+    }
+    else{
+      skillroll("", "1", this.actor, item);
+    }
   }
 }
