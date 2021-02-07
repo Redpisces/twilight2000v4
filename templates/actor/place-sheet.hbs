@@ -27,9 +27,9 @@
           <input name="data.full_name" type="text" value="{{data.full_name}}" />
         </div>
 
-        {{> "systems/twilight2000v4/templates/actor/part/prod-block.hbs" data.food r_title="Food"}}
-        {{> "systems/twilight2000v4/templates/actor/part/prod-block.hbs" data.water r_title="Water"}}
-        {{> "systems/twilight2000v4/templates/actor/part/prod-block.hbs" data.fuel r_title="Fuel"}}
+        {{> "systems/twilight2000v4/templates/actor/part/prod-block.hbs" data.food r_loc='food' r_title="Food"}}
+        {{> "systems/twilight2000v4/templates/actor/part/prod-block.hbs" data.water r_loc='water' r_title="Water"}}
+        {{> "systems/twilight2000v4/templates/actor/part/prod-block.hbs" data.fuel r_loc='fuel' r_title="Fuel"}}
 
         <div class="grid-item sub-subgrid">
           <h4 class="item-name">Type</h4>
